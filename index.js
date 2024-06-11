@@ -4,8 +4,8 @@
 
 const $calendar = document.getElementById('calendar');
 const $totalExpences = document.getElementById('total-expences');
-const $categories = document.getElementById('categories');
-const $category = document.querySelectorAll('#categories div')
+const $categoriesContainer = document.getElementById('categories');
+const $categories = document.querySelectorAll('#categories div')
 const $title = document.getElementById('title');
 const $list = document.getElementById('list');
 const $selectedCategory = document.getElementById('selected-category');
@@ -17,9 +17,9 @@ const $submit = document.getElementById('submit');
  * Main
  */
 
-$category.forEach(category => {
-    category.addEventListener('click', () => {
-        const selectedCategory = category.innerText;
+$categories.forEach($category => {
+    $category.addEventListener('click', () => {
+        const selectedCategory = $category.innerText;
         localStorage.setItem('selectedCategory', selectedCategory);
         window.location.href = './form of creating expense.html';
     });
