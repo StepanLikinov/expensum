@@ -1,4 +1,12 @@
 /**
+ * Imports
+ */
+
+import Pager from './lib/Pager.js'
+import { categories } from './lib/data.js' 
+import pagerConfig from './configs/pager.js'
+
+/**
  * Nodes
 */
 
@@ -12,24 +20,7 @@ const $sum = document.getElementById('sum');
 const $comment = document.getElementById('comment');
 const $submit = document.getElementById('submit');
 
-/**
- * Data
- */
 
-const categories = [
-    { id: 1, name: "Продукты" },
-    { id: 2, name: "Дом" },
-    { id: 3, name: "Одежда" },
-    { id: 4, name: "Здоровье" },
-    { id: 5, name: "Спорт" },
-    { id: 6, name: "Кафе" },
-    { id: 7, name: "Поездки" },
-    { id: 8, name: "Авто" },
-    { id: 9, name: "Развлечения" },
-    { id: 10, name: "Обучение" },
-    { id: 11, name: "% по кредитам" },
-    { id: 12, name: "Другое" }
-];
 
 /**
  * Main
@@ -60,10 +51,14 @@ document.addEventListener('DOMContentLoaded', () => {
         $category.addEventListener('click', () => {
             const selectedCategory = $category.innerText;
             localStorage.setItem('selectedCategory', selectedCategory);
-            window.location.href = './form of creating expense.html';
+            pager.showPage('formOfCreatingExpense')
         });
     });
 });
+
+/* Инициацилизация Pager */
+
+const pager = new Pager(pagerConfig, 'totalAndCategories');
 
 document.addEventListener('DOMContentLoaded', () => {
     const selectedCategory = localStorage.getItem('selectedCategory');
@@ -84,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         expenses.push(expense);
         localStorage.setItem('expenses', JSON.stringify(expenses));
 
-        window.location.href = './expenses list.html';
+        pager.showPage('expensesList')
     })
 })
 

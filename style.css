@@ -13,6 +13,13 @@ body {
     text-align: center;
 }
 
+#total-and-categories, #expenses-list, #form-of-creating-expense {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #total-expenses, #calendar, #selected-category, #sum, #comment, #submit, #title {
     width: 100%;
     height: 60px;
