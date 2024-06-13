@@ -17,18 +17,18 @@ const $submit = document.getElementById('submit');
  */
 
 const categories = [
-    "Продукты",
-    "Дом",
-    "Одежда",
-    "Здоровье",
-    "Спорт",
-    "Кафе",
-    "Поездки",
-    "Авто",
-    "Развлечения",
-    "Обучение",
-    "% по кредитам",
-    "Другое"
+    { id: 1, name: "Продукты" },
+    { id: 2, name: "Дом" },
+    { id: 3, name: "Одежда" },
+    { id: 4, name: "Здоровье" },
+    { id: 5, name: "Спорт" },
+    { id: 6, name: "Кафе" },
+    { id: 7, name: "Поездки" },
+    { id: 8, name: "Авто" },
+    { id: 9, name: "Развлечения" },
+    { id: 10, name: "Обучение" },
+    { id: 11, name: "% по кредитам" },
+    { id: 12, name: "Другое" }
 ];
 
 /**
@@ -47,8 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     $categoriesContainer.innerHTML = '';
     categories.forEach(category => {
         const $categoryDiv = document.createElement('div');
-        $categoryDiv.innerText = category;
+        $categoryDiv.innerText = category.name;
         $categoryDiv.classList.add('category');
+        $categoryDiv.dataset.id = category.id;
         $categoriesContainer.appendChild($categoryDiv);
     });
 
@@ -98,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const $expenseDiv = document.createElement('div');
         $expenseDiv.className = 'expense';
         $expenseDiv.innerText = 
-            `Категория: ${expense.category}, Сумма: ${expense.sum},` 
+            `Категория: ${expense.category}, Сумма: ${expense.sum}, ` 
                 + `Комментарий: ${expense.comment}`;
 
         $dateDiv.appendChild($expenseDiv);
