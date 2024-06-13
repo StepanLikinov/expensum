@@ -3,7 +3,7 @@
  */
 
 import Pager from './lib/Pager.js'
-import { categories } from './lib/data.js' 
+import { categoriesList } from './lib/data.js' 
 import pagerConfig from './configs/pager.js'
 
 /**
@@ -20,21 +20,20 @@ const $sum = document.getElementById('sum');
 const $comment = document.getElementById('comment');
 const $submit = document.getElementById('submit');
 
-
-
 /**
  * Main
  */
 
 // Сохранения категорий в localStorage
+localStorage.setItem('expenseCategories', JSON.stringify(categoriesList));
 
-localStorage.setItem('expenseCategories', JSON.stringify(categories));
+/* Инициацилизация Pager */
+const pager = new Pager(pagerConfig, 'totalAndCategories');
+
+// Заполнение categoriesContainer
+let categories = JSON.parse(localStorage.getItem('expenseCategories'));
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    // Заполнение categoriesContainer
-    let categories = JSON.parse(localStorage.getItem('expenseCategories'));
-
     $categoriesContainer.innerHTML = '';
     categories.forEach(category => {
         const $categoryDiv = document.createElement('div');
@@ -46,28 +45,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Добавление обработчиков событий для категорий
     const $categories = document.querySelectorAll('.category');
+    let selectedCategory = null; 
     
     $categories.forEach($category => {
         $category.addEventListener('click', () => {
-            const selectedCategory = $category.innerText;
-            localStorage.setItem('selectedCategory', selectedCategory);
+            selectedCategory = $category.innerText;
+            $selectedCategory.innerText = selectedCategory;
             pager.showPage('formOfCreatingExpense')
         });
     });
-});
-
-/* Инициацилизация Pager */
-
-const pager = new Pager(pagerConfig, 'totalAndCategories');
-
-document.addEventListener('DOMContentLoaded', () => {
-    const selectedCategory = localStorage.getItem('selectedCategory');
-    $selectedCategory.innerText = selectedCategory;
 
     $submit.addEventListener('click', () => {
         const sum = $sum.innerText;
         const comment = $comment.innerText;
-
         const expense = {
             category: selectedCategory,
             sum: sum,
@@ -79,25 +69,28 @@ document.addEventListener('DOMContentLoaded', () => {
         expenses.push(expense);
         localStorage.setItem('expenses', JSON.stringify(expenses));
 
+        updateExpensesList();
         pager.showPage('expensesList')
-    })
-})
-
-document.addEventListener('DOMContentLoaded', () => {
-    const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
-
-    expenses.forEach(expense => {
-        const $dateDiv = document.createElement('div');
-        $dateDiv.className = 'date';
-        $dateDiv.innerText = expense.date;
-
-        const $expenseDiv = document.createElement('div');
-        $expenseDiv.className = 'expense';
-        $expenseDiv.innerText = 
-            `Категория: ${expense.category}, Сумма: ${expense.sum}, ` 
-                + `Комментарий: ${expense.comment}`;
-
-        $dateDiv.appendChild($expenseDiv);
-        $list.appendChild($dateDiv);
     });
+
+    const updateExpensesList = () => {
+        $list.innerHTML = ''; // Очищаем текущий список
+        const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+
+        expenses.forEach(expense => {
+            const $dateDiv = document.createElement('div');
+            $dateDiv.className = 'date';
+            $dateDiv.innerText = expense.date;
+
+            const $expenseDiv = document.createElement('div');
+            $expenseDiv.className = 'expense';
+            $expenseDiv.innerText = 
+                `Категория: ${expense.category}, Сумма: ${expense.sum}, ` 
+                    + `Комментарий: ${expense.comment}`;
+
+            $dateDiv.appendChild($expenseDiv);
+            $list.appendChild($dateDiv);
+        });
+    }
+    updateExpensesList(); 
 });
