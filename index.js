@@ -5,7 +5,8 @@
 import Pager from './lib/Pager.js'
 import { categoriesList } from './lib/data.js' 
 import pagerConfig from './configs/pager.js'
-import storage from './lib/storage.js';
+import expensesStorage from './lib/expensesStorage.js';
+import categoriesStorage from './lib/categoriesStorage.js';
 
 /**
  * Main
@@ -28,7 +29,7 @@ const $submit = document.getElementById('submit');
 
 // Заполнение categoriesContainer
 const fillCategoriesContainer = () => {
-    const categories = storage.getCategories();
+    const categories = categoriesStorage.getCategories();
     $categoriesContainer.innerHTML = '';
     categories.forEach(category => {
         const $categoryDiv = document.createElement('div');
@@ -55,7 +56,7 @@ const addCategoryEventListeners = () => {
 // Обновления списка расходов
 const updateExpensesList = () => {
     $list.innerHTML = '';
-    const expenses = storage.getExpenses();
+    const expenses = expensesStorage.getExpenses();
 
     expenses.forEach(expense => {
         const $dateDiv = document.createElement('div');
@@ -84,7 +85,7 @@ const handleSubmit = () => {
         date: new Date().toLocaleDateString()
     };
 
-    storage.addExpense(expense);
+    expensesStorage.addExpense(expense);
     updateExpensesList();
     pager.showPage('expensesList');
 };
@@ -96,7 +97,7 @@ const handleSubmit = () => {
 /* Init */
 
 // Сохранения категорий в localStorage
-storage.saveCategories(categoriesList);
+categoriesStorage.saveCategories(categoriesList);
 
 //  Инициацилизация Pager
 const pager = new Pager(pagerConfig, 'totalAndCategories');
