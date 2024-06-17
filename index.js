@@ -29,7 +29,7 @@ const $submit = document.getElementById('submit');
 
 // Заполнение categoriesContainer
 const fillCategoriesContainer = () => {
-    const categories = categoriesStorage.getCategories();
+    const categories = categoriesStorage.getAll();
     $categoriesContainer.innerHTML = '';
     categories.forEach(category => {
         const $categoryDiv = document.createElement('div');
@@ -56,7 +56,7 @@ const addCategoryEventListeners = () => {
 // Обновления списка расходов
 const updateExpensesList = () => {
     $list.innerHTML = '';
-    const expenses = expensesStorage.getExpenses();
+    const expenses = expensesStorage.getAll();
 
     expenses.forEach(expense => {
         const $dateDiv = document.createElement('div');
@@ -86,7 +86,7 @@ const handleSubmit = () => {
         date: new Date().toLocaleDateString()
     };
 
-    expensesStorage.addExpense(expense);
+    expensesStorage.add(expense);
     updateExpensesList();
     pager.showPage('expensesList');
 };
@@ -98,7 +98,7 @@ const handleSubmit = () => {
 /* Init */
 
 // Сохранения категорий в localStorage
-categoriesStorage.saveCategories(categoriesList);
+categoriesStorage.saveAll(categoriesList);
 
 //  Инициацилизация Pager
 const pager = new Pager(pagerConfig, 'totalAndCategories', 'flex');
