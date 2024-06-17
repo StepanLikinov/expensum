@@ -14,7 +14,7 @@ import categoriesStorage from './lib/categoriesStorage.js';
 
 /**
  * Nodes
-*/
+ */
 
 const $categoriesContainer = document.getElementById('categories');
 const $list = document.getElementById('list');
@@ -78,6 +78,7 @@ const updateExpensesList = () => {
 const handleSubmit = () => {
     const sum = $sum.innerText;
     const comment = $comment.innerText;
+
     const expense = {
         category: selectedCategory,
         sum: sum,
@@ -100,7 +101,7 @@ const handleSubmit = () => {
 categoriesStorage.saveCategories(categoriesList);
 
 //  Инициацилизация Pager
-const pager = new Pager(pagerConfig, 'totalAndCategories');
+const pager = new Pager(pagerConfig, 'totalAndCategories', 'flex');
 
 // Хранения выбранной категории
 let selectedCategory = null;
