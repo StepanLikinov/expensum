@@ -7,6 +7,7 @@ import { categoriesList } from './lib/data.js'
 import pagerConfig from './configs/pager.js'
 import expensesStorage from './lib/expensesStorage.js';
 import categoriesStorage from './lib/categoriesStorage.js';
+import generateId from './lib/generateId.js';
 
 /**
  * Main
@@ -80,6 +81,7 @@ const handleSubmit = () => {
     const comment = $comment.innerText;
 
     const expense = {
+        id: generateId(),
         category: selectedCategory,
         sum: sum,
         comment: comment,
