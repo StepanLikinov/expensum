@@ -3,7 +3,7 @@
  */
 
 import Pager from './lib/Pager.js'
-import { categoriesList } from './lib/data.js' 
+import { categoriesList } from './data/categoriesList.js' 
 import pagerConfig from './configs/pager.js'
 import expensesStorage from './lib/expensesStorage.js';
 import categoriesStorage from './lib/categoriesStorage.js';
@@ -85,7 +85,7 @@ const handleSubmit = () => {
         category: selectedCategory,
         sum: sum,
         comment: comment,
-        date: new Date().toLocaleDateString()
+        date: Date.now()
     };
 
     expensesStorage.add(expense);
