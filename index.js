@@ -28,15 +28,29 @@ const $submit = document.getElementById('submit');
  * Functions
  */
 
+// Очистка контейнера
+
+const clearContainer = ($сontainer) => {
+    $сontainer.innerHTML = '';
+};
+
+// Создание элемента категории
+const createCategoryElement = (category) => {
+    const $categoryDiv = document.createElement('div');
+    $categoryDiv.innerText = category.name;
+    $categoryDiv.classList.add('category');
+    $categoryDiv.dataset.id = category.id;
+
+    return $categoryDiv;
+};
+
 // Заполнение categoriesContainer
-const fillCategoriesContainer = () => {
+const fillCategoriesContainer = ($categoriesContainer) => {
     const categories = categoriesStorage.getAll();
-    $categoriesContainer.innerHTML = '';
+    clearContainer($categoriesContainer);
+
     categories.forEach(category => {
-        const $categoryDiv = document.createElement('div');
-        $categoryDiv.innerText = category.name;
-        $categoryDiv.classList.add('category');
-        $categoryDiv.dataset.id = category.id;
+        const $categoryDiv = createCategoryElement(category);
         $categoriesContainer.appendChild($categoryDiv);
     });
 };
@@ -53,43 +67,59 @@ const addCategoryEventListeners = () => {
         });
     });
 };
-    
-// Обновления списка расходов
-const updateExpensesList = () => {
-    $list.innerHTML = '';
+
+// Создание элемента даты
+const createDateElement = (timestamp) => {
+    const $dateDiv = document.createElement('div');
+    $dateDiv.className = 'date';
+    // преобразование даты в читабельный
+    const dateObject = new Date(timestamp);
+    $dateDiv.innerText = dateObject.toLocaleString(); 
+
+    return $dateDiv;
+};
+
+// Создание элемента расхода
+const createExpenseElement = (expense) => {
+    const $expenseDiv = document.createElement('div');
+    $expenseDiv.className = 'expense';
+    $expenseDiv.innerText = 
+        `Категория: ${expense.category}, Сумма: ${expense.sum}, `
+        + `Комментарий: ${expense.comment}`;
+
+    return $expenseDiv;
+};
+
+// Рендеринг списка расходов
+const renderExpensesList = ($list) => {
+    clearContainer($list);
     const expenses = expensesStorage.getAll();
 
     expenses.forEach(expense => {
-        const $dateDiv = document.createElement('div');
-        $dateDiv.className = 'date';
-        $dateDiv.innerText = expense.date;
-
-        const $expenseDiv = document.createElement('div');
-        $expenseDiv.className = 'expense';
-        $expenseDiv.innerText = 
-            `Категория: ${expense.category}, Сумма: ${expense.sum}, `
-            + `Комментарий: ${expense.comment}`;
-
+        const $dateDiv = createDateElement(expense.date);
+        const $expenseDiv = createExpenseElement(expense);
         $dateDiv.appendChild($expenseDiv);
         $list.appendChild($dateDiv);
     });
 };
 
-// Обработка отправки формы
-const handleSubmit = () => {
-    const sum = $sum.innerText;
-    const comment = $comment.innerText;
-
-    const expense = {
+// Создание объекта расхода
+const createExpense = () => {
+    return {
         id: generateId(),
         category: selectedCategory,
-        sum: sum,
-        comment: comment,
-        date: Date.now()
+        sum: $sum.innerText,
+        comment: $comment.innerText,
+        date: Date.now() // Хранение даты в формате timestamp
     };
+};
+
+// Обработка отправки формы
+const handleSubmit = () => {
+    const expense = createExpense();
 
     expensesStorage.add(expense);
-    updateExpensesList();
+    renderExpensesList($list);
     pager.showPage('expensesList');
 };
 
@@ -111,8 +141,8 @@ let selectedCategory = null;
 /* Calls */
 
 document.addEventListener('DOMContentLoaded', () => {
-    fillCategoriesContainer();
+    fillCategoriesContainer($categoriesContainer);
     addCategoryEventListeners();
     $submit.addEventListener('click', handleSubmit);
-    updateExpensesList();
+    renderExpensesList($list);
 });
