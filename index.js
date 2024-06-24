@@ -103,20 +103,10 @@ const renderExpensesList = ($list) => {
     });
 };
 
-// Создание объекта расхода
-const createExpense = () => {
-    return {
-        id: generateId(),
-        category: selectedCategory,
-        sum: $sum.innerText,
-        comment: $comment.innerText,
-        date: Date.now() // Хранение даты в формате timestamp
-    };
-};
-
 // Обработка отправки формы
 const handleSubmit = () => {
-    const expense = createExpense();
+    const expense = 
+        categoriesStorage.createExpense(selectedCategory, $sum, $comment);
 
     expensesStorage.add(expense);
     renderExpensesList($dates);
