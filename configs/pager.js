@@ -5,25 +5,25 @@
 const $nav = document.querySelector('nav');
 const $navLinks = $nav.querySelectorAll('li');
 
-const $totalAndCategories = document.getElementById('total-and-categories')
-const $formOfCreatingExpense = document.getElementById('form-of-creating-expense')
-const $expensesList = document.getElementById('expenses-list')
+const $main = document.getElementById('main')
+const $new = document.getElementById('new')
+const $list = document.getElementById('list')
 const $mainLink = $navLinks[0];
-const $formLink = $navLinks[1];
-const $expenseListLink = $navLinks[2];
+const $newLink = $navLinks[1];
+const $listLink = $navLinks[2];
 
 const pagerConfig = {
-    'totalAndCategories': { 
-        pageElement: $totalAndCategories, 
+    'main': { 
+        pageElement: $main, 
         linkToPage: $mainLink 
     },
-    'formOfCreatingExpense': { 
-        pageElement: $formOfCreatingExpense, 
-        linkToPage: $formLink 
+    'new': { 
+        pageElement: $new, 
+        linkToPage: $newLink
     },
-    'expensesList': { 
-        pageElement: $expensesList,
-        linkToPage: $expenseListLink
+    'list': { 
+        pageElement: $list,
+        linkToPage: $listLink
     }
 }
 

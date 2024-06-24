@@ -18,7 +18,7 @@ import generateId from './lib/generateId.js';
  */
 
 const $categoriesContainer = document.getElementById('categories');
-const $list = document.getElementById('list');
+const $dates = document.getElementById('dates');
 const $selectedCategory = document.getElementById('selected-category');
 const $sum = document.getElementById('sum');
 const $comment = document.getElementById('comment');
@@ -63,7 +63,7 @@ const addCategoryEventListeners = () => {
         $category.addEventListener('click', () => {
             selectedCategory = $category.innerText;
             $selectedCategory.innerText = selectedCategory;
-            pager.showPage('formOfCreatingExpense');
+            pager.showPage('new');
         });
     });
 };
@@ -119,8 +119,8 @@ const handleSubmit = () => {
     const expense = createExpense();
 
     expensesStorage.add(expense);
-    renderExpensesList($list);
-    pager.showPage('expensesList');
+    renderExpensesList($dates);
+    pager.showPage('list');
 };
 
 /**
@@ -133,7 +133,7 @@ const handleSubmit = () => {
 categoriesStorage.saveAll(categoriesList);
 
 //  Инициацилизация Pager
-const pager = new Pager(pagerConfig, 'totalAndCategories', 'flex');
+const pager = new Pager(pagerConfig, 'main', 'flex');
 
 // Хранения выбранной категории
 let selectedCategory = null;
@@ -144,5 +144,5 @@ document.addEventListener('DOMContentLoaded', () => {
     fillCategoriesContainer($categoriesContainer);
     addCategoryEventListeners();
     $submit.addEventListener('click', handleSubmit);
-    renderExpensesList($list);
+    renderExpensesList($dates);
 });

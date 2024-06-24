@@ -13,7 +13,7 @@ body {
     text-align: center;
 }
 
-#total-and-categories, #expenses-list, #form-of-creating-expense {
+#main, #list, #new {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -66,7 +66,7 @@ nav ul li {
     align-content: center;
 }
 
-#form, #list {
+#form, #dates {
     width: 100%;
     flex: 1;
     display: flex;
@@ -84,7 +84,7 @@ nav ul li {
 /*
     Skeleton decor
 */
-/* 
+
 #total-expenses, #calendar, #selected-category, #sum, #comment, #submit, #title {
     background-color: rgb(205, 202, 202);
 }
@@ -116,5 +116,4 @@ nav ul li {
 
 .expense {
     background-color: rgb(205, 202, 202);
-} */
-
+}
