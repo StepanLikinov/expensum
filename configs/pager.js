@@ -2,12 +2,15 @@
  * Nodes 
  * */
 
+const $nav = document.querySelector('nav');
+const $navLinks = $nav.querySelectorAll('li');
+
 const $totalAndCategories = document.getElementById('total-and-categories')
 const $formOfCreatingExpense = document.getElementById('form-of-creating-expense')
 const $expensesList = document.getElementById('expenses-list')
-const $mainLink = document.getElementById('main-page')
-const $formLink = document.getElementById('form-page')
-const $expenseListLink = document.getElementById('expenses-list-page')
+const $mainLink = $navLinks[0];
+const $formLink = $navLinks[1];
+const $expenseListLink = $navLinks[2];
 
 const pagerConfig = {
     'totalAndCategories': { 
