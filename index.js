@@ -8,6 +8,7 @@ import pagerConfig from './configs/pager.js'
 import expensesStorage from './lib/expensesStorage.js';
 import { categoriesStorage, createCategoryElement, fillCategoriesContainer } from './lib/categories.js';
 import { getSelectedCategory } from './data/state.js'
+import { createDateElement } from './lib/dates.js';
 
 /**
  * Main
@@ -33,16 +34,16 @@ const clearContainer = ($сontainer) => {
     $сontainer.innerHTML = '';
 };
 
-// Создание элемента даты
-const createDateElement = (timestamp) => {
-    const $dateDiv = document.createElement('div');
-    $dateDiv.className = 'date';
-    // преобразование даты в читабельный формат
-    const dateObject = new Date(timestamp);
-    $dateDiv.innerText = dateObject.toLocaleString(); 
+// // Создание элемента даты
+// const createDateElement = (timestamp) => {
+//     const $dateDiv = document.createElement('div');
+//     $dateDiv.className = 'date';
+//     // преобразование даты в читабельный формат
+//     const dateObject = new Date(timestamp);
+//     $dateDiv.innerText = dateObject.toLocaleString(); 
 
-    return $dateDiv;
-};
+//     return $dateDiv;
+// };
 
 // Создание элемента расхода
 const createExpenseElement = (expense) => {
