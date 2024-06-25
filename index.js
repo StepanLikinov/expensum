@@ -10,6 +10,7 @@ import { expensesStorage, createExpenseElement, renderExpensesList }
 import { categoriesStorage, setDefaultCategory, fillCategoriesContainer,fillCategoriesSelect }
      from './lib/categories.js';
 import { getSelectedCategory, setSelectedCategory } from './data/state.js'
+import { handleNewLinkClick } from './lib/nav.js'
 
 /**
  * Main
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setDefaultCategory();
     fillCategoriesContainer($categoriesContainer);
     fillCategoriesSelect($categorySelect);
+    handleNewLinkClick();
     $submit.addEventListener('click', handleSubmit);
     renderExpensesList($dates);
 });
