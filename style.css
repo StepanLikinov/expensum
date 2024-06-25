@@ -11,6 +11,7 @@ body {
     display: flex;
     flex-direction: column;
     text-align: center;
+    padding-bottom: 80px;
 }
 
 #main, #list, #new {
@@ -66,7 +67,7 @@ nav ul li {
     align-content: center;
 }
 
-#form, #dates {
+#dates {
     width: 100%;
     flex: 1;
     display: flex;
