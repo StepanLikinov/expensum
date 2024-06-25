@@ -7,9 +7,9 @@ import { categoriesList } from './data/categoriesList.js'
 import pagerConfig from './configs/pager.js'
 import { expensesStorage, createExpenseElement, renderExpensesList } 
     from './lib/expenses.js';
-import { categoriesStorage, createCategoryElement, fillCategoriesContainer,fillCategoriesSelect }
+import { categoriesStorage, setDefaultCategory, fillCategoriesContainer,fillCategoriesSelect }
      from './lib/categories.js';
-import { getSelectedCategory } from './data/state.js'
+import { getSelectedCategory, setSelectedCategory } from './data/state.js'
 
 /**
  * Main
@@ -21,6 +21,7 @@ import { getSelectedCategory } from './data/state.js'
 
 const $categoriesContainer = document.getElementById('categories');
 const $categorySelect = document.getElementById('category-select');
+const $selects = $categorySelect.querySelectorAll('select');
 const $dates = document.getElementById('dates');
 const $sum = document.getElementById('sum');
 const $comment = document.getElementById('comment');
@@ -40,6 +41,7 @@ const handleSubmit = () => {
     pager.showPage('list');
 };
 
+
 /**
  * Run
  */
@@ -55,6 +57,7 @@ const pager = new Pager(pagerConfig, 'main', 'flex');
 /* Calls */
 
 document.addEventListener('DOMContentLoaded', () => {
+    setDefaultCategory();
     fillCategoriesContainer($categoriesContainer);
     fillCategoriesSelect($categorySelect);
     $submit.addEventListener('click', handleSubmit);

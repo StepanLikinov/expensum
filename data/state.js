@@ -1,4 +1,5 @@
 // Хранения выбранной категории
+
 let selectedCategory = null;
 
 const setSelectedCategory = (category) => {
