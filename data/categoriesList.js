@@ -2,7 +2,7 @@
  * Data
  */
 
-export const categoriesList = [
+const categoriesList = [
     { id: 1, name: "Продукты" },
     { id: 2, name: "Дом" },
     { id: 3, name: "Одежда" },
@@ -16,3 +16,9 @@ export const categoriesList = [
     { id: 11, name: "% по кредитам" },
     { id: 12, name: "Другое" }
 ];
+
+/**
+ * Exports
+ */
+
+export { categoriesList };

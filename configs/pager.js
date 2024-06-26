@@ -1,6 +1,6 @@
 /**
- * Nodes 
- * */
+ * Nodes
+ */
 
 const $nav = document.querySelector('nav');
 const $navLinks = $nav.querySelectorAll('li');
@@ -11,6 +11,10 @@ const $list = document.getElementById('list')
 const $mainLink = $navLinks[0];
 const $newLink = $navLinks[1];
 const $listLink = $navLinks[2];
+
+/**
+ * Main
+ */
 
 const pagerConfig = {
     'main': { 
@@ -26,5 +30,9 @@ const pagerConfig = {
         linkToPage: $listLink
     }
 }
+
+/**
+ * Exports 
+ */
 
 export default pagerConfig;

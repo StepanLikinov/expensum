@@ -5,10 +5,13 @@
 import Pager from './lib/Pager.js'
 import { categoriesList } from './data/categoriesList.js' 
 import pagerConfig from './configs/pager.js'
-import { expensesStorage, createExpenseElement, renderExpensesList } 
-    from './lib/expenses.js';
-import { categoriesStorage, setDefaultCategory, fillCategoriesContainer,fillCategoriesSelect }
-     from './lib/categories.js';
+import { expensesStorage, 
+    createExpenseElement, 
+    renderExpensesList } from './lib/expenses.js';
+import { categoriesStorage, 
+    setDefaultCategory, 
+    fillCategoriesContainer,
+    fillCategoriesSelect } from './lib/categories.js';
 import { getSelectedCategory, setSelectedCategory } from './data/state.js'
 import { handleNewLinkClick } from './lib/nav.js'
 
@@ -16,9 +19,7 @@ import { handleNewLinkClick } from './lib/nav.js'
  * Main
  */
 
-/**
- * Nodes
- */
+/* Nodes */
 
 const $categoriesContainer = document.getElementById('categories');
 const $categorySelect = document.getElementById('category-select');
@@ -28,20 +29,16 @@ const $sum = document.getElementById('sum');
 const $comment = document.getElementById('comment');
 const $submit = document.getElementById('submit');
 
-/**
- * Functions
- */
+/* Functions */
 
 // Обработка отправки формы
 const handleSubmit = () => {
     const expense = 
         expensesStorage.createExpense(getSelectedCategory(), $sum, $comment);
-
     expensesStorage.add(expense);
     renderExpensesList($dates);
     pager.showPage('list');
 };
-
 
 /**
  * Run
