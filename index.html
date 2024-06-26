@@ -14,7 +14,11 @@
     <div id="main">
         <div id="calendar">Календарь</div>
         <div id="total-expenses">Итого расходов</div>
-        <div id="categories"></div>
+        <div id="categories">
+            <template id="categoryTemplate">
+                <div class="category"></div>
+            </template>        
+        </div>
     </div>
 
     <div id="new">
@@ -27,7 +31,14 @@
     <div id="list">
         <div id="calendar">Календарь</div>
         <div id="title">Заголовок экрана</div>
-        <div id="dates"></div>
+        <div id="dates">
+            <template id="dateTemplate">
+                <div class="date"></div>
+            </template>
+            <template id="expenseTemplate">
+                <div class="expense"></div>
+            </template>        
+        </div>
     </div>
 
     <nav>
