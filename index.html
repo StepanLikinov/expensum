@@ -31,14 +31,7 @@
     <div id="list">
         <div id="calendar">Календарь</div>
         <div id="title">Заголовок экрана</div>
-        <div id="dates">
-            <template id="dateTemplate">
-                <div class="date"></div>
-            </template>
-            <template id="expenseTemplate">
-                <div class="expense"></div>
-            </template>        
-        </div>
+        <div id="dates"></div>
     </div>
 
     <nav>
@@ -48,6 +41,13 @@
             <li><a href="/">Список расходов</a></li>
         </ul>
     </nav>
+    
+    <template id="dateTemplate">
+        <div class="date"></div>
+    </template>
+    <template id="expenseTemplate">
+        <div class="expense"></div>
+    </template>        
 </body>
 <script type="module" src="./index.js"></script>
 </html>
