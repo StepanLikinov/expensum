@@ -3,10 +3,11 @@
  */
 
 import pager from './lib/pagerInit.js';
+import categoriesStorage from './lib/categoriesStorageApi.js';
 import { categoriesList } from './data/categoriesList.js' 
-import { expensesStorage, renderExpensesList } from './lib/expensesDomApi.js';
+import expensesStorage from './lib/expensesStorageApi.js';
+import { renderExpensesList } from './lib/expensesDomApi.js';
 import { 
-    categoriesStorage, 
     setDefaultCategory, 
     fillCategoriesContainer,
     fillCategoriesSelect 
