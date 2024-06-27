@@ -29,7 +29,7 @@ body {
     overflow: auto;
 }
 
-#categories {
+#categories-container {
     width: 100%;
     flex: 1;
     display: flex;
@@ -40,7 +40,7 @@ body {
     gap: 10px;
 }
 
-#categories div{
+#categories-container div{
     width: 70px;
     height: 70px;
     font-size: 0.5em;
@@ -67,7 +67,7 @@ nav ul li {
     align-content: center;
 }
 
-#dates {
+#datesContainer {
     width: 100%;
     flex: 1;
     display: flex;
@@ -90,11 +90,11 @@ nav ul li {
     background-color: rgb(205, 202, 202);
 }
 
-#categories {
+#categories-container {
     background-color: rgb(205, 202, 202);
 }
 
-#categories div {
+#categories-container div {
     border: 1px solid black;
     border-radius: 50%;
 }
@@ -107,7 +107,7 @@ nav ul li {
     background-color: rgb(166, 166, 225);
 }
 
-#list {
+#datesContainer {
     background-color: rgb(205, 202, 202);
 }
 

@@ -21,10 +21,10 @@ import { handleNewLinkClick } from './lib/nav.js'
 
 /* Nodes */
 
-const $categoriesContainer = document.getElementById('categories');
+const $categoriesContainer = document.getElementById('categories-container');
 const $categorySelect = document.getElementById('category-select');
 const $submit = document.getElementById('submit');
-const $dates = document.getElementById('dates');
+const $datesContainer = document.getElementById('datesContainer');
 
 /**
  * Run
@@ -43,5 +43,5 @@ document.addEventListener('DOMContentLoaded', () => {
     fillCategoriesSelect($categorySelect);
     handleNewLinkClick();
     $submit.addEventListener('click', handleSubmit);
-    renderExpensesList($dates);
+    renderExpensesList($datesContainer);
 });
