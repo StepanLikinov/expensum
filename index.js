@@ -3,15 +3,15 @@
  */
 
 import pager from './lib/pagerInit.js';
-import categoriesStorage from './lib/categoriesStorageApi.js';
 import { categoriesList } from './data/categoriesList.js' 
 import expensesStorage from './lib/expensesStorageApi.js';
-import { renderExpensesList } from './lib/expensesDomApi.js';
+import { renderExpensesList, handleSubmit } from './lib/expensesDomApi.js';
 import { 
     setDefaultCategory, 
     fillCategoriesContainer,
     fillCategoriesSelect 
 } from './lib/categoriesDomApi.js';
+import categoriesStorage from './lib/categoriesStorageApi.js';
 import { getSelectedCategory } from './data/state.js'
 import { handleNewLinkClick } from './lib/nav.js'
 
@@ -24,21 +24,8 @@ import { handleNewLinkClick } from './lib/nav.js'
 const $categoriesContainer = document.getElementById('categories');
 const $categorySelect = document.getElementById('category-select');
 const $selects = $categorySelect.querySelectorAll('select');
-const $dates = document.getElementById('dates');
-const $sum = document.getElementById('sum');
-const $comment = document.getElementById('comment');
 const $submit = document.getElementById('submit');
-
-/* Functions */
-
-// Обработка отправки формы
-const handleSubmit = () => {
-    const expense = 
-        expensesStorage.createExpense(getSelectedCategory(), $sum, $comment);
-    expensesStorage.add(expense);
-    renderExpensesList($dates);
-    pager.showPage('list');
-};
+const $dates = document.getElementById('dates');
 
 /**
  * Run
