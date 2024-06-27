@@ -24,7 +24,7 @@ import { handleNewLinkClick } from './lib/nav.js'
 const $categoriesContainer = document.getElementById('categories-container');
 const $categorySelect = document.getElementById('category-select');
 const $submit = document.getElementById('submit');
-const $datesContainer = document.getElementById('datesContainer');
+const $datesContainer = document.getElementById('dates-container');
 
 /**
  * Run
