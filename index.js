@@ -2,17 +2,16 @@
  * Imports
  */
 
-import Pager from './lib/Pager.js'
+import pager from './lib/pagerInit.js';
 import { categoriesList } from './data/categoriesList.js' 
-import pagerConfig from './configs/pager.js'
-import { expensesStorage, 
-    createExpenseElement, 
-    renderExpensesList } from './lib/expenses.js';
-import { categoriesStorage, 
+import { expensesStorage, renderExpensesList } from './lib/expensesDomApi.js';
+import { 
+    categoriesStorage, 
     setDefaultCategory, 
     fillCategoriesContainer,
-    fillCategoriesSelect } from './lib/categories.js';
-import { getSelectedCategory, setSelectedCategory } from './data/state.js'
+    fillCategoriesSelect 
+} from './lib/categoriesDomApi.js';
+import { getSelectedCategory } from './data/state.js'
 import { handleNewLinkClick } from './lib/nav.js'
 
 /**
@@ -48,9 +47,6 @@ const handleSubmit = () => {
 
 // Сохранения категорий в localStorage
 categoriesStorage.saveAll(categoriesList);
-
-//  Инициацилизация Pager
-const pager = new Pager(pagerConfig, 'main', 'flex');
 
 /* Calls */
 
