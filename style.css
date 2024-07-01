@@ -67,7 +67,7 @@ nav ul li {
     align-content: center;
 }
 
-#datesContainer {
+#dates-container {
     width: 100%;
     flex: 1;
     display: flex;
