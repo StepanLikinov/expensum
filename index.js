@@ -5,7 +5,7 @@
 import pager from './lib/pagerInit.js';
 import { categoriesList } from './data/categoriesList.js' 
 import expensesStorage from './lib/expensesStorageApi.js';
-import { renderExpensesList, handleSubmit } from './lib/expensesDomApi.js';
+import expensesDomApi from './lib/expensesDomApi.js';
 import categoriesDomApi from './lib/categoriesDomApi.js';
 import categoriesStorage from './lib/categoriesStorageApi.js';
 import { getSelectedCategory } from './data/state.js'
@@ -38,6 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
     categoriesDomApi.fillContainer($categoriesContainer);
     categoriesDomApi.fillSelect($categorySelect);
     handleNewLinkClick();
-    $submit.addEventListener('click', handleSubmit);
-    renderExpensesList($datesContainer);
+    $submit.addEventListener('click', expensesDomApi.handleSubmit);
+    expensesDomApi.renderList($datesContainer);
 });
