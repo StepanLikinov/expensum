@@ -20,6 +20,7 @@ const $categorySelect = document.getElementById('category-select');
 const $currentMonth = document.getElementById('current-month');
 const $submit = document.getElementById('submit');
 const $datesContainer = document.getElementById('dates-container');
+const $totalExpenses = document.getElementById('total-expenses');
 
 /**
  * Run
@@ -33,6 +34,7 @@ categoriesStorage.saveAll(categoriesList);
 /* Calls */
 
 document.addEventListener('DOMContentLoaded', () => {
+    expensesDomApi.showTotal(expensesDomApi.getCurrentMonth(), $totalExpenses);
     categoriesDomApi.setDefault();
     categoriesDomApi.fillContainer($categoriesContainer);
     datesDomApi.showCurrentMonth($currentMonth);
