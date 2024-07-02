@@ -2,13 +2,10 @@
  * Imports
  */
 
-import pager from './lib/pagerInit.js';
 import { categoriesList } from './data/categoriesList.js' 
-import expensesStorage from './lib/expensesStorageApi.js';
 import expensesDomApi from './lib/expensesDomApi.js';
 import categoriesDomApi from './lib/categoriesDomApi.js';
 import categoriesStorage from './lib/categoriesStorageApi.js';
-import { getSelectedCategory } from './data/state.js'
 import { handleNewLinkClick } from './lib/nav.js'
 
 /**
