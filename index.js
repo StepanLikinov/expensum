@@ -6,6 +6,7 @@ import { categoriesList } from './data/categoriesList.js'
 import expensesDomApi from './lib/expensesDomApi.js';
 import categoriesDomApi from './lib/categoriesDomApi.js';
 import categoriesStorage from './lib/categoriesStorageApi.js';
+import datesDomApi from './lib/datesDomApi.js';
 import { handleNewLinkClick } from './lib/nav.js'
 
 /**
@@ -16,6 +17,7 @@ import { handleNewLinkClick } from './lib/nav.js'
 
 const $categoriesContainer = document.getElementById('categories-container');
 const $categorySelect = document.getElementById('category-select');
+const $currentMonth = document.getElementById('current-month');
 const $submit = document.getElementById('submit');
 const $datesContainer = document.getElementById('dates-container');
 
@@ -33,6 +35,7 @@ categoriesStorage.saveAll(categoriesList);
 document.addEventListener('DOMContentLoaded', () => {
     categoriesDomApi.setDefault();
     categoriesDomApi.fillContainer($categoriesContainer);
+    datesDomApi.showCurrentMonth($currentMonth);
     categoriesDomApi.fillSelect($categorySelect);
     handleNewLinkClick();
     $submit.addEventListener('click', expensesDomApi.handleSubmit);

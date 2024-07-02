@@ -21,7 +21,7 @@ body {
     align-items: center;
 }
 
-#total-expenses, #calendar, #category-select, #sum, #comment, #submit, #title {
+#total-expenses, #current-month, #calendar, #category-select, #sum, #comment, #submit, #title {
     width: 100%;
     height: 60px;
     padding: 10px;
@@ -86,7 +86,7 @@ nav ul li {
     Skeleton decor
 */
 
-#total-expenses, #calendar, #category-select, #sum, #comment, #submit, #title {
+#total-expenses, #current-month, #calendar, #category-select, #sum, #comment, #submit, #title {
     background-color: rgb(205, 202, 202);
 }
 
