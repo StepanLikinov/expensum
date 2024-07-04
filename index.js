@@ -19,7 +19,7 @@ import { handleNewLinkClick } from './lib/nav.js'
 const $categoriesContainer = document.getElementById('categories-container');
 const $categorySelect = document.getElementById('category-select');
 const $currentMonth = document.getElementById('current-month');
-const $submit = document.getElementById('submit');
+const $expenseForm = document.getElementById('expense-form');
 const $datesContainer = document.getElementById('dates-container');
 const $totalExpenses = document.getElementById('total-expenses');
 
@@ -41,7 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
     datesDomApi.showCurrentMonth($currentMonth);
     categoriesDomApi.fillSelect($categorySelect);
     handleNewLinkClick();
-    $submit.addEventListener('click', expensesDomApi.handleSubmit);
+    $expenseForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        expensesDomApi.handleSubmit();
+    });
     
     const expenses = expensesStorage.getAll();
     expensesDomApi.renderList(expenses);

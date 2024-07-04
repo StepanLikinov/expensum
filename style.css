@@ -14,7 +14,7 @@ body {
     padding-bottom: 80px;
 }
 
-#main, #list, #new {
+#main, #list, #new form {
     flex: 1;
     display: flex;
     flex-direction: column;
