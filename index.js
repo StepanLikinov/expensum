@@ -4,6 +4,7 @@
 
 import { categoriesList } from './data/categoriesList.js' 
 import expensesDomApi from './lib/expensesDomApi.js';
+import expensesStorage from './lib/expensesStorageApi.js'
 import categoriesDomApi from './lib/categoriesDomApi.js';
 import categoriesStorage from './lib/categoriesStorageApi.js';
 import datesDomApi from './lib/datesDomApi.js';
@@ -41,5 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     categoriesDomApi.fillSelect($categorySelect);
     handleNewLinkClick();
     $submit.addEventListener('click', expensesDomApi.handleSubmit);
-    expensesDomApi.renderList($datesContainer);
+    const expenses = expensesStorage.getAll();
+    expensesDomApi.renderList(expenses);
 });
