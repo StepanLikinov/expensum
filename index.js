@@ -35,7 +35,7 @@ categoriesStorage.saveAll(categoriesList);
 /* Calls */
 
 document.addEventListener('DOMContentLoaded', () => {
-    expensesDomApi.showTotal(expensesDomApi.getCurrentMonth(), $totalExpenses);
+    expensesDomApi.showTotal(expensesStorage.getCurrentMonth(), $totalExpenses);
     categoriesDomApi.setDefault();
     categoriesDomApi.fillContainer($categoriesContainer);
     datesDomApi.showCurrentMonth($currentMonth);
