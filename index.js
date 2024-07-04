@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     categoriesDomApi.fillSelect($categorySelect);
     handleNewLinkClick();
     $submit.addEventListener('click', expensesDomApi.handleSubmit);
+    
     const expenses = expensesStorage.getAll();
     expensesDomApi.renderList(expenses);
 });
