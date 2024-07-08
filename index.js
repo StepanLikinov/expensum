@@ -9,6 +9,7 @@ import categoriesDomApi from './lib/categoriesDomApi.js';
 import categoriesStorage from './lib/categoriesStorageApi.js';
 import datesDomApi from './lib/datesDomApi.js';
 import { handleNewLinkClick } from './lib/nav.js'
+import pager from './lib/pagerInit.js';
 
 /**
  * Main
@@ -43,7 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
     handleNewLinkClick();
     $expenseForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        expensesDomApi.handleSubmit();
+        const formData = expensesDomApi.getFormData();
+        const expense = expensesStorage.createExpense(
+                formData.selectedCategory, formData.sum, formData.comment
+            );
+        expensesStorage.add(expense);
+        const expenses = expensesStorage.getAll();
+        expensesDomApi.renderList(expenses);
+        pager.showPage('list');
+        expensesDomApi.showTotal(
+            expensesStorage.getCurrentMonth(), $totalExpenses
+        );
     });
     
     const expenses = expensesStorage.getAll();
