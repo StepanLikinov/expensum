@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     categoriesDomApi.fillSelect($categorySelect);
     datesDomApi.showCurrentMonth($currentMonth);
     
-    $newExpenseLink.addEventListener('click', categoriesDomApi.resetForm)
+    $newExpenseLink.addEventListener('click', categoriesDomApi.resetForm);
     $expenseForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = expensesDomApi.getFormData();
