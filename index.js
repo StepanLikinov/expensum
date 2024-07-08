@@ -39,8 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
     expensesDomApi.showTotal(expensesStorage.getCurrentMonth(), $totalExpenses);
     categoriesDomApi.setDefaultInForm();
     categoriesDomApi.fillContainer($categoriesContainer);
-    datesDomApi.showCurrentMonth($currentMonth);
     categoriesDomApi.fillSelect($categorySelect);
+    datesDomApi.showCurrentMonth($currentMonth);
+    
     $newExpenseLink.addEventListener('click', categoriesDomApi.resetForm)
     $expenseForm.addEventListener('submit', function(event) {
         event.preventDefault();
