@@ -8,7 +8,7 @@ import expensesStorage from './lib/expensesStorageApi.js'
 import categoriesDomApi from './lib/categoriesDomApi.js';
 import categoriesStorage from './lib/categoriesStorageApi.js';
 import datesDomApi from './lib/datesDomApi.js';
-import { handleNewLinkClick } from './lib/nav.js'
+import { handleNewExpenseLinkClick } from './lib/nav.js'
 import pager from './lib/pagerInit.js';
 
 /**
@@ -37,11 +37,11 @@ categoriesStorage.saveAll(categoriesList);
 
 document.addEventListener('DOMContentLoaded', () => {
     expensesDomApi.showTotal(expensesStorage.getCurrentMonth(), $totalExpenses);
-    categoriesDomApi.setDefault();
+    categoriesDomApi.setDefaultInForm();
     categoriesDomApi.fillContainer($categoriesContainer);
     datesDomApi.showCurrentMonth($currentMonth);
     categoriesDomApi.fillSelect($categorySelect);
-    handleNewLinkClick();
+    handleNewExpenseLinkClick();
     $expenseForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = expensesDomApi.getFormData();
