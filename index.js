@@ -8,7 +8,6 @@ import expensesStorage from './lib/expensesStorageApi.js'
 import categoriesDomApi from './lib/categoriesDomApi.js';
 import categoriesStorage from './lib/categoriesStorageApi.js';
 import datesDomApi from './lib/datesDomApi.js';
-import { handleNewExpenseLinkClick } from './lib/nav.js'
 import pager from './lib/pagerInit.js';
 
 /**
@@ -23,7 +22,8 @@ const $currentMonth = document.getElementById('current-month');
 const $expenseForm = document.getElementById('expense-form');
 const $datesContainer = document.getElementById('dates-container');
 const $totalExpenses = document.getElementById('total-expenses');
-
+const $nav = document.querySelector('nav');
+const $newExpenseLink = $nav.querySelectorAll('li')[1];
 /**
  * Run
  */
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     categoriesDomApi.fillContainer($categoriesContainer);
     datesDomApi.showCurrentMonth($currentMonth);
     categoriesDomApi.fillSelect($categorySelect);
-    handleNewExpenseLinkClick();
+    $newExpenseLink.addEventListener('click', categoriesDomApi.resetForm)
     $expenseForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = expensesDomApi.getFormData();
