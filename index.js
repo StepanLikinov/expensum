@@ -24,6 +24,7 @@ const $datesContainer = document.getElementById('dates-container');
 const $totalExpenses = document.getElementById('total-expenses');
 const $nav = document.querySelector('nav');
 const $newExpenseLink = $nav.querySelectorAll('li')[1];
+const $expensesListLink = $nav.querySelectorAll('li')[2];
 const $calendar = document.getElementById('calendar');
 
 /**
@@ -42,11 +43,15 @@ document.addEventListener('DOMContentLoaded', () => {
     $newExpenseLink.addEventListener('click', () => {
         categoriesDomApi.resetForm();
     });
+    $expensesListLink.addEventListener('click', () => {
+        expensesDomApi.renderSelectedMonthList();
+    });
     // Main
     expensesDomApi.showTotal(expensesStorage.getCurrentMonth(), $totalExpenses);
     categoriesDomApi.fillContainer($categoriesContainer);
 
     // Form
+    datesDomApi.setDayValue();
     categoriesDomApi.setDefaultInForm();
     categoriesDomApi.fillSelect($categorySelect);
     datesDomApi.showCurrentMonth($currentMonth);
@@ -54,11 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         const formData = expensesDomApi.getFormData();
         const expense = expensesStorage.createExpense(
-            formData.selectedCategory, formData.sum, formData.comment
+            formData.date, formData.selectedCategory, 
+            formData.sum, formData.comment
         );
         expensesStorage.add(expense);
-        const expenses = expensesStorage.getAll();
-        expensesDomApi.renderList(expenses);
+        datesDomApi.setCalendarValue();
+        expensesDomApi.renderSelectedMonthList();
         pager.showPage('list');
         expensesDomApi.showTotal(
             expensesStorage.getCurrentMonth(), $totalExpenses
@@ -67,15 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // List
     datesDomApi.setCalendarValue();
-    const expenses = expensesStorage.getAll();
-    expensesDomApi.renderList(expenses);
-
-    $calendar.addEventListener('change', function(){
-        const selectedMonth = 
-            Number.parseInt($calendar.value.split('-')[1]) - 1;
-        console.log(selectedMonth);
-        const selectedMonthExpenses = 
-            expensesStorage.getByMonth(selectedMonth);
-        expensesDomApi.renderList(selectedMonthExpenses);
+    $calendar.addEventListener('change', function() {
+        expensesDomApi.renderSelectedMonthList();
     })
 });

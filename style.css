@@ -21,7 +21,7 @@ body {
     align-items: center;
 }
 
-#total-expenses, #current-month, #calendar, #category-select, #sum, #comment, #submit {
+#total-expenses, #current-month, #calendar, #day, #category-select, #sum, #comment, #submit {
     width: 100%;
     height: 60px;
     padding: 10px;
