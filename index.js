@@ -36,19 +36,23 @@ categoriesStorage.saveAll(categoriesList);
 /* Calls */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Global
+    $newExpenseLink.addEventListener('click', categoriesDomApi.resetForm);
+
+    // Main
     expensesDomApi.showTotal(expensesStorage.getCurrentMonth(), $totalExpenses);
-    categoriesDomApi.setDefaultInForm();
     categoriesDomApi.fillContainer($categoriesContainer);
+
+    // Form
+    categoriesDomApi.setDefaultInForm();
     categoriesDomApi.fillSelect($categorySelect);
     datesDomApi.showCurrentMonth($currentMonth);
-    
-    $newExpenseLink.addEventListener('click', categoriesDomApi.resetForm);
     $expenseForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = expensesDomApi.getFormData();
         const expense = expensesStorage.createExpense(
-                formData.selectedCategory, formData.sum, formData.comment
-            );
+            formData.selectedCategory, formData.sum, formData.comment
+        );
         expensesStorage.add(expense);
         const expenses = expensesStorage.getAll();
         expensesDomApi.renderList(expenses);
@@ -58,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     });
     
+    // List
     const expenses = expensesStorage.getAll();
     expensesDomApi.renderList(expenses);
 });
