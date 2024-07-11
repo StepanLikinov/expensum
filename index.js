@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // List
+    datesDomApi.setCalendarValue();
     const expenses = expensesStorage.getAll();
     expensesDomApi.renderList(expenses);
 });
