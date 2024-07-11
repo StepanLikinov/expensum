@@ -37,8 +37,9 @@ categoriesStorage.saveAll(categoriesList);
 
 document.addEventListener('DOMContentLoaded', () => {
     // Global
-    $newExpenseLink.addEventListener('click', categoriesDomApi.resetForm);
-
+    $newExpenseLink.addEventListener('click', () => {
+        categoriesDomApi.resetForm();
+    });
     // Main
     expensesDomApi.showTotal(expensesStorage.getCurrentMonth(), $totalExpenses);
     categoriesDomApi.fillContainer($categoriesContainer);
