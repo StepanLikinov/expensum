@@ -24,6 +24,8 @@ const $datesContainer = document.getElementById('dates-container');
 const $totalExpenses = document.getElementById('total-expenses');
 const $nav = document.querySelector('nav');
 const $newExpenseLink = $nav.querySelectorAll('li')[1];
+const $calendar = document.getElementById('calendar');
+
 /**
  * Run
  */
@@ -67,4 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
     datesDomApi.setCalendarValue();
     const expenses = expensesStorage.getAll();
     expensesDomApi.renderList(expenses);
+
+    $calendar.addEventListener('change', function(){
+        const selectedMonth = 
+            Number.parseInt($calendar.value.split('-')[1]) - 1;
+        console.log(selectedMonth);
+        const selectedMonthExpenses = 
+            expensesStorage.getByMonth(selectedMonth);
+        expensesDomApi.renderList(selectedMonthExpenses);
+    })
 });
