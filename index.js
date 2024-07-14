@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     $expensesListLink.addEventListener('click', () => {
         expensesDomApi.renderSelectedMonthList();
     });
+
     // Main
     expensesDomApi.showTotal(expensesStorage.getCurrentMonth(), $totalExpenses);
     categoriesDomApi.fillContainer($categoriesContainer);
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     $expenseForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = expensesDomApi.getFormData();
-        const expense = expensesStorage.createExpense(
+        const expense = expensesStorage.create(
             formData.date, formData.selectedCategory, 
             formData.sum, formData.comment
         );
