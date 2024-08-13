@@ -77,8 +77,4 @@ document.addEventListener('DOMContentLoaded', () => {
     $calendar.addEventListener('change', function() {
         expensesDomApi.renderSelectedMonthList();
     })
-
-    console.log(categoriesDomApi.getSelectedIconClass());
-    
-    
 });
