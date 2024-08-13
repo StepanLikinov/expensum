@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         const formData = expensesDomApi.getFormData();
         const expense = expensesStorage.create(
-            formData.date, formData.selectedCategory, 
+            formData.date, formData.selectedCategory, formData.iconClass, 
             formData.sum, formData.comment
         );
         expensesStorage.add(expense);
@@ -77,4 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
     $calendar.addEventListener('change', function() {
         expensesDomApi.renderSelectedMonthList();
     })
+
+    console.log(categoriesDomApi.getSelectedIconClass());
+    
+    
 });
