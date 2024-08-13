@@ -20,7 +20,6 @@ const $categoriesContainer = document.getElementById('categories-container');
 const $categorySelect = document.getElementById('category-select');
 const $currentMonth = document.getElementById('current-month');
 const $expenseForm = document.getElementById('expense-form');
-const $datesContainer = document.getElementById('dates-container');
 const $totalExpenses = document.getElementById('total-expenses');
 const $nav = document.querySelector('nav');
 const $newExpenseLink = $nav.querySelectorAll('li')[1];
