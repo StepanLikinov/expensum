@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         const formData = expensesDomApi.getFormData();
         const expense = expensesStorage.create(
-            formData.date, formData.selectedCategory, formData.iconClass, 
+            formData.date, formData.selectedCategory, 
             formData.sum, formData.comment
         );
         expensesStorage.add(expense);
