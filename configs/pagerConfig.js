@@ -8,9 +8,9 @@ const $navLinks = $nav.querySelectorAll('li');
 const $main = document.getElementById('main')
 const $new = document.getElementById('new')
 const $list = document.getElementById('list')
-const $mainLink = $navLinks[0];
-const $newLink = $navLinks[1];
-const $listLink = $navLinks[2];
+const $mainLink = document.getElementById('mainLink');
+const $newExpenseLink = document.getElementById('newExpenseLink');
+const $expensesListLink = document.getElementById('expensesListLink');
 
 /**
  * Main
@@ -23,11 +23,11 @@ const pagerConfig = {
     },
     'new': { 
         pageElement: $new, 
-        linkToPage: $newLink
+        linkToPage: $newExpenseLink
     },
     'list': { 
         pageElement: $list,
-        linkToPage: $listLink
+        linkToPage: $expensesListLink
     }
 }
 

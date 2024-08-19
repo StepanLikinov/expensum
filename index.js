@@ -21,9 +21,8 @@ const $categorySelect = document.getElementById('category-select');
 const $currentMonth = document.getElementById('current-month');
 const $expenseForm = document.getElementById('expense-form');
 const $totalExpenses = document.getElementById('total-expenses');
-const $nav = document.querySelector('nav');
-const $newExpenseLink = $nav.querySelectorAll('li')[1];
-const $expensesListLink = $nav.querySelectorAll('li')[2];
+const $newExpenseLink = document.getElementById('newExpenseLink');
+const $expensesListLink = document.getElementById('expensesListLink');
 const $calendar = document.getElementById('calendar');
 
 /**
