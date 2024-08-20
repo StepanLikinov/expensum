@@ -25,14 +25,22 @@
         <div class="container d-flex flex-wrap justify-content-evenly align-items-start" id="categories-container"></div>
     </div>
 
-    <div id="new">
+    <div class="container-sm fixed-bottom" id="new">
         <form id="expense-form">
-            <h1 class="title">Новый расход</h1>
-            <input type="date" id="day">
-            <select id="category-select">Категория</select>
-            <input id="sum" type="number" placeholder="Сумма">
-            <textarea id="comment" placeholder="Комментарий"></textarea>
-            <button type="submit">Создать</button>
+            <div class="h4 p-2 mb-2 text-center">Новый расход</div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <input class="form-control mb-2" type="date" id="day">
+                    <select class="form-select mb-2" id="category-select">Категория</select>
+                    <input class="form-control mb-2" id="sum" type="number" placeholder="Сумма">
+                </div>
+                <div class="col-12 col-md-6">
+                    <textarea class="form-control mb-2" id="comment" placeholder="Комментарий"></textarea>
+                </div>
+            </div>
+            <div class="d-grid">
+                <button class="btn btn-primary" type="submit">Создать</button>
+            </div>
         </form>
     </div>
 
