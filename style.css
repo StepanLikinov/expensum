@@ -1,121 +1,17 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.category-name {
+    width: 6rem; 
+    height: 2rem;
 }
 
-body {
-    margin: 0;
-    font-size: 2rem;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    padding-bottom: 80px;
+.category-icon {
+    width: 5rem; 
+    height: 5rem;
 }
 
-#main, #list, #new form {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.nav-link:hover {
+    background-color: lightgray;
 }
 
-#total-expenses, #current-month, #calendar, #day, #category-select, #sum, #comment, #submit {
-    width: 100%;
-    height: 60px;
-    padding: 10px;
-    margin-bottom: 10px;
-    overflow: auto;
+#new, #main {
+    margin-bottom: 6.75rem;
 }
-
-#categories-container {
-    width: 100%;
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-content: start;
-    padding: 20px;
-    gap: 10px;
-}
-
-#categories-container div{
-    width: 70px;
-    height: 70px;
-    font-size: 0.5em;
-}
-
-nav {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-nav div {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    list-style: none;
-}
-
-nav div a {
-    width: 25%;
-    min-height: 50px;
-    font-size: 0.5em;
-    align-content: center;
-}
-
-#dates-container {
-    width: 100%;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.date {
-    margin: 15px;
-}
-
-.expense {
-    margin: 20px 50px;
-    font-size: 0.8em;
-}
-
-/*
-    Skeleton decor
-*/
-/* 
-.title, #total-expenses, #current-month, #calendar, #category-select, #sum, #comment, #submit {
-    background-color: rgb(205, 202, 202);
-}
-
-#categories-container {
-    background-color: rgb(205, 202, 202);
-}
-
-#categories-container div {
-    border: 1px solid black;
-    border-radius: 50%;
-}
-
-nav ul {
-    background-color: rgb(240, 210, 233);
-}
-
-nav ul li {
-    background-color: rgb(166, 166, 225);
-}
-
-#dates-container {
-    background-color: rgb(205, 202, 202);
-}
-
-.date {
-    background-color: rgb(155, 151, 151);
-}
-
-.expense {
-    background-color: rgb(205, 202, 202);
-} */
