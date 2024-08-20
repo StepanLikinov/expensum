@@ -36,10 +36,9 @@
         </form>
     </div>
 
-    <div id="list">
-        <input type="month" id="calendar">
-        <h1 class="title">Список расходов</h1>
-        <div id="dates-container"></div>
+    <div class="container-sm mb-5" id="list">
+        <input class="mx-auto form-control text-center my-2 w-auto" type="month" id="calendar">
+        <div class="h4 mb-2 text-center">Список расходов</div>
         <div id="expenses-container"></div>
     </div>
 
@@ -74,19 +73,19 @@
     </template>
 
     <template id="expense-template">
-        <div class="expense">
-            <div class="expense-date"></div>
-            <div>
-                <div>
-                    <div class="expense-category-icon">
+        <div class="expense card my-4">
+            <div class="expense-date card-header text-center text-secondary"></div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="expense-category-icon col-2 col-md-1 h1">
                         <i></i>
                     </div>
-                    <div>
-                        <div class="expense-category"></div>
-                        <div class="expense-comment"></div>
+                    <div class="col-6 col-md-9">
+                        <div class="expense-category row h5"></div>
+                        <div class="expense-comment row text-secondary"></div>
                     </div>
-                    <div>
-                        <div class="expense-amount"></div>
+                    <div class="col-4 col-md-2">
+                        <div class="expense-amount fs-5 text-end"></div>
                     </div>
                 </div>
             </div>
