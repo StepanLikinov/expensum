@@ -2,9 +2,6 @@
  * Nodes
  */
 
-const $nav = document.querySelector('nav');
-const $navLinks = $nav.querySelectorAll('li');
-
 const $main = document.getElementById('main')
 const $new = document.getElementById('new')
 const $list = document.getElementById('list')
