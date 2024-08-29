@@ -1,6 +1,7 @@
 .category-name {
     width: 6rem; 
     height: 2rem;
+    hyphens: auto;
 }
 
 .category-icon {
