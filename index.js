@@ -44,7 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setActive($mainLink);
     });
     $newExpenseLink.addEventListener('click', () => {
-        categoriesDomApi.resetForm();
+        categoriesDomApi.setDefaultInForm();
+        expensesDomApi.resetForm();
         setActive($newExpenseLink);
     });
     $expensesListLink.addEventListener('click', () => {
