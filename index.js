@@ -9,7 +9,7 @@ import categoriesDomApi from './lib/categoriesDomApi.js';
 import categoriesStorage from './lib/categoriesStorageApi.js';
 import datesDomApi from './lib/datesDomApi.js';
 import pager from './lib/pagerInit.js';
-import { setActive } from './lib/heplers.js';
+import navDomApi from './lib/navDomApi.js';
 
 /**
  * Main
@@ -22,7 +22,6 @@ const $categorySelect = document.getElementById('category-select');
 const $currentMonth = document.getElementById('current-month');
 const $expenseForm = document.getElementById('expense-form');
 const $totalExpenses = document.getElementById('total-expenses');
-const $mainLink = document.getElementById('mainLink')
 const $newExpenseLink = document.getElementById('newExpenseLink');
 const $expensesListLink = document.getElementById('expensesListLink');
 const $calendar = document.getElementById('calendar');
@@ -40,23 +39,18 @@ categoriesStorage.saveAll(categoriesList);
 
 document.addEventListener('DOMContentLoaded', () => {
     // Global
-    $mainLink.addEventListener('click', () => {
-        setActive($mainLink);
-    });
+    navDomApi.initIndication();
     $newExpenseLink.addEventListener('click', () => {
         categoriesDomApi.setDefaultInForm();
         expensesDomApi.resetForm();
-        setActive($newExpenseLink);
     });
     $expensesListLink.addEventListener('click', () => {
         expensesDomApi.renderSelectedMonthList();
-        setActive($expensesListLink);
     });
 
     // Main
     expensesDomApi.showTotal(expensesStorage.getCurrentMonth(), $totalExpenses);
     categoriesDomApi.fillContainer($categoriesContainer);
-    setActive($mainLink);
 
     // Form
     datesDomApi.setDayValue();
@@ -74,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
         datesDomApi.setCalendarValue();
         expensesDomApi.renderSelectedMonthList();
         pager.showPage('list');
-        setActive($expensesListLink);
         expensesDomApi.showTotal(
             expensesStorage.getCurrentMonth(), $totalExpenses
         );
