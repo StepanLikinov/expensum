@@ -2,6 +2,7 @@
  * Imports
  */
 
+import './style.css';
 import { categoriesList } from './data/categoriesList.js' 
 import expensesDomApi from './lib/expensesDomApi.js';
 import expensesStorage from './lib/expensesStorageApi.js'
