@@ -7,6 +7,12 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },
+    watch: true,
+    devServer: {
+        static: './dist',
+        hot: true,
+    },
+    mode: 'production',
     module: {
         rules: [
             {
