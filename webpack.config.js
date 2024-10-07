@@ -12,6 +12,7 @@ module.exports = {
         static: './dist',
         hot: true,
     },
+    mode: 'production',
     module: {
         rules: [
             {
