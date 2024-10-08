@@ -13,6 +13,7 @@ module.exports = {
         static: './dist',
         hot: true,
     } : undefined,
+    devtool: isDevelopment ? 'inline-source-map' : undefined,
     mode: isDevelopment ? 'development' : 'production',
     module: {
         rules: [
