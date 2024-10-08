@@ -8,7 +8,6 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },
-    watch: isDevelopment,
     devServer: isDevelopment ? {
         static: './dist',
         hot: true,
