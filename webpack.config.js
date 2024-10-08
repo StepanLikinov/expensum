@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 module.exports = {
     entry: './index.js',
@@ -7,12 +8,12 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },
-    // watch: true,
-    // devServer: {
-    //     static: './dist',
-    //     hot: true,
-    // },
-    mode: 'production',
+    watch: isDevelopment,
+    devServer: isDevelopment ? {
+        static: './dist',
+        hot: true,
+    } : undefined,
+    mode: isDevelopment ? 'development' : 'production',
     module: {
         rules: [
             {
