@@ -1,8 +1,14 @@
+interface Category {
+    id: number;
+    name: string;
+    iconClass: string;
+}
+
 /**
  * Data
  */
 
-const categoriesList = [
+const categoriesList: Category[] = [
     { id: 1, name: "Продукты", iconClass: "bi bi-cart3" },
     { id: 2, name: "Дом", iconClass: "bi bi-house-door" },
     { id: 3, name: "Одежда", iconClass: "bi bi-handbag" },
