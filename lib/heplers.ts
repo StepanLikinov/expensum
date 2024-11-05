@@ -2,11 +2,11 @@
  * Functions
  */
 
-const clearContainer = ($сontainer) => {
+const clearContainer = ($сontainer: HTMLElement): void => {
     $сontainer.innerHTML = '';
 };
 
-const clearValue = ($element) => {
+const clearValue = ($element: HTMLInputElement | HTMLTextAreaElement): void => {
     $element.value = '';
 };
 

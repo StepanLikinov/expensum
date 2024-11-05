@@ -9,7 +9,7 @@ import pagerConfig from '../configs/pagerConfig.js'
  * Init
  */
 
-const pager = new Pager(pagerConfig, 'main');
+const pager: Pager = new Pager(pagerConfig, 'main');
 
 /**
  * Export
