@@ -2,22 +2,26 @@
  * Nodes
  */
 
-const $mainLink: HTMLElement | null = document.getElementById('mainLink')
-const $newExpenseLink: HTMLElement | null = 
-    document.getElementById('newExpenseLink');
-const $expensesListLink: HTMLElement | null = 
-    document.getElementById('expensesListLink');
-const $expenseForm: HTMLElement | null = 
-    document.getElementById('expense-form');
+const $mainLink: HTMLAnchorElement | null = document.getElementById('mainLink') as HTMLAnchorElement;
+const $newExpenseLink: HTMLAnchorElement | null = 
+    document.getElementById('newExpenseLink') as HTMLAnchorElement; 
+const $expensesListLink: HTMLAnchorElement | null = 
+    document.getElementById('expensesListLink') as HTMLAnchorElement;
+const $expenseForm: HTMLFormElement | null = 
+    document.getElementById('expense-form') as HTMLFormElement;
 
 /**
- * DOM API
+ * Interfaces
  */
 
 interface NavDomApi {
     setActive: ($clickedLink: HTMLAnchorElement) => void;
     initIndication: () => void;
 }
+
+/**
+ * DOM API
+ */
 
 const navDomApi: NavDomApi = {
     setActive: function($clickedLink: HTMLAnchorElement): void {
@@ -32,27 +36,27 @@ const navDomApi: NavDomApi = {
     },
 
     initIndication: function(): void {
-        if ($mainLink instanceof HTMLAnchorElement) {
+        if ($mainLink) {
             navDomApi.setActive($mainLink);
             $mainLink.addEventListener('click', () => {
                 navDomApi.setActive($mainLink);
             });
         }
         
-        if ($newExpenseLink instanceof HTMLAnchorElement) {
+        if ($newExpenseLink) {
             $newExpenseLink.addEventListener('click', () => {
                 navDomApi.setActive($newExpenseLink);
             });
         }
         
-        if ($expensesListLink instanceof HTMLAnchorElement) {
+        if ($expensesListLink) {
             $expensesListLink.addEventListener('click', () => {
                 navDomApi.setActive($expensesListLink);
             });
         }
-        if ($expenseForm instanceof HTMLAnchorElement) {
+        if ($expenseForm) {
             $expenseForm.addEventListener('submit', () => {
-                if ($expensesListLink instanceof HTMLAnchorElement) {
+                if ($expensesListLink) {
                     navDomApi.setActive($expensesListLink);
                 }
             });

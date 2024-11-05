@@ -1,7 +1,15 @@
+/**
+ * Interfaces
+ */
+
 interface Page {
     pageElement: HTMLElement | null;
     linkToPage: HTMLElement | null;
 }
+
+/**
+ * Pager
+ */
 
 export default class Pager {
     pages: { [key: string]: Page };
