@@ -1,3 +1,7 @@
+/**
+ * Interfaces
+ */
+
 interface Category {
     id: number;
     name: string;
