@@ -1,30 +1,48 @@
 /**
+ * Interfaces
+ */
+
+interface Category {
+    id: number;
+    name: string;
+    iconClass: string;
+}
+
+interface CategoriesStorage {
+    getAll: () => Category[];
+    saveAll: (categories: Category[]) => void;
+    find: (selectedCategory: string) => Category | undefined;
+}
+
+/**
  * Storage
  */
 
-const categoriesStorage = {
-    getAll: function() { 
-        let result;
-        const expenseCategoriesJson = localStorage.getItem('expenseCategories');
-        const expenseCategories = JSON.parse(expenseCategoriesJson);
+const categoriesStorage: CategoriesStorage = {
+    getAll: function(): Category[] { 
+        let result: Category[];
+        
+        const expenseCategoriesJson: string | null = 
+            localStorage.getItem('expenseCategories');
 
-        if (expenseCategories === null){
-            result = [];
+        if (expenseCategoriesJson) {
+            result = JSON.parse(expenseCategoriesJson); 
         } else {
-            result = expenseCategories;
+            result = []; 
         }
+    
 
         return result;
     },
 
-    saveAll: function(categories) {
-        const serializedCategories = JSON.stringify(categories);
+    saveAll: function(categories: Category[]): void {
+        const serializedCategories: string = JSON.stringify(categories);
         localStorage.setItem('expenseCategories', serializedCategories);
     },
 
-    find: function(selectedCategory) {
-        const categoriesList = this.getAll();
-        let result = categoriesList.find(
+    find: function(selectedCategory: string): Category | undefined {
+        const categoriesList: Category[] = this.getAll();
+        let result: Category | undefined = categoriesList.find(
             category => category.name === selectedCategory
         );
 
