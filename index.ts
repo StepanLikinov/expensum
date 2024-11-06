@@ -18,14 +18,22 @@ import navDomApi from './lib/navDomApi.js';
 
 /* Nodes */
 
-const $categoriesContainer = document.getElementById('categories-container');
-const $categorySelect = document.getElementById('category-select');
-const $currentMonth = document.getElementById('current-month');
-const $expenseForm = document.getElementById('expense-form');
-const $totalExpenses = document.getElementById('total-expenses');
-const $newExpenseLink = document.getElementById('newExpenseLink');
-const $expensesListLink = document.getElementById('expensesListLink');
-const $calendar = document.getElementById('calendar');
+const $categoriesContainer: HTMLElement | null = 
+    document.getElementById('categories-container') as HTMLElement;
+const $categorySelect: HTMLSelectElement | null = 
+    document.getElementById('category-select') as HTMLSelectElement;
+const $currentMonth: HTMLElement | null = 
+    document.getElementById('current-month') as HTMLElement;
+const $expenseForm: HTMLFormElement | null = 
+    document.getElementById('expense-form') as HTMLFormElement;
+const $totalExpenses: HTMLElement | null = 
+    document.getElementById('total-expenses') as HTMLElement;
+const $newExpenseLink: HTMLAnchorElement | null = 
+    document.getElementById('newExpenseLink') as HTMLAnchorElement;
+const $expensesListLink: HTMLAnchorElement | null = 
+    document.getElementById('expensesListLink') as HTMLAnchorElement;
+const $calendar: HTMLInputElement | null = 
+    document.getElementById('calendar') as HTMLInputElement;
 
 /**
  * Run
@@ -52,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Main
     expensesDomApi.showTotal(expensesStorage.getCurrentMonth(), $totalExpenses);
     categoriesDomApi.fillContainer($categoriesContainer);
+    
 
     // Form
     datesDomApi.setDayValue();
@@ -61,17 +70,19 @@ document.addEventListener('DOMContentLoaded', () => {
     $expenseForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = expensesDomApi.getFormData();
-        const expense = expensesStorage.create(
-            formData.date, formData.selectedCategory, 
-            formData.sum, formData.comment
-        );
-        expensesStorage.add(expense);
-        datesDomApi.setCalendarValue();
-        expensesDomApi.renderSelectedMonthList();
-        pager.showPage('list');
-        expensesDomApi.showTotal(
-            expensesStorage.getCurrentMonth(), $totalExpenses
-        );
+        if (formData.selectedCategory) {
+            const expense = expensesStorage.create(
+                formData.date, formData.selectedCategory, 
+                formData.sum, formData.comment
+            );
+            expensesStorage.add(expense);
+            datesDomApi.setCalendarValue();
+            expensesDomApi.renderSelectedMonthList();
+            pager.showPage('list');
+            expensesDomApi.showTotal(
+                expensesStorage.getCurrentMonth(), $totalExpenses
+            );
+        }
     });
     
     // List

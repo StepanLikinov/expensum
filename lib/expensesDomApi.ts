@@ -19,7 +19,6 @@ const $sum = document.getElementById('sum') as HTMLInputElement;
 const $comment = document.getElementById('comment') as HTMLInputElement;
 const $expensesContainer = 
     document.getElementById('expenses-container') as HTMLElement;
-const $totalExpenses = document.getElementById('total-expenses') as HTMLElement;
 const $calendar = document.getElementById('calendar') as HTMLInputElement;
 
 /**

@@ -12,7 +12,7 @@ import categoriesStorage from './categoriesStorageApi.js';
 
 interface Expense {
     id: string;
-    date: Date;
+    date: number;
     category: string;
     categoryId: number;
     sum: number;
@@ -64,7 +64,7 @@ const expensesStorage: ExpensesStorage = {
     },
 
     create: function (
-        date: Date, 
+        date: number, 
         selectedCategory: string,
         sum: string,
         comment?: string
