@@ -24,7 +24,7 @@ interface ExpensesStorage {
     saveAll(expenses: Expense[]): void;
     add(expense: Expense): void;
     create(
-        date: Date, 
+        date: number, 
         selectedCategory: string,
         sum: string,
         comment?: string

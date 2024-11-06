@@ -12,13 +12,41 @@ import expensesStorage from './expensesStorageApi.js';
  * Nodes
  */
 
-const $expenseTemplate = document.getElementById('expense-template');
-const $day = document.getElementById('day');
-const $sum = document.getElementById('sum');
-const $comment = document.getElementById('comment');
-const $expensesContainer = document.getElementById('expenses-container');
-const $totalExpenses = document.getElementById('total-expenses');
-const $calendar = document.getElementById('calendar');
+const $expenseTemplate: HTMLTemplateElement | null = 
+    document.getElementById('expense-template') as HTMLTemplateElement;
+const $day = document.getElementById('day') as HTMLInputElement;
+const $sum = document.getElementById('sum') as HTMLInputElement;
+const $comment = document.getElementById('comment') as HTMLInputElement;
+const $expensesContainer = 
+    document.getElementById('expenses-container') as HTMLElement;
+const $totalExpenses = document.getElementById('total-expenses') as HTMLElement;
+const $calendar = document.getElementById('calendar') as HTMLInputElement;
+
+/**
+ * Interfaces
+ */
+
+interface Expense {
+    id: string;
+    date: Date;
+    category: string;
+    categoryId: number;
+    sum: number;
+    comment?: string; // Комментарий может быть необязательным
+}
+
+interface Category {
+    id: number;
+    name: string;
+    iconClass: string;
+}
+
+interface FormData { 
+    date: number, 
+    selectedCategory: string | null, 
+    sum: string, 
+    comment?: string 
+}
 
 /**
  * DOM API
@@ -26,12 +54,16 @@ const $calendar = document.getElementById('calendar');
 
 const expensesDomApi = {
     // Cоздание элемента расхода
-    create: function(expense) {
-        const category = categoriesStorage.find(expense.category);
-        const iconClass = category.iconClass;
+    create: function(expense: Expense): HTMLElement {
+        const category: Category | undefined = 
+            categoriesStorage.find(expense.category);
+        if (category !== undefined) {
+            const iconClass = category.iconClass;
+        }
 
-        const $expense = 
-            $expenseTemplate.content.cloneNode(true).querySelector('.expense');
+        const $expense: HTMLElement = 
+            ($expenseTemplate.content.cloneNode(true) as DocumentFragment)
+            .querySelector('.expense') as HTMLElement;
         $expense.querySelector('.expense-date').innerText = 
             datesDomApi.create(expense.date);
         $expense.querySelector('.expense-category').innerText = 
@@ -47,38 +79,39 @@ const expensesDomApi = {
     },
 
     // Рендеринг списка расходов
-    renderList: function(data) {
+    renderList: function(data: Expense[]): void {
         clearContainer($expensesContainer);
 
-        data.forEach(expense => {
-            const $expense = this.create(expense);
+        data.forEach((expense: Expense) => {
+            const $expense: HTMLElement = this.create(expense);
             $expensesContainer.appendChild($expense);
         });
     },
 
     // Рендеринг списка расходов выбраннго месяца
-    renderSelectedMonthList: function() {
-        const selectedMonth = 
+    renderSelectedMonthList: function(): void {
+        const selectedMonth: number = 
             Number.parseInt($calendar.value.split('-')[1]) - 1;
-        const selectedMonthExpenses = 
+        const selectedMonthExpenses: Expense[] = 
             expensesStorage.getByMonth(selectedMonth);
         this.renderList(selectedMonthExpenses);
     },
 
     // Отображение суммы расходов за месяц
-    showTotal: function(expensesPeriod, $target) {
-        const totalExpenses = expensesStorage.calculateTotal(expensesPeriod);
+    showTotal: function(expensesPeriod: Expense[], $target: HTMLElement): void {
+        const totalExpenses: number = 
+            expensesStorage.calculateTotal(expensesPeriod);
         $target.innerText = `${totalExpenses} ₽`;
     },
 
     // "Очистка" формы
-    resetForm: function() {
+    resetForm: function(): void {
         clearValue($sum);
         clearValue($comment);
     },
 
     // Получение данных из формы
-    getFormData: function () {
+    getFormData: function ():FormData {
         const date = new Date($day.value).getTime();
         const selectedCategory = categoriesDomApi.getSelected();
         const sum = $sum.value;
