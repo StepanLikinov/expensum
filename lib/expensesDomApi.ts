@@ -28,7 +28,7 @@ const $calendar = document.getElementById('calendar') as HTMLInputElement;
 
 interface Expense {
     id: string;
-    date: Date;
+    date: number;
     category: string;
     categoryId: number;
     sum: number;
@@ -48,32 +48,57 @@ interface FormData {
     comment?: string 
 }
 
+interface ExpensesDomApi {
+    create(expense: Expense): HTMLElement;
+    renderList(data: Expense[]): void;
+    renderSelectedMonthList(): void;
+    showTotal(expensesPeriod: Expense[], $target: HTMLElement): void;
+    resetForm(): void;
+    getFormData(): FormData;
+}
+
 /**
  * DOM API
  */
 
-const expensesDomApi = {
+const expensesDomApi: ExpensesDomApi = {
     // Cоздание элемента расхода
     create: function(expense: Expense): HTMLElement {
         const category: Category | undefined = 
             categoriesStorage.find(expense.category);
-        if (category !== undefined) {
-            const iconClass = category.iconClass;
-        }
+        const iconClass = category ? category.iconClass : '';
 
         const $expense: HTMLElement = 
-            ($expenseTemplate.content.cloneNode(true) as DocumentFragment)
-            .querySelector('.expense') as HTMLElement;
-        $expense.querySelector('.expense-date').innerText = 
-            datesDomApi.create(expense.date);
-        $expense.querySelector('.expense-category').innerText = 
-            expense.category;
-        $expense.querySelector('.expense-category-icon').querySelector('i')
-            .className = iconClass;
-        $expense.querySelector('.expense-amount').innerText = 
-            `${expense.sum} ₽`;
-        $expense.querySelector('.expense-comment').innerText = 
-            `Комментарий: ${expense.comment}`;
+            ($expenseTemplate.content.cloneNode(true) as DocumentFragment).
+            querySelector('.expense') as HTMLElement;
+
+        const $expenseDate: HTMLElement | null = 
+            $expense.querySelector('.expense-date');
+        const $expenseCategory: HTMLElement | null = 
+            $expense.querySelector('.expense-category');
+        const $expenseIcon: HTMLElement | null | undefined = 
+            $expense.querySelector('.expense-category-icon')?.
+            querySelector('i');
+        const $expenseAmount: HTMLElement | null = 
+            $expense.querySelector('.expense-amount');
+        const $expenseComment: HTMLElement | null = 
+            $expense.querySelector('.expense-comment');
+
+        if ($expenseDate) {
+            $expenseDate.innerText = datesDomApi.create(expense.date);
+        }
+        if ($expenseCategory) {
+            $expenseCategory.innerText = expense.category;
+        }
+        if ($expenseIcon) {
+            $expenseIcon.className = iconClass;
+        }
+        if ($expenseAmount) {
+            $expenseAmount.innerText = `${expense.sum} ₽`;
+        }
+        if ($expenseComment) {
+            $expenseComment.innerText = `Комментарий: ${expense.comment}`;
+        }
 
         return $expense;
     },
