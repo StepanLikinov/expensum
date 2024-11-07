@@ -2,6 +2,7 @@
  * Imports
  */
 
+import { Expense, Category, FormData, ExpensesDomApi } from './interfaces';
 import { clearContainer, clearValue } from './heplers.js';
 import datesDomApi from './datesDomApi.js';
 import categoriesDomApi from './categoriesDomApi.js';
@@ -20,41 +21,6 @@ const $comment = document.getElementById('comment') as HTMLInputElement;
 const $expensesContainer = 
     document.getElementById('expenses-container') as HTMLElement;
 const $calendar = document.getElementById('calendar') as HTMLInputElement;
-
-/**
- * Interfaces
- */
-
-interface Expense {
-    id: string;
-    date: number;
-    category: string;
-    categoryId: number;
-    sum: number;
-    comment?: string; // Комментарий может быть необязательным
-}
-
-interface Category {
-    id: number;
-    name: string;
-    iconClass: string;
-}
-
-interface FormData { 
-    date: number, 
-    selectedCategory: string | null, 
-    sum: string, 
-    comment?: string 
-}
-
-interface ExpensesDomApi {
-    create(expense: Expense): HTMLElement;
-    renderList(data: Expense[]): void;
-    renderSelectedMonthList(): void;
-    showTotal(expensesPeriod: Expense[], $target: HTMLElement): void;
-    resetForm(): void;
-    getFormData(): FormData;
-}
 
 /**
  * DOM API

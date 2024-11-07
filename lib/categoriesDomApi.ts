@@ -2,7 +2,8 @@
  * Imports
  */
 
-import { clearContainer, clearValue } from './heplers.js';
+import { Category, CategoriesDomApi } from './interfaces';
+import { clearContainer } from './heplers.js';
 import categoriesStorage from './categoriesStorageApi.js';
 import pager from './pagerInit.js';
 import expensesDomApi from './expensesDomApi.js';
@@ -17,26 +18,6 @@ const $categorySelect: HTMLSelectElement | null =
     document.getElementById('category-select') as HTMLSelectElement;
 const $newExpenseLink: HTMLAnchorElement | null = 
     document.getElementById('newExpenseLink') as HTMLAnchorElement;
-
-/**
- * Interfaces
- */
-
-interface Category {
-    id: number;
-    name: string;
-    iconClass: string;
-}
-
-interface CategoriesDomApi {
-    selected: string | null;
-    setSelected(category: string): void;
-    getSelected(): string | null;
-    setDefaultInForm(): void;
-    create(category: Category): HTMLElement;
-    fillContainer($categoriesContainer: HTMLElement): void;
-    fillSelect($categorySelect: HTMLSelectElement): void;
-}
 
 /**
  * DOM API

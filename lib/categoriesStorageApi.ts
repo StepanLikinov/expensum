@@ -1,18 +1,8 @@
 /**
- * Interfaces
+ * Imports
  */
 
-interface Category {
-    id: number;
-    name: string;
-    iconClass: string;
-}
-
-interface CategoriesStorage {
-    getAll: () => Category[];
-    saveAll: (categories: Category[]) => void;
-    find: (selectedCategory: string) => Category | undefined;
-}
+import { Category, CategoriesStorage } from "./interfaces";
 
 /**
  * Storage

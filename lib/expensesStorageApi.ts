@@ -2,37 +2,10 @@
  * Imports
  */
 
+import { Expense, ExpensesStorage } from './interfaces';
 import generateId from './generateId.js';
 import datesDomApi from './datesDomApi.js';
 import categoriesStorage from './categoriesStorageApi.js';
-
-/**
- * Interfaces
- */
-
-interface Expense {
-    id: string;
-    date: number;
-    category: string;
-    categoryId: number;
-    sum: number;
-    comment?: string; // Комментарий может быть необязательным
-}
-
-interface ExpensesStorage {
-    getAll(): Expense[];
-    saveAll(expenses: Expense[]): void;
-    add(expense: Expense): void;
-    create(
-        date: number, 
-        selectedCategory: string,
-        sum: string,
-        comment?: string
-    ): Expense;
-    getByMonth(month: number): Expense[];
-    getCurrentMonth(): Expense[];
-    calculateTotal(expensesPeriod: Expense[]): number;
-}
 
 /**
  * Storage

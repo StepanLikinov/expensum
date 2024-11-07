@@ -1,4 +1,10 @@
 /**
+ * Imports
+ */
+
+import { NavDomApi } from './interfaces'
+
+/**
  * Nodes
  */
 
@@ -9,15 +15,6 @@ const $expensesListLink: HTMLAnchorElement | null =
     document.getElementById('expensesListLink') as HTMLAnchorElement;
 const $expenseForm: HTMLFormElement | null = 
     document.getElementById('expense-form') as HTMLFormElement;
-
-/**
- * Interfaces
- */
-
-interface NavDomApi {
-    setActive: ($clickedLink: HTMLAnchorElement) => void;
-    initIndication: () => void;
-}
 
 /**
  * DOM API

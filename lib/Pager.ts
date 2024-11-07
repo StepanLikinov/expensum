@@ -1,11 +1,8 @@
 /**
- * Interfaces
+ * Imports
  */
 
-interface Page {
-    pageElement: HTMLElement | null;
-    linkToPage: HTMLElement | null;
-}
+import { Page } from "./interfaces";
 
 /**
  * Pager

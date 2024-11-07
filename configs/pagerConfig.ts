@@ -1,4 +1,10 @@
 /**
+ * Imports
+ */
+
+import { Page } from "../lib/interfaces";
+
+/**
  * Nodes
  */
 
@@ -11,15 +17,6 @@ const $newExpenseLink: HTMLAnchorElement | null =
     document.getElementById('newExpenseLink') as HTMLAnchorElement;
 const $expensesListLink: HTMLAnchorElement | null = 
     document.getElementById('expensesListLink') as HTMLAnchorElement;
-
-/**
- * Intefaces
- */
-
-interface Page {
-    pageElement: HTMLElement | null;
-    linkToPage: HTMLElement | null;
-}
 
 /**
  * Main

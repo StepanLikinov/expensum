@@ -1,12 +1,8 @@
 /**
- * Interfaces
+ * Imports
  */
 
-interface Category {
-    id: number;
-    name: string;
-    iconClass: string;
-}
+import { Category } from "../lib/interfaces";
 
 /**
  * Data

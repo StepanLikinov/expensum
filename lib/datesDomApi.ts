@@ -2,6 +2,7 @@
  * Imports
  */
 
+import { DatesDomApi } from "./interfaces";
 import { months } from "../data/monthsList.js";
 
 /**
@@ -12,19 +13,6 @@ const $day: HTMLInputElement | null =
     document.getElementById('day') as HTMLInputElement;
 const $calendar: HTMLInputElement | null = 
     document.getElementById('calendar') as HTMLInputElement;
-
-
-/**
- * Interfaces
- */
-
-interface DatesDomApi {
-    current: Date;
-    create: (timestamp: number) => string;
-    showCurrentMonth: (target: HTMLElement) => void;
-    setDayValue: () => void;
-    setCalendarValue: () => void;
-}
 
 /**
  * Main
