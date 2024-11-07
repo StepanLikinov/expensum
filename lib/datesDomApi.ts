@@ -9,11 +9,8 @@ import { months } from "../data/monthsList.js";
  * Nodes
  */
 
-const $day: HTMLInputElement | null = 
-    document.getElementById('day') as HTMLInputElement;
-const $calendar: HTMLInputElement | null = 
-    document.getElementById('calendar') as HTMLInputElement;
-
+const $day: HTMLElement | null = document.getElementById('day');
+const $calendar: HTMLElement | null = document.getElementById('calendar');
 /**
  * Main
  */
@@ -45,7 +42,7 @@ const datesDomApi: DatesDomApi = {
 
     // Установка значения в input
     setDayValue: function():void {
-        if ($day){
+        if ($day instanceof HTMLInputElement){
             $day.value = this.current.toISOString().slice(0, 10);
         }
     },
@@ -57,7 +54,9 @@ const datesDomApi: DatesDomApi = {
         const monthsString: string  = 
             currentMonth < 10 ? '0' + currentMonth : currentMonth.toString();
         const formattedValue: string = `${currentYear}-${monthsString}`;
-        $calendar.value = formattedValue;
+        if ($calendar instanceof HTMLInputElement){
+            $calendar.value = formattedValue;
+        }
     }
 }
 

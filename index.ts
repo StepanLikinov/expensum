@@ -19,21 +19,21 @@ import navDomApi from './lib/navDomApi.js';
 /* Nodes */
 
 const $categoriesContainer: HTMLElement | null = 
-    document.getElementById('categories-container') as HTMLElement;
-const $categorySelect: HTMLSelectElement | null = 
-    document.getElementById('category-select') as HTMLSelectElement;
+    document.getElementById('categories-container');
+const $categorySelect: HTMLElement | null = 
+    document.getElementById('category-select');
 const $currentMonth: HTMLElement | null = 
-    document.getElementById('current-month') as HTMLElement;
-const $expenseForm: HTMLFormElement | null = 
-    document.getElementById('expense-form') as HTMLFormElement;
+    document.getElementById('current-month');
+const $expenseForm: HTMLElement | null = 
+    document.getElementById('expense-form');
 const $totalExpenses: HTMLElement | null = 
-    document.getElementById('total-expenses') as HTMLElement;
-const $newExpenseLink: HTMLAnchorElement | null = 
-    document.getElementById('newExpenseLink') as HTMLAnchorElement;
-const $expensesListLink: HTMLAnchorElement | null = 
-    document.getElementById('expensesListLink') as HTMLAnchorElement;
-const $calendar: HTMLInputElement | null = 
-    document.getElementById('calendar') as HTMLInputElement;
+    document.getElementById('total-expenses');
+const $newExpenseLink: HTMLElement | null = 
+    document.getElementById('newExpenseLink'); 
+const $expensesListLink: HTMLElement | null = 
+    document.getElementById('expensesListLink');
+const $calendar: HTMLElement | null = 
+    document.getElementById('calendar');
 
 /**
  * Run
@@ -49,45 +49,65 @@ categoriesStorage.saveAll(categoriesList);
 document.addEventListener('DOMContentLoaded', () => {
     // Global
     navDomApi.initIndication();
-    $newExpenseLink.addEventListener('click', () => {
-        categoriesDomApi.setDefaultInForm();
-        expensesDomApi.resetForm();
-    });
-    $expensesListLink.addEventListener('click', () => {
-        expensesDomApi.renderSelectedMonthList();
-    });
+    if ($newExpenseLink instanceof HTMLAnchorElement) {
+        $newExpenseLink.addEventListener('click', () => {
+            categoriesDomApi.setDefaultInForm();
+            expensesDomApi.resetForm();
+        });    
+    }
+    if ($expensesListLink instanceof HTMLAnchorElement) {
+        $expensesListLink.addEventListener('click', () => {
+            expensesDomApi.renderSelectedMonthList();
+        });
+    }
 
     // Main
-    expensesDomApi.showTotal(expensesStorage.getCurrentMonth(), $totalExpenses);
-    categoriesDomApi.fillContainer($categoriesContainer);
+    if ($totalExpenses) {
+        expensesDomApi.showTotal(
+            expensesStorage.getCurrentMonth(), 
+            $totalExpenses);
+    }
+    if ($categoriesContainer){
+        categoriesDomApi.fillContainer($categoriesContainer);
+    }
     
 
     // Form
     datesDomApi.setDayValue();
     categoriesDomApi.setDefaultInForm();
-    categoriesDomApi.fillSelect($categorySelect);
-    datesDomApi.showCurrentMonth($currentMonth);
-    $expenseForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const formData = expensesDomApi.getFormData();
-        if (formData.selectedCategory) {
-            const expense = expensesStorage.create(
-                formData.date, formData.selectedCategory, 
-                formData.sum, formData.comment
-            );
-            expensesStorage.add(expense);
-            datesDomApi.setCalendarValue();
-            expensesDomApi.renderSelectedMonthList();
-            pager.showPage('list');
-            expensesDomApi.showTotal(
-                expensesStorage.getCurrentMonth(), $totalExpenses
-            );
-        }
-    });
+    if ($categorySelect instanceof HTMLSelectElement){
+        categoriesDomApi.fillSelect($categorySelect);
+    }
+    if ($currentMonth) {
+        datesDomApi.showCurrentMonth($currentMonth);
+    }
+    if ($expenseForm instanceof HTMLFormElement){
+        $expenseForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = expensesDomApi.getFormData();
+            if (formData.selectedCategory) {
+                const expense = expensesStorage.create(
+                    formData.date, formData.selectedCategory, 
+                    formData.sum, formData.comment
+                );
+                expensesStorage.add(expense);
+                datesDomApi.setCalendarValue();
+                expensesDomApi.renderSelectedMonthList();
+                pager.showPage('list');
+                if ($totalExpenses) {
+                    expensesDomApi.showTotal(
+                        expensesStorage.getCurrentMonth(), $totalExpenses
+                    );
+                }
+            }
+        });
+    }
     
     // List
     datesDomApi.setCalendarValue();
-    $calendar.addEventListener('change', function() {
-        expensesDomApi.renderSelectedMonthList();
-    })
+    if ($calendar instanceof HTMLInputElement) {
+        $calendar.addEventListener('change', function() {
+            expensesDomApi.renderSelectedMonthList();
+        })
+    }
 });

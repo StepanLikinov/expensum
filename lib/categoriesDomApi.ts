@@ -12,12 +12,12 @@ import navDomApi from './navDomApi.js';
 /**
  * Nodes
  */
-const $categoryTemplate: HTMLTemplateElement | null =
-    document.getElementById('category-template') as HTMLTemplateElement;
-const $categorySelect: HTMLSelectElement | null = 
-    document.getElementById('category-select') as HTMLSelectElement;
-const $newExpenseLink: HTMLAnchorElement | null = 
-    document.getElementById('newExpenseLink') as HTMLAnchorElement;
+const $categoryTemplate: HTMLElement | null =
+    document.getElementById('category-template');
+const $categorySelect: HTMLElement | null = 
+    document.getElementById('category-select');
+const $newExpenseLink: HTMLElement | null = 
+    document.getElementById('newExpenseLink');
 
 /**
  * DOM API
@@ -45,49 +45,57 @@ const categoriesDomApi: CategoriesDomApi = {
     setDefaultInForm: function(): void {
         const categoriesList: Category[] = categoriesStorage.getAll();
         this.setSelected(categoriesList[0].name);
-        if ($categorySelect) {
+        if ($categorySelect instanceof HTMLSelectElement) {
             $categorySelect.selectedIndex = 0;
         }
     },
 
     // Создание элемента категории с добавлением обработчика событий
     create: function(category: Category): HTMLElement {
-        const $category: HTMLElement = 
-            ($categoryTemplate.content.cloneNode(true) as DocumentFragment)
-            .querySelector('.category') as HTMLElement;
+        if ($categoryTemplate instanceof HTMLTemplateElement) {
+            const $category: HTMLElement = 
+                ($categoryTemplate.content.cloneNode(true) as DocumentFragment)
+                .querySelector('.category') as HTMLElement;
 
-        const $categoryName: HTMLElement | null = 
-            $category.querySelector('.category-name') as HTMLElement;
+            const $categoryName: HTMLElement | null = 
+                $category.querySelector('.category-name');
 
-        const $categoryIconElement: HTMLElement | null = 
-            $category.querySelector('.category-icon');
+            const $categoryIconElement: HTMLElement | null = 
+                $category.querySelector('.category-icon');
 
-        let $categoryIcon: HTMLElement | null = null;
+            let $categoryIcon: HTMLElement | null = null;
 
-        if ($categoryIconElement) {
-            $categoryIcon = 
-                $categoryIconElement.querySelector('i') as HTMLElement | null;
-        }
-        if ($categoryName) {
-            $categoryName.innerText = category.name;
-        }
-        if ($categoryIcon) {
-            $categoryIcon.className = category.iconClass;
-        }
-        
-        $category.dataset.id = category.id.toString();
-
-        $category.addEventListener('click', () => {
-            this.setSelected(category.name);
-            if ($categorySelect) {
-                $categorySelect.value = category.id.toString();
+            if ($categoryIconElement) {
+                $categoryIcon = $categoryIconElement.querySelector('i');
             }
-            expensesDomApi.resetForm();
-            pager.showPage('new');
-            navDomApi.setActive($newExpenseLink)
-        });
+            if ($categoryName) {
+                $categoryName.innerText = category.name;
+            }
+            if ($categoryIcon) {
+                $categoryIcon.className = category.iconClass;
+            }
+            
+            $category.dataset.id = category.id.toString();
 
-        return $category;
+            $category.addEventListener('click', () => {
+                this.setSelected(category.name);
+                if ($categorySelect instanceof HTMLSelectElement) {
+                    $categorySelect.value = category.id.toString();
+                }
+                expensesDomApi.resetForm();
+                pager.showPage('new');
+                if ($newExpenseLink instanceof HTMLAnchorElement) {
+                    navDomApi.setActive($newExpenseLink)
+                }
+            });
+
+            return $category;
+        } else {
+            throw new Error(
+                'Template for category element not found in the DOM'
+            );
+        }
+
     },
 
     // Заполнение categoriesContainer

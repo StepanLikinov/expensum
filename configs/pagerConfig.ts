@@ -11,12 +11,11 @@ import { Page } from "../lib/interfaces";
 const $main: HTMLElement | null = document.getElementById('main');
 const $new: HTMLElement | null = document.getElementById('new');
 const $list: HTMLElement | null = document.getElementById('list');
-const $mainLink: HTMLAnchorElement | null = 
-    document.getElementById('mainLink') as HTMLAnchorElement;
-const $newExpenseLink: HTMLAnchorElement | null = 
-    document.getElementById('newExpenseLink') as HTMLAnchorElement;
-const $expensesListLink: HTMLAnchorElement | null = 
-    document.getElementById('expensesListLink') as HTMLAnchorElement;
+const $mainLink: HTMLElement | null = document.getElementById('mainLink');
+const $newExpenseLink: HTMLElement | null = 
+    document.getElementById('newExpenseLink');
+const $expensesListLink: HTMLElement | null = 
+    document.getElementById('expensesListLink');
 
 /**
  * Main

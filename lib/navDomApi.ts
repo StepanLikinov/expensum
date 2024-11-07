@@ -8,13 +8,13 @@ import { NavDomApi } from './interfaces'
  * Nodes
  */
 
-const $mainLink: HTMLAnchorElement | null = document.getElementById('mainLink') as HTMLAnchorElement;
-const $newExpenseLink: HTMLAnchorElement | null = 
-    document.getElementById('newExpenseLink') as HTMLAnchorElement; 
-const $expensesListLink: HTMLAnchorElement | null = 
-    document.getElementById('expensesListLink') as HTMLAnchorElement;
-const $expenseForm: HTMLFormElement | null = 
-    document.getElementById('expense-form') as HTMLFormElement;
+const $mainLink: HTMLElement | null = document.getElementById('mainLink');
+const $newExpenseLink: HTMLElement | null = 
+    document.getElementById('newExpenseLink'); 
+const $expensesListLink: HTMLElement | null = 
+    document.getElementById('expensesListLink');
+const $expenseForm: HTMLElement | null = 
+    document.getElementById('expense-form');
 
 /**
  * DOM API
@@ -33,27 +33,27 @@ const navDomApi: NavDomApi = {
     },
 
     initIndication: function(): void {
-        if ($mainLink) {
+        if ($mainLink instanceof HTMLAnchorElement) {
             navDomApi.setActive($mainLink);
             $mainLink.addEventListener('click', () => {
                 navDomApi.setActive($mainLink);
             });
         }
         
-        if ($newExpenseLink) {
+        if ($newExpenseLink instanceof HTMLAnchorElement) {
             $newExpenseLink.addEventListener('click', () => {
                 navDomApi.setActive($newExpenseLink);
             });
         }
         
-        if ($expensesListLink) {
+        if ($expensesListLink instanceof HTMLAnchorElement) {
             $expensesListLink.addEventListener('click', () => {
                 navDomApi.setActive($expensesListLink);
             });
         }
-        if ($expenseForm) {
+        if ($expenseForm instanceof HTMLFormElement) {
             $expenseForm.addEventListener('submit', () => {
-                if ($expensesListLink) {
+                if ($expensesListLink instanceof HTMLAnchorElement) {
                     navDomApi.setActive($expensesListLink);
                 }
             });
