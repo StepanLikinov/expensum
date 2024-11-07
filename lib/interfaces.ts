@@ -85,5 +85,5 @@ interface NavDomApi {
 
 export { 
     Page, Category, CategoriesDomApi, CategoriesStorage, DatesDomApi, Expense,
-    FormData, ExpensesDomApi, ExpensesStorage
+    FormData, ExpensesDomApi, ExpensesStorage, NavDomApi
 }
