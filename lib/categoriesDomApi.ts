@@ -52,50 +52,56 @@ const categoriesDomApi: CategoriesDomApi = {
 
     // Создание элемента категории с добавлением обработчика событий
     create: function(category: Category): HTMLElement {
-        if ($categoryTemplate instanceof HTMLTemplateElement) {
-            const $category: HTMLElement = 
-                ($categoryTemplate.content.cloneNode(true) as DocumentFragment)
-                .querySelector('.category') as HTMLElement;
-
-            const $categoryName: HTMLElement | null = 
-                $category.querySelector('.category-name');
-
-            const $categoryIconElement: HTMLElement | null = 
-                $category.querySelector('.category-icon');
-
-            let $categoryIcon: HTMLElement | null = null;
-
-            if ($categoryIconElement) {
-                $categoryIcon = $categoryIconElement.querySelector('i');
-            }
-            if ($categoryName) {
-                $categoryName.innerText = category.name;
-            }
-            if ($categoryIcon) {
-                $categoryIcon.className = category.iconClass;
-            }
-            
-            $category.dataset.id = category.id.toString();
-
-            $category.addEventListener('click', () => {
-                this.setSelected(category.name);
-                if ($categorySelect instanceof HTMLSelectElement) {
-                    $categorySelect.value = category.id.toString();
-                }
-                expensesDomApi.resetForm();
-                pager.showPage('new');
-                if ($newExpenseLink instanceof HTMLAnchorElement) {
-                    navDomApi.setActive($newExpenseLink)
-                }
-            });
-
-            return $category;
-        } else {
+        if (!($categoryTemplate instanceof HTMLTemplateElement)) {
             throw new Error(
                 'Template for category element not found in the DOM'
             );
         }
 
+        const $categoryTemplateClone: DocumentFragment = 
+            $categoryTemplate.content.cloneNode(true) as DocumentFragment;
+        const $category: HTMLElement | null = 
+            $categoryTemplateClone.querySelector('.category');
+        
+        if (!$category) {
+            throw new Error(
+                "Couldn't find .category element in template clone"
+            );
+        }
+
+        const $categoryName: HTMLElement | null = 
+        $category.querySelector('.category-name');
+
+        const $categoryIconElement: HTMLElement | null = 
+            $category.querySelector('.category-icon');
+
+        let $categoryIcon: HTMLElement | null = null;
+
+        if ($categoryIconElement) {
+            $categoryIcon = $categoryIconElement.querySelector('i');
+        }
+        if ($categoryName) {
+            $categoryName.innerText = category.name;
+        }
+        if ($categoryIcon) {
+            $categoryIcon.className = category.iconClass;
+        }
+        
+        $category.dataset.id = category.id.toString();
+
+        $category.addEventListener('click', () => {
+            this.setSelected(category.name);
+            if ($categorySelect instanceof HTMLSelectElement) {
+                $categorySelect.value = category.id.toString();
+            }
+            expensesDomApi.resetForm();
+            pager.showPage('new');
+            if ($newExpenseLink instanceof HTMLAnchorElement) {
+                navDomApi.setActive($newExpenseLink)
+            }
+        });
+
+        return $category;
     },
 
     // Заполнение categoriesContainer

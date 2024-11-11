@@ -32,49 +32,55 @@ const expensesDomApi: ExpensesDomApi = {
         const category: Category | undefined = 
             categoriesStorage.find(expense.category);
         const iconClass = category ? category.iconClass : '';
-
-        if ($expenseTemplate instanceof HTMLTemplateElement) {
-            const $expense: HTMLElement = 
-            ($expenseTemplate.content.cloneNode(true) as DocumentFragment).
-            querySelector('.expense') as HTMLElement;
-
-            const $expenseDate: HTMLElement | null = 
-                $expense.querySelector('.expense-date');
-            const $expenseCategory: HTMLElement | null = 
-                $expense.querySelector('.expense-category');
-            const $expenseIcon: HTMLElement | null | undefined = 
-                $expense.querySelector('.expense-category-icon')?.
-                querySelector('i');
-            const $expenseAmount: HTMLElement | null = 
-                $expense.querySelector('.expense-amount');
-            const $expenseComment: HTMLElement | null = 
-                $expense.querySelector('.expense-comment');
-
-            if ($expenseDate) {
-                $expenseDate.innerText = datesDomApi.create(expense.date);
-            }
-            if ($expenseCategory) {
-                $expenseCategory.innerText = expense.category;
-            }
-            if ($expenseIcon) {
-                $expenseIcon.className = iconClass;
-            }
-            if ($expenseAmount) {
-                $expenseAmount.innerText = `${expense.sum} ₽`;
-            }
-            if ($expenseComment) {
-                $expenseComment.innerText = `Комментарий: ${expense.comment}`;
-            }
-
-            return $expense;
-        } else {
+    
+        if (
+            !$expenseTemplate || 
+            !($expenseTemplate instanceof HTMLTemplateElement)
+        ) {
             throw new Error(
                 'Template for expense element not found in the DOM'
             );
         }
-
+    
+        const $expenseTemplateClone: DocumentFragment = 
+            $expenseTemplate.content.cloneNode(true) as DocumentFragment;
+        const $expense: HTMLElement | null = 
+            $expenseTemplateClone.querySelector(".expense");
+    
+        if (!$expense) {
+            throw new Error("Couldn't find .expense element in template clone");
+        }
+    
+        const $expenseDate: HTMLElement | null = 
+            $expense.querySelector('.expense-date');
+        const $expenseCategory: HTMLElement | null = 
+            $expense.querySelector('.expense-category');
+        const $expenseIcon: HTMLElement | null = 
+            $expense.querySelector('.expense-category-icon i');
+        const $expenseAmount: HTMLElement | null = 
+            $expense.querySelector('.expense-amount');
+        const $expenseComment: HTMLElement | null = 
+            $expense.querySelector('.expense-comment');
+    
+        if ($expenseDate) {
+            $expenseDate.innerText = datesDomApi.create(expense.date);
+        }
+        if ($expenseCategory) {
+            $expenseCategory.innerText = expense.category;
+        }
+        if ($expenseIcon) {
+            $expenseIcon.className = iconClass;
+        }
+        if ($expenseAmount) {
+            $expenseAmount.innerText = `${expense.sum} ₽`;
+        }
+        if ($expenseComment) {
+            $expenseComment.innerText = `Комментарий: ${expense.comment}`;
+        }
+    
+        return $expense;
     },
-
+    
     // Рендеринг списка расходов
     renderList: function(data: Expense[]): void {
         if ($expensesContainer){
