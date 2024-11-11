@@ -33,10 +33,7 @@ const expensesDomApi: ExpensesDomApi = {
             categoriesStorage.find(expense.category);
         const iconClass = category ? category.iconClass : '';
     
-        if (
-            !$expenseTemplate || 
-            !($expenseTemplate instanceof HTMLTemplateElement)
-        ) {
+        if (!($expenseTemplate instanceof HTMLTemplateElement)) {
             throw new Error(
                 'Template for expense element not found in the DOM'
             );
