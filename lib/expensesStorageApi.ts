@@ -61,7 +61,7 @@ const expensesStorage: ExpensesStorage = {
     },
 
     // Получение расходов по выбранному месяцу
-    getByMonth: function(month: number): Expense[] {
+    getByMonth: function(this: ExpensesStorage, month: number): Expense[] {
         const expenses: Expense[] = this.getAll();
         const selectedMonthExpenses: Expense[] = 
             expenses.filter(function(expense: Expense) {
@@ -76,8 +76,9 @@ const expensesStorage: ExpensesStorage = {
 
     // Получение расходов текущего месяца
     getCurrentMonth: function(): Expense[] {
+        const currentMonthIndex: number = datesDomApi.current.getMonth();
         const currentMonthExpenses: Expense[] = 
-            this.getByMonth(datesDomApi.current.getMonth());
+            this.getByMonth(currentMonthIndex);
 
         return currentMonthExpenses;
     },

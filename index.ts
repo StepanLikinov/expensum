@@ -11,6 +11,7 @@ import categoriesStorage from './lib/categoriesStorageApi.js';
 import datesDomApi from './lib/datesDomApi.js';
 import pager from './lib/pagerInit.js';
 import navDomApi from './lib/navDomApi.js';
+import { FormData, Expense } from './lib/interfaces.js';
 
 /**
  * Main
@@ -20,18 +21,25 @@ import navDomApi from './lib/navDomApi.js';
 
 const $categoriesContainer: HTMLElement | null = 
     document.getElementById('categories-container');
+
 const $categorySelect: HTMLElement | null = 
     document.getElementById('category-select');
+
 const $currentMonth: HTMLElement | null = 
     document.getElementById('current-month');
+
 const $expenseForm: HTMLElement | null = 
     document.getElementById('expense-form');
+
 const $totalExpenses: HTMLElement | null = 
     document.getElementById('total-expenses');
+
 const $newExpenseLink: HTMLElement | null = 
     document.getElementById('newExpenseLink'); 
+
 const $expensesListLink: HTMLElement | null = 
     document.getElementById('expensesListLink');
+
 const $calendar: HTMLElement | null = 
     document.getElementById('calendar');
 
@@ -55,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             expensesDomApi.resetForm();
         });    
     }
+
     if ($expensesListLink instanceof HTMLAnchorElement) {
         $expensesListLink.addEventListener('click', () => {
             expensesDomApi.renderSelectedMonthList();
@@ -67,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             expensesStorage.getCurrentMonth(), 
             $totalExpenses);
     }
+
     if ($categoriesContainer){
         categoriesDomApi.fillContainer($categoriesContainer);
     }
@@ -78,15 +88,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if ($categorySelect instanceof HTMLSelectElement){
         categoriesDomApi.fillSelect($categorySelect);
     }
+
     if ($currentMonth) {
         datesDomApi.showCurrentMonth($currentMonth);
     }
+
     if ($expenseForm instanceof HTMLFormElement){
         $expenseForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            const formData = expensesDomApi.getFormData();
+            const formData: FormData = expensesDomApi.getFormData();
             if (formData.selectedCategory) {
-                const expense = expensesStorage.create(
+                const expense: Expense = expensesStorage.create(
                     formData.date, formData.selectedCategory, 
                     formData.sum, formData.comment
                 );

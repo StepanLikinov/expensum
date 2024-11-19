@@ -15,11 +15,14 @@ import expensesStorage from './expensesStorageApi.js';
 
 const $expenseTemplate: HTMLElement | null = 
     document.getElementById('expense-template');
+
 const $day: HTMLElement | null = document.getElementById('day');
 const $sum: HTMLElement | null = document.getElementById('sum');
 const $comment: HTMLElement | null = document.getElementById('comment');
+
 const $expensesContainer: HTMLElement | null = 
     document.getElementById('expenses-container');
+    
 const $calendar: HTMLElement | null = document.getElementById('calendar');
 
 /**

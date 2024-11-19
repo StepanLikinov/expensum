@@ -60,6 +60,7 @@ const categoriesDomApi: CategoriesDomApi = {
 
         const $categoryTemplateClone: DocumentFragment = 
             $categoryTemplate.content.cloneNode(true) as DocumentFragment;
+            
         const $category: HTMLElement | null = 
             $categoryTemplateClone.querySelector('.category');
         
