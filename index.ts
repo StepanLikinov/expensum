@@ -57,6 +57,7 @@ categoriesStorage.saveAll(categoriesList);
 document.addEventListener('DOMContentLoaded', () => {
     // Global
     navDomApi.initIndication();
+
     if ($newExpenseLink instanceof HTMLAnchorElement) {
         $newExpenseLink.addEventListener('click', () => {
             categoriesDomApi.setDefaultInForm();
@@ -74,17 +75,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if ($totalExpenses) {
         expensesDomApi.showTotal(
             expensesStorage.getCurrentMonth(), 
-            $totalExpenses);
+            $totalExpenses
+        );
     }
 
     if ($categoriesContainer){
         categoriesDomApi.fillContainer($categoriesContainer);
     }
     
-
     // Form
     datesDomApi.setDayValue();
     categoriesDomApi.setDefaultInForm();
+
     if ($categorySelect instanceof HTMLSelectElement){
         categoriesDomApi.fillSelect($categorySelect);
     }
@@ -97,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         $expenseForm.addEventListener('submit', function(event) {
             event.preventDefault();
             const formData: FormData = expensesDomApi.getFormData();
+
             if (formData.selectedCategory) {
                 const expense: Expense = expensesStorage.create(
                     formData.date, formData.selectedCategory, 
@@ -106,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 datesDomApi.setCalendarValue();
                 expensesDomApi.renderSelectedMonthList();
                 pager.showPage('list');
+
                 if ($totalExpenses) {
                     expensesDomApi.showTotal(
                         expensesStorage.getCurrentMonth(), $totalExpenses
@@ -117,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // List
     datesDomApi.setCalendarValue();
+    
     if ($calendar instanceof HTMLInputElement) {
         $calendar.addEventListener('change', function() {
             expensesDomApi.renderSelectedMonthList();
