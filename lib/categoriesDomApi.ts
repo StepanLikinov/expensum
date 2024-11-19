@@ -14,8 +14,10 @@ import navDomApi from './navDomApi.js';
  */
 const $categoryTemplate: HTMLElement | null =
     document.getElementById('category-template');
+
 const $categorySelect: HTMLElement | null = 
     document.getElementById('category-select');
+
 const $newExpenseLink: HTMLElement | null = 
     document.getElementById('newExpenseLink');
 
@@ -25,33 +27,30 @@ const $newExpenseLink: HTMLElement | null =
 
 const categoriesDomApi: CategoriesDomApi = {
     // Хранения выбранной категории
-    
     selected: null,
 
     // Установка выбранной категории
-    
-    setSelected: function(category: string): void {
+    setSelected: function(category) {
         this.selected = category;
     },
 
     // Получение выбранной категории
-    
-    getSelected: function(): string | null {
+    getSelected: function() {
         return this.selected;
     },
 
     // Установка категории по умолчанию (для создания расхода через "Новый расход")
-    
-    setDefaultInForm: function(): void {
+    setDefaultInForm: function() {
         const categoriesList: Category[] = categoriesStorage.getAll();
         this.setSelected(categoriesList[0].name);
+
         if ($categorySelect instanceof HTMLSelectElement) {
             $categorySelect.selectedIndex = 0;
         }
     },
 
     // Создание элемента категории с добавлением обработчика событий
-    create: function(category: Category): HTMLElement {
+    create: function(category) {
         if (!($categoryTemplate instanceof HTMLTemplateElement)) {
             throw new Error(
                 'Template for category element not found in the DOM'
@@ -71,7 +70,7 @@ const categoriesDomApi: CategoriesDomApi = {
         }
 
         const $categoryName: HTMLElement | null = 
-        $category.querySelector('.category-name');
+            $category.querySelector('.category-name');
 
         const $categoryIconElement: HTMLElement | null = 
             $category.querySelector('.category-icon');
@@ -81,9 +80,11 @@ const categoriesDomApi: CategoriesDomApi = {
         if ($categoryIconElement) {
             $categoryIcon = $categoryIconElement.querySelector('i');
         }
+
         if ($categoryName) {
             $categoryName.innerText = category.name;
         }
+
         if ($categoryIcon) {
             $categoryIcon.className = category.iconClass;
         }
@@ -92,11 +93,14 @@ const categoriesDomApi: CategoriesDomApi = {
 
         $category.addEventListener('click', () => {
             this.setSelected(category.name);
+
             if ($categorySelect instanceof HTMLSelectElement) {
                 $categorySelect.value = category.id.toString();
             }
+
             expensesDomApi.resetForm();
             pager.showPage('new');
+
             if ($newExpenseLink instanceof HTMLAnchorElement) {
                 navDomApi.setActive($newExpenseLink)
             }
@@ -106,8 +110,7 @@ const categoriesDomApi: CategoriesDomApi = {
     },
 
     // Заполнение categoriesContainer
-    
-    fillContainer: function($categoriesContainer: HTMLElement): void {
+    fillContainer: function($categoriesContainer) {
         clearContainer($categoriesContainer);
 
         const categoriesList: Category[] = categoriesStorage.getAll();
@@ -119,7 +122,7 @@ const categoriesDomApi: CategoriesDomApi = {
     },
     
     // Заполнение categorySelect
-    fillSelect: function($categorySelect: HTMLElement): void {
+    fillSelect: function($categorySelect) {
         const categoriesList: Category[] = categoriesStorage.getAll();
 
         categoriesList.forEach((category: Category) => {
@@ -133,10 +136,13 @@ const categoriesDomApi: CategoriesDomApi = {
             if ($categorySelect instanceof HTMLSelectElement) {
                 const selectedCategoryId: number = 
                     Number.parseInt($categorySelect.value);
+
                 const selectedCategory: Category | undefined = 
                     categoriesList.find(
-                        category => category.id === selectedCategoryId
+                        (category: Category) => 
+                            category.id === selectedCategoryId
                     );
+
                 if (selectedCategory) {
                     this.setSelected(selectedCategory.name);
                 }

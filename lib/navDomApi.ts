@@ -9,10 +9,13 @@ import { NavDomApi } from './interfaces'
  */
 
 const $mainLink: HTMLElement | null = document.getElementById('mainLink');
+
 const $newExpenseLink: HTMLElement | null = 
     document.getElementById('newExpenseLink'); 
+
 const $expensesListLink: HTMLElement | null = 
     document.getElementById('expensesListLink');
+
 const $expenseForm: HTMLElement | null = 
     document.getElementById('expense-form');
 
@@ -21,18 +24,18 @@ const $expenseForm: HTMLElement | null =
  */
 
 const navDomApi: NavDomApi = {
-    setActive: function($clickedLink: HTMLAnchorElement): void {
+    setActive: function($clickedLink) {
     let navLinks: NodeListOf<HTMLAnchorElement> =
         document.querySelectorAll('.navbar-nav a');
 
-    navLinks.forEach(function($link) {
+    navLinks.forEach(function($link: HTMLAnchorElement) {
         $link.classList.remove('text-primary');
     });
 
     $clickedLink.classList.add('text-primary');
     },
 
-    initIndication: function(): void {
+    initIndication: function() {
         if ($mainLink instanceof HTMLAnchorElement) {
             navDomApi.setActive($mainLink);
             $mainLink.addEventListener('click', () => {
@@ -51,6 +54,7 @@ const navDomApi: NavDomApi = {
                 navDomApi.setActive($expensesListLink);
             });
         }
+        
         if ($expenseForm instanceof HTMLFormElement) {
             $expenseForm.addEventListener('submit', () => {
                 if ($expensesListLink instanceof HTMLAnchorElement) {

@@ -16,13 +16,12 @@ import expensesStorage from './expensesStorageApi.js';
 const $expenseTemplate: HTMLElement | null = 
     document.getElementById('expense-template');
 
-const $day: HTMLElement | null = document.getElementById('day');
-const $sum: HTMLElement | null = document.getElementById('sum');
-const $comment: HTMLElement | null = document.getElementById('comment');
-
 const $expensesContainer: HTMLElement | null = 
     document.getElementById('expenses-container');
-    
+
+const $day: HTMLElement | null = document.getElementById('day');
+const $sum: HTMLElement | null = document.getElementById('sum');
+const $comment: HTMLElement | null = document.getElementById('comment');    
 const $calendar: HTMLElement | null = document.getElementById('calendar');
 
 /**
@@ -31,10 +30,11 @@ const $calendar: HTMLElement | null = document.getElementById('calendar');
 
 const expensesDomApi: ExpensesDomApi = {
     // Cоздание элемента расхода
-    create: function(expense: Expense): HTMLElement {
+    create: function(expense) {
         const category: Category | undefined = 
             categoriesStorage.find(expense.category);
-        const iconClass = category ? category.iconClass : '';
+
+        const iconClass: string = category ? category.iconClass : '';
     
         if (!($expenseTemplate instanceof HTMLTemplateElement)) {
             throw new Error(
@@ -44,6 +44,7 @@ const expensesDomApi: ExpensesDomApi = {
     
         const $expenseTemplateClone: DocumentFragment = 
             $expenseTemplate.content.cloneNode(true) as DocumentFragment;
+
         const $expense: HTMLElement | null = 
             $expenseTemplateClone.querySelector(".expense");
     
@@ -53,27 +54,35 @@ const expensesDomApi: ExpensesDomApi = {
     
         const $expenseDate: HTMLElement | null = 
             $expense.querySelector('.expense-date');
+
         const $expenseCategory: HTMLElement | null = 
             $expense.querySelector('.expense-category');
+
         const $expenseIcon: HTMLElement | null = 
             $expense.querySelector('.expense-category-icon i');
+
         const $expenseAmount: HTMLElement | null = 
             $expense.querySelector('.expense-amount');
+
         const $expenseComment: HTMLElement | null = 
             $expense.querySelector('.expense-comment');
     
         if ($expenseDate) {
             $expenseDate.innerText = datesDomApi.create(expense.date);
         }
+
         if ($expenseCategory) {
             $expenseCategory.innerText = expense.category;
         }
+
         if ($expenseIcon) {
             $expenseIcon.className = iconClass;
         }
+
         if ($expenseAmount) {
             $expenseAmount.innerText = `${expense.sum} ₽`;
         }
+        
         if ($expenseComment) {
             $expenseComment.innerText = `Комментарий: ${expense.comment}`;
         }
@@ -82,7 +91,7 @@ const expensesDomApi: ExpensesDomApi = {
     },
     
     // Рендеринг списка расходов
-    renderList: function(data: Expense[]): void {
+    renderList: function(data) {
         if ($expensesContainer){
             clearContainer($expensesContainer);
 
@@ -94,7 +103,7 @@ const expensesDomApi: ExpensesDomApi = {
     },
 
     // Рендеринг списка расходов выбраннго месяца
-    renderSelectedMonthList: function(): void {
+    renderSelectedMonthList: function() {
         if ($calendar instanceof HTMLInputElement) {
             const selectedMonth: number = 
             Number.parseInt($calendar.value.split('-')[1]) - 1;
@@ -105,32 +114,37 @@ const expensesDomApi: ExpensesDomApi = {
     },
 
     // Отображение суммы расходов за месяц
-    showTotal: function(expensesPeriod: Expense[], $target: HTMLElement): void {
+    showTotal: function(expensesPeriod, $target) {
         const totalExpenses: number = 
             expensesStorage.calculateTotal(expensesPeriod);
+
         $target.innerText = `${totalExpenses} ₽`;
     },
 
     // "Очистка" формы
-    resetForm: function(): void {
+    resetForm: function() {
         if ($sum instanceof HTMLInputElement) {
             clearValue($sum);
         }
+
         if ($comment instanceof HTMLInputElement) {
             clearValue($comment);
         }
     },
 
     // Получение данных из формы
-    getFormData: function ():FormData {
+    getFormData: function() {
         if ($day instanceof HTMLInputElement 
             && $sum instanceof HTMLInputElement
             && $comment instanceof HTMLInputElement
         ) {
-            const date = new Date($day.value).getTime();
-            const selectedCategory = categoriesDomApi.getSelected();
-            const sum = $sum.value;
-            const comment = $comment.value;
+            const date: number = new Date($day.value).getTime();
+
+            const selectedCategory: string | null = 
+                categoriesDomApi.getSelected();
+
+            const sum: string = $sum.value;
+            const comment: string = $comment.value;
     
             return {
                 date,

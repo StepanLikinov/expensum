@@ -12,7 +12,7 @@ import categoriesStorage from './categoriesStorageApi.js';
  */
 
 const expensesStorage: ExpensesStorage = {
-    getAll: function(): Expense[] {
+    getAll: function() {
         let result: Expense[];
         const expensesJson: string | null = localStorage.getItem('expenses');
 
@@ -25,23 +25,18 @@ const expensesStorage: ExpensesStorage = {
         return result;
     },
 
-    saveAll: function(expenses: Expense[]): void {
+    saveAll: function(expenses) {
         const serializedExpenses: string = JSON.stringify(expenses);
         localStorage.setItem('expenses', serializedExpenses);
     },
 
-    add: function(expense: Expense): void {
+    add: function(expense) {
         const expenses: Expense[] = this.getAll();
         expenses.push(expense);
         this.saveAll(expenses);
     },
 
-    create: function (
-        date: number, 
-        selectedCategory: string,
-        sum: string,
-        comment?: string
-    ): Expense {
+    create: function(date, selectedCategory, sum, comment?) {
         const category = categoriesStorage.find(selectedCategory);
 
         if (category !== undefined) {
@@ -61,7 +56,7 @@ const expensesStorage: ExpensesStorage = {
     },
 
     // Получение расходов по выбранному месяцу
-    getByMonth: function(this: ExpensesStorage, month: number): Expense[] {
+    getByMonth: function(month) {
         const expenses: Expense[] = this.getAll();
         const selectedMonthExpenses: Expense[] = 
             expenses.filter(function(expense: Expense) {
@@ -71,12 +66,13 @@ const expensesStorage: ExpensesStorage = {
                 return expenseMonth === month;
             });
         
-            return selectedMonthExpenses;
+        return selectedMonthExpenses;
     },
 
     // Получение расходов текущего месяца
-    getCurrentMonth: function(): Expense[] {
+    getCurrentMonth: function() {
         const currentMonthIndex: number = datesDomApi.current.getMonth();
+
         const currentMonthExpenses: Expense[] = 
             this.getByMonth(currentMonthIndex);
 
@@ -84,9 +80,9 @@ const expensesStorage: ExpensesStorage = {
     },
 
     // Расчет суммы расходов за период
-    calculateTotal: function(expensesPeriod: Expense[]): number {
+    calculateTotal: function(expensesPeriod) {
         const totalExpensesSum: number = expensesPeriod.reduce(
-            function(total, expense) {
+            function(total: number, expense: Expense) {
                 return total + expense.sum;
             }, 
         0);

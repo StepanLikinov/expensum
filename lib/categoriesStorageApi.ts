@@ -9,7 +9,7 @@ import { Category, CategoriesStorage } from "./interfaces";
  */
 
 const categoriesStorage: CategoriesStorage = {
-    getAll: function(): Category[] { 
+    getAll: function() { 
         let result: Category[];
         
         const expenseCategoriesJson: string | null = 
@@ -25,12 +25,12 @@ const categoriesStorage: CategoriesStorage = {
         return result;
     },
 
-    saveAll: function(categories: Category[]): void {
+    saveAll: function(categories) {
         const serializedCategories: string = JSON.stringify(categories);
         localStorage.setItem('expenseCategories', serializedCategories);
     },
 
-    find: function(selectedCategory: string): Category | undefined {
+    find: function(selectedCategory) {
         const categoriesList: Category[] = this.getAll();
         let result: Category | undefined = categoriesList.find(
             category => category.name === selectedCategory
