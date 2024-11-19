@@ -20,11 +20,8 @@ const datesDomApi: DatesDomApi = {
     // Хранение текущей датой
     current: new Date(),
 
-    // Создание элемента даты
-    create: function(timestamp) {
-        const $date: HTMLElement  = document.createElement('div');
-
-        // преобразование даты в читабельный формат
+    // преобразование даты в читабельный формат
+    format: function(timestamp) {
         const dateObject: Date = new Date(timestamp);
         const day: number = dateObject.getDate();
         const month: number = dateObject.getMonth() + 1;

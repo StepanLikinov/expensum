@@ -31,7 +31,7 @@ interface CategoriesStorage {
 
 interface DatesDomApi {
     current: Date;
-    create: (timestamp: number) => string;
+    format: (timestamp: number) => string;
     showCurrentMonth: (target: HTMLElement) => void;
     setDayValue: () => void;
     setCalendarValue: () => void;

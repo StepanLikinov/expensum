@@ -68,7 +68,7 @@ const expensesDomApi: ExpensesDomApi = {
             $expense.querySelector('.expense-comment');
     
         if ($expenseDate) {
-            $expenseDate.innerText = datesDomApi.create(expense.date);
+            $expenseDate.innerText = datesDomApi.format(expense.date);
         }
 
         if ($expenseCategory) {
