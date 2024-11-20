@@ -2,7 +2,7 @@
  * Imports
  */
 
-import { Expense, ExpensesStorage } from './interfaces';
+import { Expense, ExpensesStorage, Category } from './interfaces';
 import generateId from './generateId.js';
 import datesDomApi from './datesDomApi.js';
 import categoriesStorage from './categoriesStorageApi.js';
@@ -37,21 +37,22 @@ const expensesStorage: ExpensesStorage = {
     },
 
     create: function(date, selectedCategory, sum, comment?) {
-        const category = categoriesStorage.find(selectedCategory);
+        const category: Category | undefined = 
+            categoriesStorage.find(selectedCategory);
 
-        if (category !== undefined) {
-            const categoryId = category.id;
-
-            return {
-                id: generateId(),
-                date: date,
-                category: selectedCategory,
-                categoryId: categoryId,
-                sum: Number.parseFloat(sum),
-                comment: comment
-            };
-        } else {
+        if (category === undefined) {
             throw new Error(`Category ${selectedCategory} not found`);
+        }
+        
+        const categoryId = category.id;
+
+        return {
+            id: generateId(),
+            date: date,
+            category: selectedCategory,
+            categoryId: categoryId,
+            sum: Number.parseFloat(sum),
+            comment: comment
         }
     },
 

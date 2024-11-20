@@ -43,7 +43,6 @@ const categoriesDomApi: CategoriesDomApi = {
     setDefaultInForm: function() {
         const categoriesList: Category[] = categoriesStorage.getAll();
         this.setSelected(categoriesList[0].name);
-
         if ($categorySelect instanceof HTMLSelectElement) {
             $categorySelect.selectedIndex = 0;
         }

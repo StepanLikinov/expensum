@@ -26,6 +26,7 @@ export default class Pager {
     showPage(inputPageName: string): void {
         for (let pageName in this.pages) {
             const page = this.pages[pageName];
+
             if (pageName === inputPageName && page.pageElement) {
                 page.pageElement.style.display = this.displayValue;
             } else if (page.pageElement) {
@@ -37,6 +38,7 @@ export default class Pager {
     addEventListeners(): void {
         for (let pageName in this.pages) {
             const page = this.pages[pageName];
+            
             if (page.linkToPage){
                 page.linkToPage.addEventListener(
                     'click', 

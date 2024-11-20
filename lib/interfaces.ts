@@ -82,6 +82,9 @@ interface NavDomApi {
     initIndication: () => void;
 }
 
+/**
+ * Exports
+ */
 
 export { 
     Page, Category, CategoriesDomApi, CategoriesStorage, DatesDomApi, Expense,

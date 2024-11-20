@@ -134,30 +134,32 @@ const expensesDomApi: ExpensesDomApi = {
 
     // Получение данных из формы
     getFormData: function() {
-        if ($day instanceof HTMLInputElement 
-            && $sum instanceof HTMLInputElement
-            && $comment instanceof HTMLInputElement
+        if (
+            !(
+                $day instanceof HTMLInputElement &&
+                $sum instanceof HTMLInputElement &&
+                $comment instanceof HTMLInputElement
+            )
         ) {
-            const date: number = new Date($day.value).getTime();
-
-            const selectedCategory: string | null = 
-                categoriesDomApi.getSelected();
-
-            const sum: string = $sum.value;
-            const comment: string = $comment.value;
-    
-            return {
-                date,
-                selectedCategory,
-                sum,
-                comment
+                throw new Error('Data in form not found in the DOM');
             }
-        } else {
-            throw new Error('Data in form not found in the DOM');
+
+        const date: number = new Date($day.value).getTime();
+
+        const selectedCategory: string | null = 
+            categoriesDomApi.getSelected();
+
+        const sum: string = $sum.value;
+        const comment: string = $comment.value;
+
+        return {
+            date,
+            selectedCategory,
+            sum,
+            comment
         }
     }
 }
-
 
 /* Exports */
 

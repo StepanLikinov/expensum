@@ -20,7 +20,6 @@ const categoriesStorage: CategoriesStorage = {
         } else {
             result = []; 
         }
-    
 
         return result;
     },

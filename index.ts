@@ -125,6 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if ($calendar instanceof HTMLInputElement) {
         $calendar.addEventListener('change', function() {
             expensesDomApi.renderSelectedMonthList();
-        })
+        });
     }
 });
