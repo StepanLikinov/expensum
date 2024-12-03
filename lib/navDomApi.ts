@@ -25,14 +25,14 @@ const $expenseForm: HTMLElement | null =
 
 const navDomApi: NavDomApi = {
     setActive: function($clickedLink) {
-    let navLinks: NodeListOf<HTMLAnchorElement> =
-        document.querySelectorAll('.navbar-nav a');
+        let navLinks: NodeListOf<HTMLAnchorElement> =
+            document.querySelectorAll('.navbar-nav a');
 
-    navLinks.forEach(function($link: HTMLAnchorElement) {
-        $link.classList.remove('text-primary');
-    });
+        navLinks.forEach(function($link: HTMLAnchorElement) {
+            $link.classList.remove('text-primary');
+        });
 
-    $clickedLink.classList.add('text-primary');
+        $clickedLink.classList.add('text-primary');
     },
 
     initIndication: function() {
