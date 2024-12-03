@@ -2,10 +2,10 @@
  * Imports
  */
 
-import { Expense, ExpensesStorage, Category } from './interfaces.js';
-import generateId from './generateId.js';
-import datesDomApi from './datesDomApi.js';
-import categoriesStorage from './categoriesStorageApi.js';
+import { Expense, ExpensesStorage, Category } from './interfaces';
+import generateId from './generateId';
+import datesDomApi from './datesDomApi';
+import categoriesStorage from './categoriesStorageApi';
 
 /**
  * Storage

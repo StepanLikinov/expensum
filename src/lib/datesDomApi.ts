@@ -2,8 +2,8 @@
  * Imports
  */
 
-import { DatesDomApi } from "./interfaces.js";
-import { months } from "../data/monthsList.js";
+import { DatesDomApi } from "./interfaces";
+import { months } from "../data/monthsList";
 
 /**
  * Nodes

@@ -3,15 +3,15 @@
  */
 
 import './style.css';
-import { categoriesList } from './data/categoriesList.js' 
-import expensesDomApi from './lib/expensesDomApi.js';
-import expensesStorage from './lib/expensesStorageApi.js'
-import categoriesDomApi from './lib/categoriesDomApi.js';
-import categoriesStorage from './lib/categoriesStorageApi.js';
-import datesDomApi from './lib/datesDomApi.js';
-import pager from './lib/pagerInit.js';
-import navDomApi from './lib/navDomApi.js';
-import { FormData, Expense } from './lib/interfaces.js';
+import { categoriesList } from './data/categoriesList' 
+import expensesDomApi from './lib/expensesDomApi';
+import expensesStorage from './lib/expensesStorageApi'
+import categoriesDomApi from './lib/categoriesDomApi';
+import categoriesStorage from './lib/categoriesStorageApi';
+import datesDomApi from './lib/datesDomApi';
+import pager from './lib/pagerInit';
+import navDomApi from './lib/navDomApi';
+import { FormData, Expense } from './lib/interfaces';
 
 /**
  * Main

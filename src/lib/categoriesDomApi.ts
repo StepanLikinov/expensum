@@ -2,12 +2,12 @@
  * Imports
  */
 
-import { Category, CategoriesDomApi } from './interfaces.js';
-import { clearContainer } from './heplers.js';
-import categoriesStorage from './categoriesStorageApi.js';
-import pager from './pagerInit.js';
-import expensesDomApi from './expensesDomApi.js';
-import navDomApi from './navDomApi.js';
+import { Category, CategoriesDomApi } from './interfaces';
+import { clearContainer } from './heplers';
+import categoriesStorage from './categoriesStorageApi';
+import pager from './pagerInit';
+import expensesDomApi from './expensesDomApi';
+import navDomApi from './navDomApi';
 
 /**
  * Nodes

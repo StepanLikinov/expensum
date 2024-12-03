@@ -2,12 +2,12 @@
  * Imports
  */
 
-import { Expense, Category, FormData, ExpensesDomApi } from './interfaces.js';
-import { clearContainer, clearValue } from './heplers.js';
-import datesDomApi from './datesDomApi.js';
-import categoriesDomApi from './categoriesDomApi.js';
-import categoriesStorage from './categoriesStorageApi.js';
-import expensesStorage from './expensesStorageApi.js';
+import { Expense, Category, FormData, ExpensesDomApi } from './interfaces';
+import { clearContainer, clearValue } from './heplers';
+import datesDomApi from './datesDomApi';
+import categoriesDomApi from './categoriesDomApi';
+import categoriesStorage from './categoriesStorageApi';
+import expensesStorage from './expensesStorageApi';
 
 /**
  * Nodes
@@ -127,7 +127,7 @@ const expensesDomApi: ExpensesDomApi = {
             clearValue($sum);
         }
 
-        if ($comment instanceof HTMLInputElement) {
+        if ($comment instanceof HTMLTextAreaElement) {
             clearValue($comment);
         }
     },
@@ -138,7 +138,7 @@ const expensesDomApi: ExpensesDomApi = {
             !(
                 $day instanceof HTMLInputElement &&
                 $sum instanceof HTMLInputElement &&
-                $comment instanceof HTMLInputElement
+                $comment instanceof HTMLTextAreaElement
             )
         ) {
                 throw new Error('Data in form not found in the DOM');

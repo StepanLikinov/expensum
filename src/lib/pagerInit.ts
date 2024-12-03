@@ -2,8 +2,8 @@
  * Imports
  */
 
-import Pager from './Pager.js'
-import pagerConfig from '../configs/pagerConfig.js'
+import Pager from './Pager'
+import pagerConfig from '../configs/pagerConfig'
 
 /**
  * Init
