@@ -50,8 +50,11 @@ const $day: HTMLElement | null =
 const $calendar: HTMLElement | null = 
     document.getElementById('calendar');
 
-const $sum: HTMLElement | null = document.getElementById('sum');
-const $comment: HTMLElement | null = document.getElementById('comment');  
+const $sum: HTMLElement | null = 
+    document.getElementById('sum');
+
+const $comment: HTMLElement | null = 
+    document.getElementById('comment');  
 
 /**
  * Run
@@ -63,8 +66,11 @@ const $comment: HTMLElement | null = document.getElementById('comment');
 categoriesStorage.saveAll(categoriesList);
 
 const datesDomApi: DatesDomApi = new DatesDomApi($day, $calendar);
+
 const categoriesDomApi: CategoriesDomApi = 
-    new CategoriesDomApi($categoryTemplate, $categorySelect);
+    new CategoriesDomApi(
+        $newExpenseLink, $categoryTemplate, $categorySelect, $sum, $comment
+    );
 
 /* Calls */
 

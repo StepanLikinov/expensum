@@ -11,11 +11,11 @@ import navDomApi from './navDomApi';
 /**
  * Nodes
  */
-const $newExpenseLink: HTMLElement | null = 
-    document.getElementById('newExpenseLink');
+// const $newExpenseLink: HTMLElement | null = 
+//     document.getElementById('newExpenseLink');
 
-const $sum: HTMLElement | null = document.getElementById('sum');
-const $comment: HTMLElement | null = document.getElementById('comment');  
+// const $sum: HTMLElement | null = document.getElementById('sum');
+// const $comment: HTMLElement | null = document.getElementById('comment');  
 
 /**
  * DOM API
@@ -23,16 +23,25 @@ const $comment: HTMLElement | null = document.getElementById('comment');
 
 class CategoriesDomApi {
     categoriesStorage: CategoriesStorage;
+    $newExpenseLink: HTMLElement | null;
     $categoryTemplate: HTMLElement | null;
     $categorySelect: HTMLElement | null;
+    $sum: HTMLElement | null;
+    $comment: HTMLElement | null;
 
     constructor(
+        $newExpenseLink: HTMLElement | null,
         $categoryTemplate: HTMLElement | null,
-        $categorySelect: HTMLElement | null
+        $categorySelect: HTMLElement | null,
+        $sum: HTMLElement | null,
+        $comment: HTMLElement | null,
     ) {
         this.categoriesStorage = categoriesStorage;
+        this.$newExpenseLink = $newExpenseLink;
         this.$categoryTemplate = $categoryTemplate;
         this.$categorySelect = $categorySelect;
+        this.$sum = $sum;
+        this.$comment = $comment
     }
 
     setDefaultInForm(): void {
@@ -92,11 +101,11 @@ class CategoriesDomApi {
                 this.$categorySelect.value = category.id.toString();
             }
 
-            resetForm($sum, $comment);
+            resetForm(this.$sum, this.$comment);
             pager.showPage('new');
 
-            if ($newExpenseLink instanceof HTMLAnchorElement) {
-                navDomApi.setActive($newExpenseLink)
+            if (this.$newExpenseLink instanceof HTMLAnchorElement) {
+                navDomApi.setActive(this.$newExpenseLink)
             }
         });
 
