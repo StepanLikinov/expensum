@@ -4,7 +4,7 @@
 
 import './style.css';
 import { categoriesList } from './data/categoriesList' 
-import expensesDomApi from './lib/expensesDomApi';
+import ExpensesDomApi from './lib/ExpensesDomApi';
 import expensesStorage from './lib/expensesStorageApi'
 import CategoriesDomApi from './lib/CategoriesDomApi';
 import categoriesStorage from './lib/categoriesStorageApi';
@@ -31,6 +31,12 @@ const $categoryTemplate: HTMLElement | null =
 
 const $currentMonth: HTMLElement | null = 
     document.getElementById('current-month');
+
+const $expenseTemplate: HTMLElement | null = 
+    document.getElementById('expense-template');
+
+const $expensesContainer: HTMLElement | null = 
+    document.getElementById('expenses-container');
 
 const $expenseForm: HTMLElement | null = 
     document.getElementById('expense-form');
@@ -67,10 +73,13 @@ categoriesStorage.saveAll(categoriesList);
 
 const datesDomApi: DatesDomApi = new DatesDomApi($day, $calendar);
 
-const categoriesDomApi: CategoriesDomApi = 
-    new CategoriesDomApi(
+const categoriesDomApi: CategoriesDomApi = new CategoriesDomApi(
         $newExpenseLink, $categoryTemplate, $categorySelect, $sum, $comment
-    );
+);
+
+const expensesDomApi: ExpensesDomApi = new ExpensesDomApi(
+    $expenseTemplate, $expensesContainer, $day, $sum, $comment, $calendar
+)
 
 /* Calls */
 
@@ -120,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             
             const formData: FormData = expensesDomApi.getFormData();
-            console.log(formData.selectedCategory);
             if (formData.selectedCategory) {
                 const expense: Expense = expensesStorage.create(
                     formData.date, formData.selectedCategory, 

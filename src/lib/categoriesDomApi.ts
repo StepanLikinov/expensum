@@ -32,7 +32,7 @@ class CategoriesDomApi {
         this.$categoryTemplate = $categoryTemplate;
         this.$categorySelect = $categorySelect;
         this.$sum = $sum;
-        this.$comment = $comment
+        this.$comment = $comment;
     }
 
     setDefaultInForm(): void {

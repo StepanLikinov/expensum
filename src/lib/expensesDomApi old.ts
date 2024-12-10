@@ -2,54 +2,46 @@
  * Imports
  */
 
-import { Expense, Category, FormData } from './interfaces';
+import { Expense, Category, ExpensesDomApi } from './interfaces';
 import { clearContainer, formatDate } from './heplers';
 import categoriesStorage from './categoriesStorageApi';
 import expensesStorage from './expensesStorageApi';
 
 /**
+ * Nodes
+ */
+
+const $expenseTemplate: HTMLElement | null = 
+    document.getElementById('expense-template');
+
+const $expensesContainer: HTMLElement | null = 
+    document.getElementById('expenses-container');
+
+const $day: HTMLElement | null = document.getElementById('day');
+const $sum: HTMLElement | null = document.getElementById('sum');
+const $comment: HTMLElement | null = document.getElementById('comment');    
+const $calendar: HTMLElement | null = document.getElementById('calendar');
+
+/**
  * DOM API
  */
 
-class ExpensesDomApi {
-    $expenseTemplate: HTMLElement | null;
-    $expensesContainer: HTMLElement | null;
-    $day: HTMLElement | null;
-    $sum: HTMLElement | null;
-    $comment: HTMLElement | null;   
-    $calendar: HTMLElement | null; 
-
-    constructor(    
-        $expenseTemplate: HTMLElement | null,
-        $expensesContainer: HTMLElement | null,
-        $day: HTMLElement | null,
-        $sum: HTMLElement | null,
-        $comment: HTMLElement | null,   
-        $calendar: HTMLElement | null, 
-    ) {
-        this.$expenseTemplate = $expenseTemplate
-        this.$expensesContainer = $expensesContainer
-        this.$day = $day
-        this.$sum = $sum
-        this.$comment = $comment
-        this.$calendar = $calendar
-    }
-
+const expensesDomApi: ExpensesDomApi = {
     // Cоздание элемента расхода
-    create(expense: Expense): HTMLElement  {
+    create: function(expense) {
         const category: Category | undefined = 
             categoriesStorage.find(expense.category);
 
         const iconClass: string = category ? category.iconClass : '';
     
-        if (!(this.$expenseTemplate instanceof HTMLTemplateElement)) {
+        if (!($expenseTemplate instanceof HTMLTemplateElement)) {
             throw new Error(
                 'Template for expense element not found in the DOM'
             );
         }
     
         const $expenseTemplateClone: DocumentFragment = 
-            this.$expenseTemplate.content.cloneNode(true) as DocumentFragment;
+            $expenseTemplate.content.cloneNode(true) as DocumentFragment;
 
         const $expense: HTMLElement | null = 
             $expenseTemplateClone.querySelector(".expense");
@@ -94,58 +86,58 @@ class ExpensesDomApi {
         }
     
         return $expense;
-    }
-
+    },
+    
     // Рендеринг списка расходов
-    renderList(data: Expense[]): void {
-        if (this.$expensesContainer){
-            clearContainer(this.$expensesContainer);
+    renderList: function(data) {
+        if ($expensesContainer){
+            clearContainer($expensesContainer);
 
             data.forEach((expense: Expense) => {
                 const $expense: HTMLElement = this.create(expense);
-                this.$expensesContainer.appendChild($expense);
+                $expensesContainer.appendChild($expense);
             });
         }
-    }
+    },
 
     // Рендеринг списка расходов выбраннго месяца
-    renderSelectedMonthList(): void {
-        if (this.$calendar instanceof HTMLInputElement) {
+    renderSelectedMonthList: function() {
+        if ($calendar instanceof HTMLInputElement) {
             const selectedMonth: number = 
-            Number.parseInt(this.$calendar.value.split('-')[1]) - 1;
+            Number.parseInt($calendar.value.split('-')[1]) - 1;
             const selectedMonthExpenses: Expense[] = 
                 expensesStorage.getByMonth(selectedMonth);
             this.renderList(selectedMonthExpenses);
         }
-    }
+    },
 
     // Отображение суммы расходов за месяц
-    showTotal(expensesPeriod: Expense[], $target: HTMLElement): void {
+    showTotal: function(expensesPeriod, $target) {
         const totalExpenses: number = 
             expensesStorage.calculateTotal(expensesPeriod);
 
         $target.innerText = `${totalExpenses} ₽`;
-    }
+    },
 
     // Получение данных из формы
-    getFormData(): FormData {
+    getFormData: function() {
         if (
             !(
-                this.$day instanceof HTMLInputElement &&
-                this.$sum instanceof HTMLInputElement &&
-                this.$comment instanceof HTMLTextAreaElement
+                $day instanceof HTMLInputElement &&
+                $sum instanceof HTMLInputElement &&
+                $comment instanceof HTMLTextAreaElement
             )
         ) {
                 throw new Error('Data in form not found in the DOM');
             }
 
-        const date: number = new Date(this.$day.value).getTime();
+        const date: number = new Date($day.value).getTime();
 
         const selectedCategory: string | null = 
             categoriesStorage.getSelected();
 
-        const sum: string = this.$sum.value;
-        const comment: string = this.$comment.value;
+        const sum: string = $sum.value;
+        const comment: string = $comment.value;
 
         return {
             date,
@@ -158,4 +150,5 @@ class ExpensesDomApi {
 
 /* Exports */
 
-export default ExpensesDomApi;
+export default expensesDomApi;
+
