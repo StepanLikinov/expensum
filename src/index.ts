@@ -8,7 +8,7 @@ import expensesDomApi from './lib/expensesDomApi';
 import expensesStorage from './lib/expensesStorageApi'
 import categoriesDomApi from './lib/categoriesDomApi';
 import categoriesStorage from './lib/categoriesStorageApi';
-import datesDomApi from './lib/datesDomApi';
+import DatesDomApi from './lib/DatesDomApi';
 import pager from './lib/pagerInit';
 import navDomApi from './lib/navDomApi';
 import { FormData, Expense } from './lib/interfaces';
@@ -40,6 +40,9 @@ const $newExpenseLink: HTMLElement | null =
 const $expensesListLink: HTMLElement | null = 
     document.getElementById('expensesListLink');
 
+const $day: HTMLElement | null = 
+    document.getElementById('day');
+    
 const $calendar: HTMLElement | null = 
     document.getElementById('calendar');
 
@@ -51,6 +54,8 @@ const $calendar: HTMLElement | null =
 
 // Сохранения категорий в localStorage
 categoriesStorage.saveAll(categoriesList);
+
+const datesDomApi: DatesDomApi = new DatesDomApi($day, $calendar);
 
 /* Calls */
 

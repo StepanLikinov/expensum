@@ -29,14 +29,6 @@ interface CategoriesStorage {
     find: (selectedCategory: string) => Category | undefined;
 }
 
-interface DatesDomApi {
-    current: Date;
-    format: (timestamp: number) => string;
-    showCurrentMonth: (target: HTMLElement) => void;
-    setDayValue: () => void;
-    setCalendarValue: () => void;
-}
-
 interface Expense {
     id: string;
     date: number;
@@ -87,6 +79,6 @@ interface NavDomApi {
  */
 
 export { 
-    Page, Category, CategoriesDomApi, CategoriesStorage, DatesDomApi, Expense,
+    Page, Category, CategoriesDomApi, CategoriesStorage, Expense,
     FormData, ExpensesDomApi, ExpensesStorage, NavDomApi
 }

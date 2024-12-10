@@ -2,62 +2,53 @@
  * Imports
  */
 
-import { DatesDomApi } from "./interfaces";
 import { months } from "../data/monthsList";
-
-/**
- * Nodes
- */
-
-const $day: HTMLElement | null = document.getElementById('day');
-const $calendar: HTMLElement | null = document.getElementById('calendar');
+import DateState  from "./DateState";
 
 /**
  * Main
  */
 
-const datesDomApi: DatesDomApi = {
-    // Хранение текущей датой
-    current: new Date(),
+class DatesDomApi {
+    dateState: DateState;
+    $day: HTMLElement | null;
+    $calendar: HTMLElement | null;
 
-    // преобразование даты в читабельный формат
-    format: function(timestamp) {
-        const dateObject: Date = new Date(timestamp);
-        const day: number = dateObject.getDate();
-        const month: number = dateObject.getMonth() + 1;
+    constructor($day: HTMLElement | null, $calendar: HTMLElement | null) {
+        this.dateState = new DateState();
+        this.$day = $day;
+        this.$calendar = $calendar;
+    }
 
-        const formattedDate: string = 
-            `${day < 10 ? '0' + day : day}.${month < 10 ? '0' + month : month}`;
-
-        return formattedDate;
-    },
-    
     // Отображение текущего месяца
-    showCurrentMonth: function($target) {
-        const currentMonth: number = this.current.getMonth();
+    showCurrentMonth($target: HTMLElement): void {
+        const currentMonth: number = this.dateState.currentValue.getMonth();
         const currentMonthName: string = months[currentMonth];
         $target.innerText = currentMonthName;
-    },
+    }
 
     // Установка значения в input
-    setDayValue: function() {
-        if ($day instanceof HTMLInputElement){
-            $day.value = this.current.toISOString().slice(0, 10);
+    setDayValue(): void {
+        if (this.$day instanceof HTMLInputElement){
+            this.$day.value = 
+                this.dateState.currentValue.toISOString().slice(0, 10);
         }
-    },
+    }
 
     // Установка значения в календарь
-    setCalendarValue: function() {
-        const currentMonth: number  = this.current.getMonth() + 1;
-        const currentYear: number  = this.current.getFullYear();
+    setCalendarValue(): void {
+        const currentMonth: number  = 
+            this.dateState.currentValue.getMonth() + 1;
+        const currentYear: number  = 
+            this.dateState.currentValue.getFullYear();
 
         const monthsString: string  = 
             currentMonth < 10 ? '0' + currentMonth : currentMonth.toString();
 
         const formattedValue: string = `${currentYear}-${monthsString}`;
 
-        if ($calendar instanceof HTMLInputElement){
-            $calendar.value = formattedValue;
+        if (this.$calendar instanceof HTMLInputElement){
+            this.$calendar.value = formattedValue;
         }
     }
 }
@@ -66,4 +57,4 @@ const datesDomApi: DatesDomApi = {
  * Exports
  */
 
-export default datesDomApi;
+export default DatesDomApi;

@@ -4,8 +4,8 @@
 
 import { Expense, ExpensesStorage, Category } from './interfaces';
 import generateId from './generateId';
-import datesDomApi from './datesDomApi';
 import categoriesStorage from './categoriesStorageApi';
+import DateState from './DateState';
 
 /**
  * Storage
@@ -72,7 +72,8 @@ const expensesStorage: ExpensesStorage = {
 
     // Получение расходов текущего месяца
     getCurrentMonth: function() {
-        const currentMonthIndex: number = datesDomApi.current.getMonth();
+        const dateState = new DateState();
+        const currentMonthIndex: number = dateState.currentValue.getMonth();
 
         const currentMonthExpenses: Expense[] = 
             this.getByMonth(currentMonthIndex);

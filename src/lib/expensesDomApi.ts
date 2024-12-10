@@ -2,9 +2,8 @@
  * Imports
  */
 
-import { Expense, Category, FormData, ExpensesDomApi } from './interfaces';
-import { clearContainer, clearValue } from './heplers';
-import datesDomApi from './datesDomApi';
+import { Expense, Category, ExpensesDomApi } from './interfaces';
+import { clearContainer, clearValue, formatDate } from './heplers';
 import categoriesDomApi from './categoriesDomApi';
 import categoriesStorage from './categoriesStorageApi';
 import expensesStorage from './expensesStorageApi';
@@ -68,7 +67,7 @@ const expensesDomApi: ExpensesDomApi = {
             $expense.querySelector('.expense-comment');
     
         if ($expenseDate) {
-            $expenseDate.innerText = datesDomApi.format(expense.date);
+            $expenseDate.innerText = formatDate(expense.date);
         }
 
         if ($expenseCategory) {
