@@ -3,8 +3,7 @@
  */
 
 import { Expense, Category, ExpensesDomApi } from './interfaces';
-import { clearContainer, clearValue, formatDate } from './heplers';
-import categoriesDomApi from './categoriesDomApi';
+import { clearContainer, formatDate } from './heplers';
 import categoriesStorage from './categoriesStorageApi';
 import expensesStorage from './expensesStorageApi';
 
@@ -120,17 +119,6 @@ const expensesDomApi: ExpensesDomApi = {
         $target.innerText = `${totalExpenses} ₽`;
     },
 
-    // "Очистка" формы
-    resetForm: function() {
-        if ($sum instanceof HTMLInputElement) {
-            clearValue($sum);
-        }
-
-        if ($comment instanceof HTMLTextAreaElement) {
-            clearValue($comment);
-        }
-    },
-
     // Получение данных из формы
     getFormData: function() {
         if (
@@ -146,7 +134,7 @@ const expensesDomApi: ExpensesDomApi = {
         const date: number = new Date($day.value).getTime();
 
         const selectedCategory: string | null = 
-            categoriesDomApi.getSelected();
+            categoriesStorage.getSelected();
 
         const sum: string = $sum.value;
         const comment: string = $comment.value;

@@ -19,10 +19,22 @@ const formatDate = (timestamp: number): string => {
         `${day < 10 ? '0' + day : day}.${month < 10 ? '0' + month : month}`;
 
     return formattedDate;
-}
+};
+
+const resetForm = (
+    $sum: HTMLElement | null, $comment: HTMLElement | null 
+): void => {
+    if ($sum instanceof HTMLInputElement) {
+        clearValue($sum);
+    }
+
+    if ($comment instanceof HTMLTextAreaElement) {
+        clearValue($comment);
+    }
+};
 
 /**
  * Exports
  */
 
-export { clearContainer, clearValue, formatDate };
+export { clearContainer, clearValue, formatDate, resetForm };

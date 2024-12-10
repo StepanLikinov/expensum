@@ -6,12 +6,13 @@ import './style.css';
 import { categoriesList } from './data/categoriesList' 
 import expensesDomApi from './lib/expensesDomApi';
 import expensesStorage from './lib/expensesStorageApi'
-import categoriesDomApi from './lib/categoriesDomApi';
+import CategoriesDomApi from './lib/CategoriesDomApi';
 import categoriesStorage from './lib/categoriesStorageApi';
-import DatesDomApi from './lib/DatesDomApi';
+import DatesDomApi from './lib/DatesDomApi'
 import pager from './lib/pagerInit';
 import navDomApi from './lib/navDomApi';
 import { FormData, Expense } from './lib/interfaces';
+import { resetForm } from './lib/heplers';
 
 /**
  * Main
@@ -24,6 +25,9 @@ const $categoriesContainer: HTMLElement | null =
 
 const $categorySelect: HTMLElement | null = 
     document.getElementById('category-select');
+
+const $categoryTemplate: HTMLElement | null =
+    document.getElementById('category-template');
 
 const $currentMonth: HTMLElement | null = 
     document.getElementById('current-month');
@@ -46,6 +50,9 @@ const $day: HTMLElement | null =
 const $calendar: HTMLElement | null = 
     document.getElementById('calendar');
 
+const $sum: HTMLElement | null = document.getElementById('sum');
+const $comment: HTMLElement | null = document.getElementById('comment');  
+
 /**
  * Run
  */
@@ -56,6 +63,8 @@ const $calendar: HTMLElement | null =
 categoriesStorage.saveAll(categoriesList);
 
 const datesDomApi: DatesDomApi = new DatesDomApi($day, $calendar);
+const categoriesDomApi: CategoriesDomApi = 
+    new CategoriesDomApi($categoryTemplate, $categorySelect);
 
 /* Calls */
 
@@ -66,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if ($newExpenseLink instanceof HTMLAnchorElement) {
         $newExpenseLink.addEventListener('click', () => {
             categoriesDomApi.setDefaultInForm();
-            expensesDomApi.resetForm();
+            resetForm($sum, $comment);
         });    
     }
 
@@ -103,8 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if ($expenseForm instanceof HTMLFormElement){
         $expenseForm.addEventListener('submit', function(event) {
             event.preventDefault();
+            
             const formData: FormData = expensesDomApi.getFormData();
-
+            console.log(formData.selectedCategory);
             if (formData.selectedCategory) {
                 const expense: Expense = expensesStorage.create(
                     formData.date, formData.selectedCategory, 

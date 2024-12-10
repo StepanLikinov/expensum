@@ -3,7 +3,7 @@
  */
 
 import { months } from "../data/monthsList";
-import DateState  from "./DateState";
+import DateState from "./DateState";
 
 /**
  * Main

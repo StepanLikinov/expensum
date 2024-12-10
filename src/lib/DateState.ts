@@ -8,11 +8,6 @@ class DateState {
     constructor() {
         this.currentValue = new Date();
     }
-
-    // Установить новую дату
-    setCurrentDate(date: Date): void {
-        this.currentValue = date;
-    }
 }
 
 /**

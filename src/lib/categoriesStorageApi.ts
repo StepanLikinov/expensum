@@ -9,6 +9,19 @@ import { Category, CategoriesStorage } from "./interfaces";
  */
 
 const categoriesStorage: CategoriesStorage = {
+    // Хранения выбранной категории
+    selected: null,
+
+    // Установка выбранной категории
+    setSelected: function(category) {
+        this.selected = category;
+    },
+
+    // Получение выбранной категории
+    getSelected: function() {
+        return this.selected;
+    },
+
     getAll: function() { 
         let result: Category[];
         

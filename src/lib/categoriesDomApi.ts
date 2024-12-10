@@ -2,62 +2,57 @@
  * Imports
  */
 
-import { Category, CategoriesDomApi } from './interfaces';
-import { clearContainer } from './heplers';
+import { Category, CategoriesStorage } from './interfaces';
+import { clearContainer, resetForm } from './heplers';
 import categoriesStorage from './categoriesStorageApi';
 import pager from './pagerInit';
-import expensesDomApi from './expensesDomApi';
 import navDomApi from './navDomApi';
 
 /**
  * Nodes
  */
-const $categoryTemplate: HTMLElement | null =
-    document.getElementById('category-template');
-
-const $categorySelect: HTMLElement | null = 
-    document.getElementById('category-select');
-
 const $newExpenseLink: HTMLElement | null = 
     document.getElementById('newExpenseLink');
+
+const $sum: HTMLElement | null = document.getElementById('sum');
+const $comment: HTMLElement | null = document.getElementById('comment');  
 
 /**
  * DOM API
  */
 
-const categoriesDomApi: CategoriesDomApi = {
-    // Хранения выбранной категории
-    selected: null,
+class CategoriesDomApi {
+    categoriesStorage: CategoriesStorage;
+    $categoryTemplate: HTMLElement | null;
+    $categorySelect: HTMLElement | null;
 
-    // Установка выбранной категории
-    setSelected: function(category) {
-        this.selected = category;
-    },
+    constructor(
+        $categoryTemplate: HTMLElement | null,
+        $categorySelect: HTMLElement | null
+    ) {
+        this.categoriesStorage = categoriesStorage;
+        this.$categoryTemplate = $categoryTemplate;
+        this.$categorySelect = $categorySelect;
+    }
 
-    // Получение выбранной категории
-    getSelected: function() {
-        return this.selected;
-    },
-
-    // Установка категории по умолчанию (для создания расхода через "Новый расход")
-    setDefaultInForm: function() {
+    setDefaultInForm(): void {
         const categoriesList: Category[] = categoriesStorage.getAll();
-        this.setSelected(categoriesList[0].name);
-        if ($categorySelect instanceof HTMLSelectElement) {
-            $categorySelect.selectedIndex = 0;
+        this.categoriesStorage.setSelected(categoriesList[0].name);
+        if (this.$categorySelect instanceof HTMLSelectElement) {
+            this.$categorySelect.selectedIndex = 0;
         }
-    },
+    }
 
     // Создание элемента категории с добавлением обработчика событий
-    create: function(category) {
-        if (!($categoryTemplate instanceof HTMLTemplateElement)) {
+    create(category: Category): HTMLElement {
+        if (!(this.$categoryTemplate instanceof HTMLTemplateElement)) {
             throw new Error(
                 'Template for category element not found in the DOM'
             );
         }
 
         const $categoryTemplateClone: DocumentFragment = 
-            $categoryTemplate.content.cloneNode(true) as DocumentFragment;
+            this.$categoryTemplate.content.cloneNode(true) as DocumentFragment;
             
         const $category: HTMLElement | null = 
             $categoryTemplateClone.querySelector('.category');
@@ -91,13 +86,13 @@ const categoriesDomApi: CategoriesDomApi = {
         $category.dataset.id = category.id.toString();
 
         $category.addEventListener('click', () => {
-            this.setSelected(category.name);
-
-            if ($categorySelect instanceof HTMLSelectElement) {
-                $categorySelect.value = category.id.toString();
+            this.categoriesStorage.setSelected(category.name);
+            
+            if (this.$categorySelect instanceof HTMLSelectElement) {
+                this.$categorySelect.value = category.id.toString();
             }
 
-            expensesDomApi.resetForm();
+            resetForm($sum, $comment);
             pager.showPage('new');
 
             if ($newExpenseLink instanceof HTMLAnchorElement) {
@@ -106,10 +101,10 @@ const categoriesDomApi: CategoriesDomApi = {
         });
 
         return $category;
-    },
+    }
 
     // Заполнение categoriesContainer
-    fillContainer: function($categoriesContainer) {
+    fillContainer($categoriesContainer: HTMLElement): void {
         clearContainer($categoriesContainer);
 
         const categoriesList: Category[] = categoriesStorage.getAll();
@@ -118,10 +113,10 @@ const categoriesDomApi: CategoriesDomApi = {
             const $category: HTMLElement = this.create(category);
             $categoriesContainer.appendChild($category);
         });
-    },
-    
+    }
+
     // Заполнение categorySelect
-    fillSelect: function($categorySelect) {
+    fillSelect($categorySelect: HTMLSelectElement): void {
         const categoriesList: Category[] = categoriesStorage.getAll();
 
         categoriesList.forEach((category: Category) => {
@@ -143,15 +138,15 @@ const categoriesDomApi: CategoriesDomApi = {
                     );
 
                 if (selectedCategory) {
-                    this.setSelected(selectedCategory.name);
+                    this.categoriesStorage.setSelected(selectedCategory.name);
                 }
             }
         });
-    } 
-} 
+    }
+}
 
 /**
  * Exports
  */
 
-export default categoriesDomApi;
+export default CategoriesDomApi;

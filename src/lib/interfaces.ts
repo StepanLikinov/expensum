@@ -13,17 +13,10 @@ interface Category {
     iconClass: string;
 }
 
-interface CategoriesDomApi {
+interface CategoriesStorage {
     selected: string | null;
     setSelected(category: string): void;
     getSelected(): string | null;
-    setDefaultInForm(): void;
-    create(category: Category): HTMLElement;
-    fillContainer($categoriesContainer: HTMLElement): void;
-    fillSelect($categorySelect: HTMLSelectElement): void;
-}
-
-interface CategoriesStorage {
     getAll: () => Category[];
     saveAll: (categories: Category[]) => void;
     find: (selectedCategory: string) => Category | undefined;
@@ -35,7 +28,7 @@ interface Expense {
     category: string;
     categoryId: number;
     sum: number;
-    comment?: string; // Комментарий может быть необязательным
+    comment?: string;
 }
 
 interface FormData { 
@@ -50,7 +43,6 @@ interface ExpensesDomApi {
     renderList(data: Expense[]): void;
     renderSelectedMonthList(): void;
     showTotal(expensesPeriod: Expense[], $target: HTMLElement): void;
-    resetForm(): void;
     getFormData(): FormData;
 }
 
@@ -79,6 +71,6 @@ interface NavDomApi {
  */
 
 export { 
-    Page, Category, CategoriesDomApi, CategoriesStorage, Expense,
-    FormData, ExpensesDomApi, ExpensesStorage, NavDomApi
+    Page, Category, CategoriesStorage, Expense,
+    FormData, ExpensesStorage, NavDomApi, ExpensesDomApi
 }
