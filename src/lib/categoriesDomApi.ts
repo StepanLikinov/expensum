@@ -9,15 +9,6 @@ import pager from './pagerInit';
 import navDomApi from './navDomApi';
 
 /**
- * Nodes
- */
-// const $newExpenseLink: HTMLElement | null = 
-//     document.getElementById('newExpenseLink');
-
-// const $sum: HTMLElement | null = document.getElementById('sum');
-// const $comment: HTMLElement | null = document.getElementById('comment');  
-
-/**
  * DOM API
  */
 
