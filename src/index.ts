@@ -10,7 +10,7 @@ import CategoriesDomApi from './lib/CategoriesDomApi';
 import categoriesStorage from './lib/categoriesStorageApi';
 import DatesDomApi from './lib/DatesDomApi'
 import pager from './lib/pagerInit';
-import navDomApi from './lib/navDomApi';
+import Nav from './lib/Nav'
 import { FormData, Expense } from './lib/interfaces';
 import { resetForm } from './lib/heplers';
 
@@ -44,6 +44,12 @@ const $expenseForm: HTMLElement | null =
 const $totalExpenses: HTMLElement | null = 
     document.getElementById('total-expenses');
 
+const $navLinks: NodeListOf<HTMLAnchorElement> =
+    document.querySelectorAll('.navbar-nav a');
+
+const $mainLink: HTMLElement | null = 
+    document.getElementById('mainLink');
+
 const $newExpenseLink: HTMLElement | null = 
     document.getElementById('newExpenseLink'); 
 
@@ -60,7 +66,10 @@ const $sum: HTMLElement | null =
     document.getElementById('sum');
 
 const $comment: HTMLElement | null = 
-    document.getElementById('comment');  
+    document.getElementById('comment');
+
+const categoryElements: NodeListOf<HTMLElement> = 
+    document.querySelectorAll('.category')
 
 /**
  * Run
@@ -73,19 +82,33 @@ categoriesStorage.saveAll(categoriesList);
 
 const datesDomApi: DatesDomApi = new DatesDomApi($day, $calendar);
 
-const categoriesDomApi: CategoriesDomApi = new CategoriesDomApi(
-        $newExpenseLink, $categoryTemplate, $categorySelect, $sum, $comment
+const nav: Nav = new Nav(
+    $navLinks, $mainLink, $newExpenseLink, $expensesListLink, $expenseForm
 );
+// -----------------------------------------------------------------------------
+function clickHandle() {
+    resetForm($sum, $comment);
+    pager.showPage('new');
 
+    if (nav.$newExpenseLink instanceof HTMLAnchorElement) {
+        nav.setActive(nav.$newExpenseLink)
+    }
+}
+// -----------------------------------------------------------------------------
+const categoriesDomApi: CategoriesDomApi = new CategoriesDomApi(
+    $categoryTemplate, $categorySelect, clickHandle
+);
 const expensesDomApi: ExpensesDomApi = new ExpensesDomApi(
     $expenseTemplate, $expensesContainer, $day, $sum, $comment, $calendar
-)
+);
+
+
 
 /* Calls */
 
 document.addEventListener('DOMContentLoaded', () => {
     // Global
-    navDomApi.initIndication();
+    nav.initIndication();
 
     if ($newExpenseLink instanceof HTMLAnchorElement) {
         $newExpenseLink.addEventListener('click', () => {
@@ -112,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         categoriesDomApi.fillContainer($categoriesContainer);
     }
     
+
     // Form
     datesDomApi.setDayValue();
     categoriesDomApi.setDefaultInForm();

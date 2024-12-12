@@ -3,36 +3,27 @@
  */
 
 import { Category, CategoriesStorage } from './interfaces';
-import { clearContainer, resetForm } from './heplers';
+import { clearContainer } from './heplers';
 import categoriesStorage from './categoriesStorageApi';
-import pager from './pagerInit';
-import navDomApi from './navDomApi';
-
 /**
  * DOM API
  */
 
 class CategoriesDomApi {
     categoriesStorage: CategoriesStorage;
-    $newExpenseLink: HTMLElement | null;
     $categoryTemplate: HTMLElement | null;
     $categorySelect: HTMLElement | null;
-    $sum: HTMLElement | null;
-    $comment: HTMLElement | null;
+    clickHandle: () => void;
 
     constructor(
-        $newExpenseLink: HTMLElement | null,
         $categoryTemplate: HTMLElement | null,
         $categorySelect: HTMLElement | null,
-        $sum: HTMLElement | null,
-        $comment: HTMLElement | null,
+        clickHandle: () => void
     ) {
         this.categoriesStorage = categoriesStorage;
-        this.$newExpenseLink = $newExpenseLink;
         this.$categoryTemplate = $categoryTemplate;
         this.$categorySelect = $categorySelect;
-        this.$sum = $sum;
-        this.$comment = $comment;
+        this.clickHandle = clickHandle;
     }
 
     setDefaultInForm(): void {
@@ -92,12 +83,7 @@ class CategoriesDomApi {
                 this.$categorySelect.value = category.id.toString();
             }
 
-            resetForm(this.$sum, this.$comment);
-            pager.showPage('new');
-
-            if (this.$newExpenseLink instanceof HTMLAnchorElement) {
-                navDomApi.setActive(this.$newExpenseLink)
-            }
+            this.clickHandle();
         });
 
         return $category;

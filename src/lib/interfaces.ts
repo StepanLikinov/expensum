@@ -61,16 +61,11 @@ interface ExpensesStorage {
     calculateTotal(expensesPeriod: Expense[]): number;
 }
 
-interface NavDomApi {
-    setActive: ($clickedLink: HTMLAnchorElement) => void;
-    initIndication: () => void;
-}
-
 /**
  * Exports
  */
 
 export { 
     Page, Category, CategoriesStorage, Expense,
-    FormData, ExpensesStorage, NavDomApi, ExpensesDomApi
+    FormData, ExpensesStorage, ExpensesDomApi
 }
