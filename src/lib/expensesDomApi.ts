@@ -18,6 +18,7 @@ class ExpensesDomApi {
     $sum: HTMLElement | null;
     $comment: HTMLElement | null;   
     $calendar: HTMLElement | null; 
+    $totalExpenses: HTMLElement | null; 
 
     constructor(    
         $expenseTemplate: HTMLElement | null,
@@ -26,6 +27,7 @@ class ExpensesDomApi {
         $sum: HTMLElement | null,
         $comment: HTMLElement | null,   
         $calendar: HTMLElement | null, 
+        $totalExpenses: HTMLElement | null
     ) {
         this.$expenseTemplate = $expenseTemplate
         this.$expensesContainer = $expensesContainer
@@ -33,6 +35,7 @@ class ExpensesDomApi {
         this.$sum = $sum
         this.$comment = $comment
         this.$calendar = $calendar
+        this.$totalExpenses = $totalExpenses
     }
 
     // Cоздание элемента расхода
@@ -120,11 +123,12 @@ class ExpensesDomApi {
     }
 
     // Отображение суммы расходов за месяц
-    showTotal(expensesPeriod: Expense[], $target: HTMLElement): void {
+    showTotal(expensesPeriod: Expense[]): void {
         const totalExpenses: number = 
             expensesStorage.calculateTotal(expensesPeriod);
-
-        $target.innerText = `${totalExpenses} ₽`;
+        if (this.$totalExpenses) {
+            this.$totalExpenses.innerText = `${totalExpenses} ₽`;
+        }
     }
 
     // Получение данных из формы
@@ -152,6 +156,14 @@ class ExpensesDomApi {
             selectedCategory,
             sum,
             comment
+        }
+    }
+
+    calendarChangeHandle(): void {
+        if (this.$calendar instanceof HTMLInputElement) {
+            this.$calendar.addEventListener('change', () => {
+                this.renderSelectedMonthList();
+            });
         }
     }
 }

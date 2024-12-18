@@ -8,6 +8,7 @@ import ExpensesDomApi from './lib/ExpensesDomApi';
 import expensesStorage from './lib/expensesStorageApi'
 import CategoriesDomApi from './lib/CategoriesDomApi';
 import categoriesStorage from './lib/categoriesStorageApi';
+import DateState from './lib/DateState';
 import DatesDomApi from './lib/DatesDomApi'
 import pager from './lib/pagerInit';
 import Nav from './lib/Nav'
@@ -68,9 +69,6 @@ const $sum: HTMLElement | null =
 const $comment: HTMLElement | null = 
     document.getElementById('comment');
 
-const categoryElements: NodeListOf<HTMLElement> = 
-    document.querySelectorAll('.category')
-
 /**
  * Run
  */
@@ -80,29 +78,44 @@ const categoryElements: NodeListOf<HTMLElement> =
 // Сохранения категорий в localStorage
 categoriesStorage.saveAll(categoriesList);
 
-const datesDomApi: DatesDomApi = new DatesDomApi($day, $calendar);
+const datesDomApi: DatesDomApi = new DatesDomApi(
+    new DateState,
+    $day, 
+    $calendar, 
+    $currentMonth
+);
 
 const nav: Nav = new Nav(
-    $navLinks, $mainLink, $newExpenseLink, $expensesListLink, $expenseForm
+    $navLinks, 
+    $mainLink, 
+    $newExpenseLink, 
+    $expensesListLink, 
+    $expenseForm
 );
-// -----------------------------------------------------------------------------
-function clickHandle() {
-    resetForm($sum, $comment);
-    pager.showPage('new');
 
-    if (nav.$newExpenseLink instanceof HTMLAnchorElement) {
-        nav.setActive(nav.$newExpenseLink)
-    }
-}
-// -----------------------------------------------------------------------------
 const categoriesDomApi: CategoriesDomApi = new CategoriesDomApi(
-    $categoryTemplate, $categorySelect, clickHandle
+    $categoryTemplate, 
+    $categorySelect,
+    $categoriesContainer, 
+    () => {
+        resetForm($sum, $comment);
+        pager.showPage('new');
+
+        if (nav.$newExpenseLink instanceof HTMLAnchorElement) {
+            nav.setActive(nav.$newExpenseLink)
+        }
+    }
 );
+
 const expensesDomApi: ExpensesDomApi = new ExpensesDomApi(
-    $expenseTemplate, $expensesContainer, $day, $sum, $comment, $calendar
+    $expenseTemplate, 
+    $expensesContainer, 
+    $day, 
+    $sum, 
+    $comment, 
+    $calendar,
+    $totalExpenses
 );
-
-
 
 /* Calls */
 
@@ -124,29 +137,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Main
-    if ($totalExpenses) {
-        expensesDomApi.showTotal(
-            expensesStorage.getCurrentMonth(), 
-            $totalExpenses
-        );
-    }
-
-    if ($categoriesContainer){
-        categoriesDomApi.fillContainer($categoriesContainer);
-    }
+    expensesDomApi.showTotal(expensesStorage.getCurrentMonth());
+    categoriesDomApi.fillContainer();
     
-
     // Form
     datesDomApi.setDayValue();
     categoriesDomApi.setDefaultInForm();
-
-    if ($categorySelect instanceof HTMLSelectElement){
-        categoriesDomApi.fillSelect($categorySelect);
-    }
-
-    if ($currentMonth) {
-        datesDomApi.showCurrentMonth($currentMonth);
-    }
+    categoriesDomApi.fillSelect();
+    datesDomApi.showCurrentMonth();
 
     if ($expenseForm instanceof HTMLFormElement){
         $expenseForm.addEventListener('submit', function(event) {
@@ -162,22 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 datesDomApi.setCalendarValue();
                 expensesDomApi.renderSelectedMonthList();
                 pager.showPage('list');
-
-                if ($totalExpenses) {
-                    expensesDomApi.showTotal(
-                        expensesStorage.getCurrentMonth(), $totalExpenses
-                    );
-                }
+                expensesDomApi.showTotal(expensesStorage.getCurrentMonth());
             }
         });
     }
     
     // List
     datesDomApi.setCalendarValue();
-    
-    if ($calendar instanceof HTMLInputElement) {
-        $calendar.addEventListener('change', function() {
-            expensesDomApi.renderSelectedMonthList();
-        });
-    }
+    expensesDomApi.calendarChangeHandle();
 });

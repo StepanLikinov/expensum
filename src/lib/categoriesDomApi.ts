@@ -13,16 +13,19 @@ class CategoriesDomApi {
     categoriesStorage: CategoriesStorage;
     $categoryTemplate: HTMLElement | null;
     $categorySelect: HTMLElement | null;
+    $categoriesContainer: HTMLElement | null;
     clickHandle: () => void;
 
     constructor(
         $categoryTemplate: HTMLElement | null,
         $categorySelect: HTMLElement | null,
+        $categoriesContainer: HTMLElement | null,        
         clickHandle: () => void
     ) {
         this.categoriesStorage = categoriesStorage;
         this.$categoryTemplate = $categoryTemplate;
         this.$categorySelect = $categorySelect;
+        this.$categoriesContainer = $categoriesContainer;
         this.clickHandle = clickHandle;
     }
 
@@ -90,32 +93,36 @@ class CategoriesDomApi {
     }
 
     // Заполнение categoriesContainer
-    fillContainer($categoriesContainer: HTMLElement): void {
-        clearContainer($categoriesContainer);
+    fillContainer(): void {
+        if (this.$categoriesContainer) {
+            clearContainer(this.$categoriesContainer);
 
-        const categoriesList: Category[] = categoriesStorage.getAll();
-    
-        categoriesList.forEach(category => {
-            const $category: HTMLElement = this.create(category);
-            $categoriesContainer.appendChild($category);
-        });
+            const categoriesList: Category[] = categoriesStorage.getAll();
+        
+            categoriesList.forEach(category => {
+                const $category: HTMLElement = this.create(category);
+                this.$categoriesContainer.appendChild($category);
+            });
+        }
     }
 
     // Заполнение categorySelect
-    fillSelect($categorySelect: HTMLSelectElement): void {
+    fillSelect(): void {
         const categoriesList: Category[] = categoriesStorage.getAll();
 
         categoriesList.forEach((category: Category) => {
             const $option: HTMLOptionElement = document.createElement('option');
             $option.value = category.id.toString();
             $option.text = category.name;
-            $categorySelect.appendChild($option);
+            if (this.$categorySelect) {
+                this.$categorySelect.appendChild($option);
+            }
         });
 
-        $categorySelect.addEventListener('change', () => {
-            if ($categorySelect instanceof HTMLSelectElement) {
+        this.$categorySelect.addEventListener('change', () => {
+            if (this.$categorySelect instanceof HTMLSelectElement) {
                 const selectedCategoryId: number = 
-                    Number.parseInt($categorySelect.value);
+                    Number.parseInt(this.$categorySelect.value);
 
                 const selectedCategory: Category | undefined = 
                     categoriesList.find(

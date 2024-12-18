@@ -13,18 +13,27 @@ class DatesDomApi {
     dateState: DateState;
     $day: HTMLElement | null;
     $calendar: HTMLElement | null;
+    $currentMonth: HTMLElement | null;
 
-    constructor($day: HTMLElement | null, $calendar: HTMLElement | null) {
-        this.dateState = new DateState();
+    constructor(
+        dateState: DateState,
+        $day: HTMLElement | null, 
+        $calendar: HTMLElement | null,
+        $currentMonth: HTMLElement | null
+    ) {
+        this.dateState = dateState;
         this.$day = $day;
         this.$calendar = $calendar;
+        this.$currentMonth = $currentMonth;
     }
 
     // Отображение текущего месяца
-    showCurrentMonth($target: HTMLElement): void {
+    showCurrentMonth(): void {
         const currentMonth: number = this.dateState.currentValue.getMonth();
         const currentMonthName: string = months[currentMonth];
-        $target.innerText = currentMonthName;
+        if (this.$currentMonth){
+            this.$currentMonth.innerText = currentMonthName;
+        }
     }
 
     // Установка значения в input
