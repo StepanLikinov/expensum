@@ -8,6 +8,8 @@ class Nav {
     $newExpenseLink: HTMLElement | null; 
     $expensesListLink: HTMLElement | null; 
     $expenseForm: HTMLElement | null;
+    newExpenseLinkClickHandle: () => void;
+    expensesListLinkClickHandle: () => void;
 
     constructor(
         navLinks: NodeListOf<HTMLAnchorElement>, 
@@ -15,12 +17,16 @@ class Nav {
         $newExpenseLink: HTMLElement | null, 
         $expensesListLink: HTMLElement | null, 
         $expenseForm: HTMLElement | null,
+        newExpenseLinkClickHandle: () => void,
+        expensesListLinkClickHandle: () => void
     ) {
         this.navLinks = navLinks;
         this.$mainLink = $mainLink;
         this.$newExpenseLink = $newExpenseLink;
         this.$expensesListLink = $expensesListLink;
         this.$expenseForm = $expenseForm;
+        this.newExpenseLinkClickHandle = newExpenseLinkClickHandle;
+        this.expensesListLinkClickHandle = expensesListLinkClickHandle;
     }
 
     setActive($clickedLink: HTMLAnchorElement): void {

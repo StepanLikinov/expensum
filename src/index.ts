@@ -90,7 +90,22 @@ const nav: Nav = new Nav(
     $mainLink, 
     $newExpenseLink, 
     $expensesListLink, 
-    $expenseForm
+    $expenseForm,
+    () => {
+        if ($newExpenseLink instanceof HTMLAnchorElement) {
+            $newExpenseLink.addEventListener('click', () => {
+                categoriesDomApi.setDefaultInForm();
+                resetForm($sum, $comment);
+            });    
+        }
+    },
+    () => {
+        if ($expensesListLink instanceof HTMLAnchorElement) {
+            $expensesListLink.addEventListener('click', () => {
+                expensesDomApi.renderSelectedMonthList();
+            });
+        }
+    }
 );
 
 const categoriesDomApi: CategoriesDomApi = new CategoriesDomApi(
@@ -122,19 +137,8 @@ const expensesDomApi: ExpensesDomApi = new ExpensesDomApi(
 document.addEventListener('DOMContentLoaded', () => {
     // Global
     nav.initIndication();
-
-    if ($newExpenseLink instanceof HTMLAnchorElement) {
-        $newExpenseLink.addEventListener('click', () => {
-            categoriesDomApi.setDefaultInForm();
-            resetForm($sum, $comment);
-        });    
-    }
-
-    if ($expensesListLink instanceof HTMLAnchorElement) {
-        $expensesListLink.addEventListener('click', () => {
-            expensesDomApi.renderSelectedMonthList();
-        });
-    }
+    nav.newExpenseLinkClickHandle();
+    nav.expensesListLinkClickHandle();
 
     // Main
     expensesDomApi.showTotal(expensesStorage.getCurrentMonth());
