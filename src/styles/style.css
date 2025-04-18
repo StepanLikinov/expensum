@@ -1,0 +1,18 @@
+.category-name {
+    width: 6rem; 
+    height: 2rem;
+    hyphens: auto;
+}
+
+.category-icon {
+    width: 5rem; 
+    height: 5rem;
+}
+
+.nav-link:hover {
+    background-color: lightgray;
+}
+
+#new, #main, #list {
+    margin-bottom: 6.75rem;
+}
