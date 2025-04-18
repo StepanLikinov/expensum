@@ -1,15 +1,27 @@
 {
   "devDependencies": {
-    "uuid": "^10.0.0",
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.0",
     "style-loader": "^4.0.0",
+    "uuid": "^10.0.0",
     "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.1.0",
-    "html-webpack-plugin": "^5.6.0"
+    "webpack-dev-server": "^5.1.0"
   },
   "scripts": {
     "start": "NODE_ENV=development webpack serve",
     "build": "NODE_ENV=production webpack"
+  },
+  "dependencies": {
+    "bootstrap-icons": "^1.11.3",
+    "font-awesome": "^4.7.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-redux": "^9.2.0",
+    "@reduxjs/toolkit": "^2.6.1"
   }
 }
