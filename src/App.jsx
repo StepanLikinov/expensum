@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPage } from './features/pageSlice';
 import navConfig from './configs/navConfig'; 
 import Nav from './components/Nav'; 
 
 const App = () => {
-    const [currentPage, setCurrentPage] = useState('main');  // Хранение текущей страницы
-
-    // Функция для изменения активной страницы
-    const displayPage = (page) => {
-        setCurrentPage(page);
-    };
+    const dispatch = useDispatch();
+    const currentPage = useSelector((state) => state.page.currentPage);
 
     return (
         <div>
-            <Nav 
-                navLinks={navConfig.navLinks}  // Передаем ссылки для навигации
-                displayPage={displayPage}  // Функция для изменения активной страницы
-                config={navConfig}  // Передаем весь конфиг в Nav
-            />
             <div className="p-4">
-                {navConfig.pages[currentPage]} {/* Отображаем компонент текущей страницы */}
+                {navConfig.pages[currentPage]}
             </div>
+            <Nav 
+                navLinks={navConfig.navLinks} 
+                displayPage={(page) => dispatch(setPage(page))}
+                config={navConfig} 
+            />
         </div>
     );
 };
