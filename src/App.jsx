@@ -10,7 +10,7 @@ const App = () => {
 
     return (
         <div>
-            <div className="p-4">
+            <div>
                 {navConfig.pages[currentPage]}
             </div>
             <Nav 

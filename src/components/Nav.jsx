@@ -17,7 +17,7 @@ const Nav = ({ navLinks, displayPage, config }) => {
                                 event.preventDefault();
                                 displayPage(link);
                             }}
-                            className={`flex flex-col items-center w-1/4 rounded-full text-gray-600 hover:bg-gray-200 transition-colors duration-200 ${activeLink === link ? 'text-blue-500' : ''}`}
+                            className={`flex flex-col items-center w-1/4 rounded-full text-gray-600 hover:bg-gray-200 transition-colors duration-200 ${activeLink === link ? 'text-blue-600' : ''}`}
                         >
                             <i className={`bi ${config[link].iconClass} text-[2.5rem] -mb-1`}></i>
                             <span className="text-center md:hidden">{config[link].shortLabel}</span>
