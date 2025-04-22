@@ -1,5 +1,3 @@
-import React from 'react';
-
 const SummaryBlock = ({ total, monthName }) => {
     return (
         <div className="w-full mb-2 bg-gray-100 pb-1">

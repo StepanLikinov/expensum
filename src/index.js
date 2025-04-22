@@ -1,8 +1,6 @@
-import './styles/tailwind.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import './styles/style.css'
+import './style.css'
 
-import React from 'react';
+
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './App'; 

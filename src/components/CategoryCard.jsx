@@ -1,5 +1,3 @@
-import React from 'react';
-
 const CategoryCard = ({ category, handleClick }) => {
 
     const categoryCardStyleClasses = `

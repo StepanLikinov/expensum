@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { categoriesList } from '../../data/categoriesList';
+import { categoriesList } from '../data/categoriesList';
 
 const initialCategories = (() => {
     const stored = localStorage.getItem('expenseCategories');

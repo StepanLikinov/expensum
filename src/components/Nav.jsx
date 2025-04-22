@@ -1,4 +1,3 @@
-import React from 'react';
 import NavLinkItem from './NavLinkItem';
 
 const Nav = ({ navLinks, displayPage, config }) => {

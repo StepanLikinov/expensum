@@ -7,8 +7,9 @@
 ## Технологический стек
 
 - **Язык программирования:** JavaScript
-- **Библиотеки:** Bootstrap 5.3
-- **API:** Browser APIs
+- **Фремворк:** React
+- **Стейт-менеджер:** Redux
+- **Библиотеки:** Tailwinid
 - **Инструменты:** Webpack, NodeJS, Netlify
 - **Хранилище:** LocalStorage
 

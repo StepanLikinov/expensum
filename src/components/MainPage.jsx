@@ -1,8 +1,7 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCategory } from '../features/categoriesSlice';
 import { setPage } from '../features/pageSlice';
-import { months } from '../../data/monthsList';
+import { months } from '../data/monthsList';
 import SummaryBlock from './SummaryBlock';
 import CategoryCard from './CategoryCard';
 

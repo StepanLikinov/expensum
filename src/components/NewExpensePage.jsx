@@ -1,10 +1,10 @@
-import React, { useRef }from 'react';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCategory } from '../features/categoriesSlice';
 import { setDate } from '../features/dateSlice';
 import { setPage } from '../features/pageSlice';
 import { addExpense } from '../features/expensesSlice'
-import generateId from '../../lib/generateId';
+import generateId from '../lib/generateId';
 
 
 const NewExpensePage = () => {

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ExpenseCard = ({ expense, iconClass }) => {
     const expenseCardStyleClasses = 
         `expense border border-gray-300 rounded-lg shadow-sm m-4`;

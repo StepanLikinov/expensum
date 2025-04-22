@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPage } from './features/pageSlice';
 import navConfig from './configs/navConfig'; 
