@@ -1,3 +1,7 @@
+/**
+ * CategoryCard
+ */
+
 const CategoryCard = ({ category, handleClick }) => {
 
     const categoryCardStyleClasses = `
@@ -26,5 +30,9 @@ const CategoryCard = ({ category, handleClick }) => {
         </div>
     );
 };
+
+/**
+ * Exports
+ */
 
 export default CategoryCard;

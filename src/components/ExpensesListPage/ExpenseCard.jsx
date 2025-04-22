@@ -1,3 +1,7 @@
+/**
+ * ExpenseCard
+ */
+
 const ExpenseCard = ({ expense, iconClass }) => {
     const expenseCardStyleClasses = 
         `expense border border-gray-300 rounded-lg shadow-sm m-4`;
@@ -50,5 +54,9 @@ const ExpenseCard = ({ expense, iconClass }) => {
         </div>
     );
 };
+
+/**
+ * Exports
+ */
 
 export default ExpenseCard;

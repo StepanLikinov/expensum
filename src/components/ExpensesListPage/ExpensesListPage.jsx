@@ -1,8 +1,17 @@
+/**
+ * Imports
+ */
+
 import { useSelector, useDispatch } from 'react-redux';
-import { setDate } from '../features/dateSlice';
+import { setDate } from '../../features/dateSlice';
 import MonthSelector from './MonthSelector';
 import ExpenseCard from './ExpenseCard';
-import { getCategoryIcon } from '../lib/helpers'
+import { getCategoryIcon } from '../../lib/helpers'
+
+/**
+ * ExpensesListPage
+ */
+
 
 const ExpensesListPage = () => {
     const dispatch = useDispatch();
@@ -40,5 +49,9 @@ const ExpensesListPage = () => {
         </div>
     );
 };
+
+/**
+ * Exports
+ */
 
 export default ExpensesListPage;

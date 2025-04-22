@@ -1,4 +1,12 @@
-import NavLinkItem from './NavLinkItem';
+/**
+ * Imports
+ */
+
+import NavLink from './NavLink';
+
+/**
+ * Nav
+ */
 
 const Nav = ({ navLinks, displayPage, config }) => {
     return (
@@ -6,7 +14,7 @@ const Nav = ({ navLinks, displayPage, config }) => {
             <div className="w-full px-4">
                 <div className="flex justify-around w-full">
                     {navLinks.map((link) => (
-                        <NavLinkItem
+                        <NavLink
                             key={link}
                             link={link}
                             displayPage={displayPage}
@@ -18,5 +26,9 @@ const Nav = ({ navLinks, displayPage, config }) => {
         </nav>
     );
 };
+
+/**
+ * Exports
+ */
 
 export default Nav;

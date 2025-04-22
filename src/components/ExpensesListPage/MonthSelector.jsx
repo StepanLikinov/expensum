@@ -1,3 +1,7 @@
+/**
+ * MonthSelector
+ */
+
 const MonthSelector = ({ value, handleChange }) => {
     const styleClasses = 
         `block mx-auto my-2 p-2 text-center border border-gray-300 rounded`;
@@ -11,5 +15,9 @@ const MonthSelector = ({ value, handleChange }) => {
         />
     );
 };
+
+/**
+ * Exports
+ */
 
 export default MonthSelector;

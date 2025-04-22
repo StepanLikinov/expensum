@@ -1,6 +1,14 @@
+/**
+ * Imports
+ */
+
 import { useSelector } from 'react-redux';
 
-const NavLinkItem = ({ link, displayPage, config }) => {
+/**
+ * NavLinkItem
+ */
+
+const NavLink = ({ link, displayPage, config }) => {
     const activeLink = useSelector((state) => state.page.currentPage);
 
     const handleClick = (event) => {
@@ -9,9 +17,9 @@ const NavLinkItem = ({ link, displayPage, config }) => {
     };
 
     const NavLinkStyleClasses = `
-        flex flex-col items-center w-1/4 rounded-full text-gray-600 
+        flex flex-col items-center w-1/4 rounded-full
         hover:bg-gray-200 transition-colors duration-200 
-        ${activeLink === link ? 'text-blue-500' : ''}   
+        ${activeLink === link ? 'text-blue-600' : 'text-gray-600 '}   
     `;
 
     return (
@@ -32,4 +40,8 @@ const NavLinkItem = ({ link, displayPage, config }) => {
     );
 };
 
-export default NavLinkItem;
+/**
+ * Exports
+ */
+
+export default NavLink;

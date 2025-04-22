@@ -1,3 +1,7 @@
+/**
+ * SummaryBlock
+ */
+
 const SummaryBlock = ({ total, monthName }) => {
     return (
         <div className="w-full mb-2 bg-gray-100 pb-1">
@@ -15,5 +19,9 @@ const SummaryBlock = ({ total, monthName }) => {
         </div>
     );
 };
+
+/**
+ * Exports
+ */
 
 export default SummaryBlock;

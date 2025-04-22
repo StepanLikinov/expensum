@@ -1,9 +1,17 @@
+/**
+ * Imports
+ */
+
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCategory } from '../features/categoriesSlice';
-import { setPage } from '../features/pageSlice';
-import { months } from '../data/monthsList';
+import { selectCategory } from '../../features/categoriesSlice';
+import { setPage } from '../../features/pageSlice';
+import { months } from '../../data/monthsList';
 import SummaryBlock from './SummaryBlock';
 import CategoryCard from './CategoryCard';
+
+/**
+ * MainPage
+ */
 
 const MainPage = () => {
     const dispatch = useDispatch();
@@ -54,5 +62,9 @@ const MainPage = () => {
         </div>
     );
 };
+
+/**
+ * Exports
+ */
 
 export default MainPage;

@@ -1,7 +1,15 @@
+/**
+ * Imports
+ */
+
 import { useDispatch, useSelector } from 'react-redux';
 import { setPage } from './features/pageSlice';
 import navConfig from './configs/navConfig'; 
-import Nav from './components/Nav'; 
+import Nav from './components/Nav/Nav'; 
+
+/**
+ * App
+ */
 
 const App = () => {
     const dispatch = useDispatch();
