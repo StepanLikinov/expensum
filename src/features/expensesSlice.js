@@ -1,16 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-const loadExpensesFromLocalStorage = () => {
-    const stored = localStorage.getItem('expenses');
-    return stored ? JSON.parse(stored) : [];
-};
-
-const saveExpensesToLocalStorage = (expenses) => {
-    localStorage.setItem('expenses', JSON.stringify(expenses));
-};
+import { loadFromLocalStorage, saveToLocalStorage } from '../lib/helpers';
 
 const initialState = {
-    list: loadExpensesFromLocalStorage(),
+    list: loadFromLocalStorage('expenses', [])
 };
 
 const expensesSlice = createSlice({
@@ -19,11 +11,11 @@ const expensesSlice = createSlice({
     reducers: {
         setExpenses(state, action) {
             state.list = action.payload;
-            saveExpensesToLocalStorage(state.list);
+            saveToLocalStorage('expenses', state.list);
         },
         addExpense(state, action) {
             state.list.push(action.payload);
-            saveExpensesToLocalStorage(state.list);
+            saveToLocalStorage('expenses', state.list);
         },
     },
 });

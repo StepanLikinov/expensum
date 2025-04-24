@@ -34,9 +34,12 @@ const ExpensesListPage = () => {
                 value={defaultMonth} 
                 handleChange={handleDateChange} 
             />
-            <div className="text-2xl text-center">Список расходов</div>
+            
+            <div className="text-2xl text-center">
+                Список расходов
+            </div>
 
-            <div id="expenses-container">
+            <div>
                 {filteredExpenses.map((expense, index) => (
                     <ExpenseCard
                         key={index}

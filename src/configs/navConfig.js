@@ -10,17 +10,17 @@ const navConfig = {
         list: <ExpensesListPage />
     },
     main: {
-        iconClass: "bi-house",
+        iconClass: "bi bi-house",
         shortLabel: "Главная",
         fullLabel: "Главная",
     },
     new: {
-        iconClass: "bi-plus-circle",
+        iconClass: "bi bi-plus-circle",
         shortLabel: "Новый",
         fullLabel: "Новый расход",
     },
     list: {
-        iconClass: "bi-list-ul",
+        iconClass: "bi bi-list-ul",
         shortLabel: "Список",
         fullLabel: "Список расходов",
     },

@@ -29,6 +29,9 @@ const NewExpensePage = () => {
     const [sum, setSum] = useState('');
     const [comment, setComment] = useState('');
 
+    const buttonStyleClasses = 
+        `w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600`
+
     const handleDateChange = (event) => {
         dispatch(setDate(event.target.value));
     };
@@ -61,8 +64,8 @@ const NewExpensePage = () => {
     };
 
     return (
-        <div className="max-w-[1320px] mx-auto px-2" id="new">
-            <form id="expense-form" onSubmit={handleSubmit}>
+        <div className="max-w-[1320px] mx-auto px-2">
+            <form onSubmit={handleSubmit}>
                 <div className="text-2xl p-3 mb-2 text-center">
                     Новый расход
                 </div>
@@ -71,7 +74,6 @@ const NewExpensePage = () => {
                         <input
                             className="w-full p-2 mb-2 border rounded"
                             type="date"
-                            id="day"
                             value={currentDate}
                             onChange={handleDateChange}
                         />
@@ -93,10 +95,7 @@ const NewExpensePage = () => {
                     </div>
                 </div>
                 <div>
-                    <button
-                        className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                        type="submit"
-                    >
+                    <button className={buttonStyleClasses} type="submit">
                         Создать
                     </button>
                 </div>

@@ -9,11 +9,11 @@ const SummaryBlock = ({ total, monthName }) => {
                 <div className="pt-1 text-md text-gray-500">
                     Итого расходов
                 </div>
-                <div className="text-2xl" id="total-expenses">
+                <div className="text-2xl">
                     {total} ₽
                 </div>
             </div>
-            <div className="text-3xl text-center" id="current-month">
+            <div className="text-3xl text-center">
                 {monthName}
             </div>
         </div>

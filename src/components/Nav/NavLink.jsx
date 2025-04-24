@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux';
  */
 
 const NavLink = ({ link, displayPage, config }) => {
-    const activeLink = useSelector((state) => state.page.currentPage);
+    const currentPage = useSelector((state) => state.page.currentPage);
+    const isActive = currentPage === link;
 
     const handleClick = (event) => {
         event.preventDefault();
@@ -19,7 +20,7 @@ const NavLink = ({ link, displayPage, config }) => {
     const NavLinkStyleClasses = `
         flex flex-col items-center w-1/4 rounded-full
         hover:bg-gray-200 transition-colors duration-200 
-        ${activeLink === link ? 'text-blue-600' : 'text-gray-600 '}   
+        ${isActive ? 'text-blue-600' : 'text-gray-600 '}   
     `;
 
     return (
@@ -28,7 +29,7 @@ const NavLink = ({ link, displayPage, config }) => {
             onClick={handleClick}
             className={NavLinkStyleClasses}
         >
-            <i className={`bi ${config[link].iconClass} text-[2.5rem] -mb-1`}>
+            <i className={`${config[link].iconClass} text-[2.5rem] -mb-1`}>
             </i>
             <span className="text-center md:hidden">
                 {config[link].shortLabel}

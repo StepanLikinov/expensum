@@ -1,32 +1,29 @@
 /**
+ * Importrs
+ */
+
+import { formatDate } from "../../lib/helpers";
+
+/**
  * ExpenseCard
  */
 
 const ExpenseCard = ({ expense, iconClass }) => {
     const expenseCardStyleClasses = 
-        `expense border border-gray-300 rounded-lg shadow-sm m-4`;
+        `border border-gray-300 rounded-lg shadow-sm m-4`;
     const expenseDateStyleClasses = `
-        expense-date bg-gray-100 border border-b-gray-300 text-center 
+        bg-gray-100 border border-b-gray-300 text-center 
         text-gray-600 font-semibold text-lg py-2 rounded-t-lg
     `;
     const expenseCategoryIconStyleClasses = 
-        `expense-category-icon text-3xl md:text-4xl mr-6`;
+        `text-3xl md:text-4xl mr-6`;
     const expenseCategoryStyleClasses = 
-        `expense-category text-xl font-semibold`;
+        `text-xl font-semibold`;
     const expenseComentIconStyleClasses = 
-        `expense-comment text-base text-gray-500 mt-1`;
-    const expenseAmountIconStyleClasses = `
-        expense-amount text-right text-xl font-semibold whitespace-nowrap ml-4
-    `;
+        `text-base text-gray-500 mt-1`;
+    const expenseAmountIconStyleClasses = 
+        `text-right text-xl font-semibold whitespace-nowrap ml-4`;
     
-    const formatDate = (date) => {
-        const formattedDate = new Date(date);
-        return formattedDate.toLocaleDateString('ru-RU', {
-            day: '2-digit',
-            month: '2-digit',
-        });
-    };
-
     return (
         <div className={expenseCardStyleClasses}>
             <div className={expenseDateStyleClasses}>

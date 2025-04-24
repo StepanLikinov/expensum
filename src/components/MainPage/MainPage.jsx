@@ -44,13 +44,10 @@ const MainPage = () => {
     const monthName = months[now.getMonth()];
 
     return (
-        <div id="main">
+        <div>
             <SummaryBlock total={totalExpenses} monthName={monthName} />
 
-            <div 
-                className={categoryContainerStyleClasses}
-                id="categories-container"
-            >
+            <div className={categoryContainerStyleClasses}>
                 {categories.map((category) => (
                     <CategoryCard
                         key={category.id}

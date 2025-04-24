@@ -1,14 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { categoriesList } from '../data/categoriesList';
+import { loadFromLocalStorage, saveToLocalStorage } from '../lib/helpers';
 
-const initialCategories = (() => {
-    const stored = localStorage.getItem('expenseCategories');
-    return stored ? JSON.parse(stored) : categoriesList;
-})();
-
-const saveToLocalStorage = (categories) => {
-    localStorage.setItem('expenseCategories', JSON.stringify(categories));
-};
+const initialCategories = 
+    loadFromLocalStorage('expenseCategories', categoriesList);
 
 const initialState = {
     list: initialCategories,
@@ -21,7 +16,7 @@ const categoriesSlice = createSlice({
     reducers: {
         setCategories(state, action) {
             state.list = action.payload;
-            saveToLocalStorage(state.list);
+            saveToLocalStorage('expenseCategories', state.list);
         },
         selectCategory(state, action) {
             state.selectedCategory = action.payload;

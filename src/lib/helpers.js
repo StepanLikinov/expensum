@@ -4,12 +4,20 @@ const getCategoryIcon = (categoryName, categories) => {
     return category.iconClass;
 };
 
-const formatDate = (date) => {
-    const formattedDate = new Date(date);
-    return formattedDate.toLocaleDateString('ru-RU', {
-        day: '2-digit',
-        month: '2-digit',
-    });
+const formatDate = (date) => new Date(date).toLocaleDateString('ru-RU', {
+    day: '2-digit',
+    month: '2-digit',
+});
+
+const loadFromLocalStorage = (key, defaultValue = []) => {
+    const stored = localStorage.getItem(key);
+    return stored ? JSON.parse(stored) : defaultValue;
 };
 
-export { getCategoryIcon, formatDate}
+const saveToLocalStorage = (key, data) => {
+    localStorage.setItem(key, JSON.stringify(data));
+};
+
+export { 
+    getCategoryIcon, formatDate, loadFromLocalStorage, saveToLocalStorage 
+};
