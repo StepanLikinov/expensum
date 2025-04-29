@@ -8,6 +8,7 @@ import { setPage } from '../features/pageSlice';
 import { months } from '../data/monthsList';
 import SummaryBlock from '../components/SummaryBlock';
 import CategoryCard from '../components/CategoryCard';
+import { filterExpensesByMonth } from '../lib/helpers';
 
 /**
  * MainPage
@@ -37,8 +38,7 @@ const MainPage = () => {
 
     const now = new Date();
     const currentMonth = now.toISOString().slice(0, 7);
-    const filteredExpenses = 
-        expenses.filter(expense => expense.date.startsWith(currentMonth));
+    const filteredExpenses = filterExpensesByMonth(expenses, currentMonth);
     const totalExpenses = 
         filteredExpenses.reduce((sum, expense) => sum + expense.sum, 0);
     const monthName = months[now.getMonth()];

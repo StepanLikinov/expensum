@@ -11,6 +11,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx'],
     },
+    watch: !isDevelopment,
     devServer: isDevelopment ? {
         static: './dist',
         hot: true,

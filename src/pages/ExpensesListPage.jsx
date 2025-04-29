@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setDate } from '../features/dateSlice';
 import MonthSelector from '../components/MonthSelector';
 import ExpenseCard from '../components/ExpenseCard';
-import { getCategoryIcon } from '../lib/helpers'
+import { getCategoryIcon, filterExpensesByMonth } from '../lib/helpers'
 
 /**
  * ExpensesListPage
@@ -24,8 +24,7 @@ const ExpensesListPage = () => {
     };
 
     const currentMonth = currentDate.slice(0, 7);
-    const filteredExpenses = 
-        expenses.filter(expence => expence.date.startsWith(currentMonth));
+    const filteredExpenses = filterExpensesByMonth(expenses, currentMonth);
 
     return (
         <div className="max-w-[1320px] mx-auto" id="list">
