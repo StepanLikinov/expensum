@@ -18,14 +18,13 @@ const ExpensesListPage = () => {
     const categories = useSelector((state) => state.categories.list);
     const currentDate = useSelector((state) => state.date.currentDate);
     const defaultMonth = currentDate.slice(0, 7);
+    const currentMonth = currentDate.slice(0, 7);
+    const filteredExpenses = filterExpensesByMonth(expenses, currentMonth);
 
     const handleDateChange = (event) => {
         dispatch(setDate(event.target.value + '-01'));
     };
-
-    const currentMonth = currentDate.slice(0, 7);
-    const filteredExpenses = filterExpensesByMonth(expenses, currentMonth);
-
+    
     return (
         <div className="max-w-[1320px] mx-auto" id="list">
             <MonthSelector 
