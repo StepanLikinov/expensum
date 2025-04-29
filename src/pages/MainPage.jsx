@@ -3,11 +3,11 @@
  */
 
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCategory } from '../../features/categoriesSlice';
-import { setPage } from '../../features/pageSlice';
-import { months } from '../../data/monthsList';
-import SummaryBlock from './SummaryBlock';
-import CategoryCard from './CategoryCard';
+import { selectCategory } from '../features/categoriesSlice';
+import { setPage } from '../features/pageSlice';
+import { months } from '../data/monthsList';
+import SummaryBlock from '../components/SummaryBlock';
+import CategoryCard from '../components/CategoryCard';
 
 /**
  * MainPage

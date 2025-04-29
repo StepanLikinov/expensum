@@ -24,3 +24,13 @@
 npm i 
 npm run start
 ```
+
+## Основная ветка
+
+- JavaScript + React + Redux + Tailwinid
+
+## Дополнительные ветки
+
+- Vanilla JS + Bootstrap
+- TypeScript + Bootstrap
+- Vanilla JS + Tailwinid

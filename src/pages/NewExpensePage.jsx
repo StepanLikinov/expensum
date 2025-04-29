@@ -4,14 +4,14 @@
 
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCategory } from '../../features/categoriesSlice';
-import { setDate } from '../../features/dateSlice';
-import { setPage } from '../../features/pageSlice';
-import { addExpense } from '../../features/expensesSlice'
-import generateId from '../../lib/generateId';
-import CategorySelector from './CategorySelector';
-import SumInput from './SumInput';
-import CommentInput from './CommentInput';
+import { selectCategory } from '../features/categoriesSlice';
+import { setDate } from '../features/dateSlice';
+import { setPage } from '../features/pageSlice';
+import { addExpense } from '../features/expensesSlice'
+import generateId from '../lib/generateId';
+import CategorySelector from '../components/CategorySelector';
+import SumInput from '../components/SumInput';
+import CommentInput from '../components/CommentInput';
 
 /**
  * NewExpensePage

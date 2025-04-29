@@ -2,7 +2,7 @@
  * Importrs
  */
 
-import { formatDate } from "../../lib/helpers";
+import { formatDate } from "../lib/helpers";
 
 /**
  * ExpenseCard

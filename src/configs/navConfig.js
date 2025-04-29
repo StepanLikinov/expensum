@@ -1,6 +1,14 @@
-import MainPage from '../components/MainPage/MainPage';
-import NewExpensePage from '../components/NewExpensePage/NewExpensePage';
-import ExpensesListPage from '../components/ExpensesListPage/ExpensesListPage';
+/**
+ * Imports
+ */
+
+import MainPage from '../pages/MainPage';
+import NewExpensePage from '../pages/NewExpensePage';
+import ExpensesListPage from '../pages/ExpensesListPage';
+
+/**
+ * Nav Config
+ */
 
 const navConfig = {
     navLinks: ["main", "new", "list"],
@@ -25,5 +33,9 @@ const navConfig = {
         fullLabel: "Список расходов",
     },
 };
+
+/**
+ * Exports
+ */
 
 export default navConfig;

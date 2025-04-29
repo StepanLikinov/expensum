@@ -3,15 +3,14 @@
  */
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setDate } from '../../features/dateSlice';
-import MonthSelector from './MonthSelector';
-import ExpenseCard from './ExpenseCard';
-import { getCategoryIcon } from '../../lib/helpers'
+import { setDate } from '../features/dateSlice';
+import MonthSelector from '../components/MonthSelector';
+import ExpenseCard from '../components/ExpenseCard';
+import { getCategoryIcon } from '../lib/helpers'
 
 /**
  * ExpensesListPage
  */
-
 
 const ExpensesListPage = () => {
     const dispatch = useDispatch();
